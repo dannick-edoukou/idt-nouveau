@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Stack from "@/app/composants/stack";
 import DynamicHero from "../../composants/DynamicHero";
 
@@ -47,7 +46,7 @@ const imageCategories = [
         id: 5, 
         img: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=500&auto=format",
         title: "Studio Design",
-        description: "Optimisation d&apos;espace parfaite"
+        description: "Optimisation d'espace parfaite"
       },
       { 
         id: 6, 
@@ -161,21 +160,7 @@ const imageCategories = [
 
 export default function Phototheque() {
   const [currentPage, setCurrentPage] = useState(1);
-  interface Image {
-  id: number;
-  img: string;
-  title: string;
-  description: string;
-}
-
-interface Category {
-  id: number;
-  title: string;
-  description: string;
-  images: Image[];
-}
-
-const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   // Configuration responsive des stacks par page
@@ -208,21 +193,12 @@ const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const startIndex = (currentPage - 1) * stacksPerPage;
   const currentStacks = imageCategories.slice(startIndex, startIndex + stacksPerPage);
 
-  interface ImageItem {
-    id: number;
-    title: string;
-    description: string;
-    img: string;
-  }
-
-  const createStackContent = (item: ImageItem) => (
+  const createStackContent = (item) => (
     <div className="relative w-full h-full">
-      <Image 
+      <img 
         src={item.img} 
         alt={item.title}
         className="w-full h-full object-cover rounded-lg"
-        width={500}
-        height={300}
       />
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 rounded-b-lg">
         <h3 className="text-white font-semibold text-lg mb-1">
@@ -240,9 +216,7 @@ const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
 
   // Composant pour la vue détail de catégorie
   const CategoryDetailView = () => {
-    if (!selectedCategory) return null; // Return null if no category is selected
-    
-    const { images } = selectedCategory;
+    const images = selectedCategory.images;
     const currentImg = images[currentImageIndex];
     const canGoPrev = currentImageIndex > 0;
     const canGoNext = currentImageIndex < images.length - 1;
@@ -276,12 +250,10 @@ const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <Image
+          <img
             className="h-auto max-h-[420px] max-w-full rounded-lg mx-auto shadow-lg"
             src={currentImg.img}
             alt={currentImg.title || ''}
-            width={800}
-            height={420}
           />
           <button
             onClick={() => canGoNext && setCurrentImageIndex(i => i + 1)}
@@ -310,12 +282,10 @@ const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
                 style={{ width: 64, height: 48 }}
                 aria-label={`Voir l'image ${img.title || img.id}`}
               >
-                <Image
+                <img
                   src={img.img}
                   alt={img.title || ''}
                   className="object-cover w-full h-full"
-                  width={64}
-                  height={48}
                 />
               </button>
             ))}
@@ -359,6 +329,19 @@ const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
                   className="flex flex-col items-center cursor-pointer group" 
                   onClick={() => setSelectedCategory(category)}
                 >
+                  {/* Titre de la catégorie */}
+                  <div className="text-center mb-4">
+                    <h3 className="text-lg font-semibold text-orange-600 mb-1 group-hover:underline">
+                      {category.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm">
+                      {category.description}
+                    </p>
+                    <div className="text-orange-400 text-xs mt-1">
+                      {category.images.length} propriétés
+                    </div>
+                  </div>
+                  
                   {/* Stack avec toutes les images de la catégorie */}
                   <Stack
                     randomRotation={true}
@@ -373,19 +356,6 @@ const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
                       content: createStackContent(item)
                     }))}
                   />
-                  
-                  {/* Titre et description de la catégorie maintenant EN DESSOUS */}
-                  <div className="text-center mt-4">
-                    <h3 className="text-lg font-semibold text-orange-600 mb-1 group-hover:underline">
-                      {category.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm">
-                      {category.description}
-                    </p>
-                    <div className="text-orange-400 text-xs mt-1">
-                      {category.images.length} propriétés
-                    </div>
-                  </div>
                 </div>
               ))}
             </div>

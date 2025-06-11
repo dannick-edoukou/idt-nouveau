@@ -1,15 +1,14 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 
 // Données vidéos avec dates réelles
 const allVideos = [
   { 
     id: 1, 
     youtubeId: "dQw4w9WgXcQ",
-    title: "FC&apos;estival d&apos;IDTÉté 2024",
-    description: "Ambiance fC&apos;estive au cœur de la ville",
+    title: "Festival d'Été 2024",
+    description: "Ambiance festive au cœur de la ville",
     date: "2024-07-15",
     category: "Événements"
   },
@@ -33,7 +32,7 @@ const allVideos = [
     id: 4, 
     youtubeId: "dQw4w9WgXcQ",
     title: "Entretien avec le Maire",
-    description: "Vision et projets pour l&apos;avenir",
+    description: "Vision et projets pour l'avenir",
     date: "2024-11-05",
     category: "Interviews"
   },
@@ -104,28 +103,40 @@ const allVideos = [
 ];
 
 export default function Videotheque() {
-  type Video = typeof allVideos[number];
-const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("recent"); // "recent" ou "oldest"
   const [filteredVideos, setFilteredVideos] = useState(allVideos);
-  type VideoData = {
-  [youtubeId: string]: {
-    title: string;
-    duration: string;
-    viewCount: number;
-    publishedAt: string;
+  const [videoData, setVideoData] = useState({});
+
+  // Fonction pour obtenir les données d'une vidéo YouTube
+  const fetchVideoData = async (youtubeId) => {
+    try {
+      // Simulation d'une API call - en réalité, vous utiliseriez l'API YouTube
+      // Pour la démo, on simule des données
+      const simulatedData = {
+        title: getSimulatedTitle(youtubeId),
+        duration: getSimulatedDuration(youtubeId),
+        viewCount: Math.floor(Math.random() * 10000) + 1000,
+        publishedAt: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString()
+      };
+      
+      setVideoData(prev => ({
+        ...prev,
+        [youtubeId]: simulatedData
+      }));
+    } catch (error) {
+      console.error('Erreur lors de la récupération des données vidéo:', error);
+    }
   };
-};
-const [videoData, setVideoData] = useState<VideoData>({});
 
   // Fonctions de simulation (à remplacer par de vraies données)
-  const getSimulatedTitle = (youtubeId: string) => {
+  const getSimulatedTitle = (youtubeId) => {
     const video = allVideos.find(v => v.youtubeId === youtubeId);
     return video ? video.title : "Titre non disponible";
   };
 
-  const getSimulatedDuration = (youtubeId: string) => {
+  const getSimulatedDuration = (youtubeId) => {
     const durations = ["5:32", "12:45", "8:30", "15:20", "25:10", "18:45", "22:15", "14:30", "20:05", "28:40"];
     const index = parseInt(youtubeId.slice(-1), 16) % durations.length;
     return durations[index];
@@ -133,33 +144,12 @@ const [videoData, setVideoData] = useState<VideoData>({});
 
   // Effet pour charger les données des vidéos
   useEffect(() => {
-    // Fonction pour obtenir les données d&apos;une vidéo YouTube
-    const fetchVideoData = async (youtubeId: string) => {
-      try {
-        // Simulation d&apos;une API call - en réalité, vous utiliseriez l&apos;API YouTube
-        // Pour la démo, on simule des données
-        const simulatedData = {
-          title: getSimulatedTitle(youtubeId),
-          duration: getSimulatedDuration(youtubeId),
-          viewCount: Math.floor(Math.random() * 10000) + 1000,
-          publishedAt: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString()
-        };
-        
-        setVideoData(prev => ({
-          ...prev,
-          [youtubeId]: simulatedData
-        }));
-      } catch (error) {
-        console.error('Erreur lors de la récupération des données vidéo:', error);
-      }
-    };
-
     allVideos.forEach(video => {
       if (!videoData[video.youtubeId]) {
         fetchVideoData(video.youtubeId);
       }
     });
-  }, [videoData]);
+  }, []);
 
   // Filtrage et tri des vidéos
   useEffect(() => {
@@ -175,16 +165,16 @@ const [videoData, setVideoData] = useState<VideoData>({});
     }
 
     // Tri par date
-    filtered.sort((a: Video, b: Video) => {
-      const dateA = new Date(a.date).getTime();
-      const dateB = new Date(b.date).getTime();
+    filtered.sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
       return sortOrder === "recent" ? dateB - dateA : dateA - dateB;
     });
 
     setFilteredVideos(filtered);
   }, [searchTerm, sortOrder]);
 
-  const openVideoModal = (video: Video) => {
+  const openVideoModal = (video) => {
     setSelectedVideo(video);
     document.body.style.overflow = 'hidden'; // Empêche le scroll
   };
@@ -194,11 +184,11 @@ const [videoData, setVideoData] = useState<VideoData>({});
     document.body.style.overflow = 'unset'; // Restaure le scroll
   };
 
-  const getYoutubeThumbnail = (youtubeId: string) => {
+  const getYoutubeThumbnail = (youtubeId) => {
     return `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
   };
 
-  const formatDate = (dateString: string) => {
+  const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('fr-FR', {
       year: 'numeric',
@@ -207,7 +197,7 @@ const [videoData, setVideoData] = useState<VideoData>({});
     });
   };
 
-  const getCategoryColor = (category: string) => {
+  const getCategoryColor = (category) => {
     const colors = {
       "Événements": "bg-red-500",
       "Interviews": "bg-blue-500",
@@ -216,7 +206,7 @@ const [videoData, setVideoData] = useState<VideoData>({});
       "Actualités": "bg-orange-500",
       "Patrimoine": "bg-indigo-500"
     };
-    return colors[category as keyof typeof colors] || "bg-gray-500";
+    return colors[category] || "bg-gray-500";
   };
 
   return (
@@ -232,7 +222,7 @@ const [videoData, setVideoData] = useState<VideoData>({});
               </h1>
               <p className="text-gray-600 text-lg max-w-3xl mx-auto mb-6">
                 Découvrez {allVideos.length} vidéos de votre communauté. 
-                Explorez nos contenus locaux et restez connecté avec l&apos;actualité.
+                Explorez nos contenus locaux et restez connecté avec l'actualité.
               </p>
               
               {/* Barre de recherche et filtres */}
@@ -290,15 +280,12 @@ const [videoData, setVideoData] = useState<VideoData>({});
                 onClick={() => openVideoModal(video)}
               >
                 <div className="relative">
-                  <Image 
+                  <img 
                     src={getYoutubeThumbnail(video.youtubeId)}
                     alt={video.title}
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                    width={384}
-                    height={216}
-                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`;
+                    onError={(e) => {
+                      e.target.src = `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`;
                     }}
                   />
                   
@@ -354,7 +341,7 @@ const [videoData, setVideoData] = useState<VideoData>({});
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-gray-600 mb-2">Aucune vidéo trouvée</h3>
-              <p className="text-gray-500">Essayez de modifier votre recherche ou changez l&apos;ordre de tri.</p>
+              <p className="text-gray-500">Essayez de modifier votre recherche ou changez l'ordre de tri.</p>
             </div>
           )}
         </div>
