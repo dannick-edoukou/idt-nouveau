@@ -66,6 +66,16 @@ export default function MotDuDG() {
                     </h2>
                   </div>
 
+                  <p className="text-lg text-white/90 mb-6 leading-relaxed">
+                    &quot;C&apos;est avec une immense fierté que je m&apos;adresse à vous à travers ce message. Depuis sa création en 2017, notre groupe n&apos;a cessé d&apos;évoluer et de se renforcer, porté par une vision claire : celle d&apos;être le leader de l&apos;information et du divertissement en Afrique francophone.&quot;
+                  </p>
+                  <p className="text-lg text-white/90 mb-6 leading-relaxed">
+                    Notre engagement en faveur de l&apos;excellence et de l&apos;innovation nous a permis de construirent une offre médiatique riche et diversifiée, qui s&apos;adresse à tous les publics. Que ce soit à travers nos chaînes de télévision, nos stations de radio ou nos plateformes numériques, nous nous efforçons chaque jour de vous proposer des contenus de qualité, qui reflètent la richesse et la diversité de notre continent.
+                  </p>
+                  <p className="text-lg text-white/90 mb-6 leading-relaxed">
+                    L&apos;année 2023 marque un tournant décisif pour notre groupe, avec le lancement de nouvelles chaînes et le renforcement de notre présence à l&apos;international. Ces développements s&apos;inscrivent dans notre stratégie de croissance et d&apos;innovation, qui vise à anticiper les attentes de nos publics et à nous adapter aux évolutions technologiques.
+                  </p>
+
                   <div className="space-y-6 text-gray-700 leading-relaxed">
                     <div className="border-l-4 border-orange-500 pl-6">
                       <p className="text-lg italic text-orange-700 mb-4">

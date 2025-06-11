@@ -167,7 +167,7 @@ export default function CoverageMap() {
                     return (
                       <React.Fragment key={item.id}>
                         <Polygon
-                          positions={[item.coordinates]}
+                          positions={item.coordinates as LatLngExpression[]}
                           pathOptions={{
                             fillColor: config.color,
                             fillOpacity: 0.2,

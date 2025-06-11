@@ -119,27 +119,6 @@ const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
 };
 const [videoData, setVideoData] = useState<VideoData>({});
 
-  // Fonction pour obtenir les données d&apos;une vidéo YouTube
-  const fetchVideoData = async (youtubeId: string) => {
-    try {
-      // Simulation d&apos;une API call - en réalité, vous utiliseriez l&apos;API YouTube
-      // Pour la démo, on simule des données
-      const simulatedData = {
-        title: getSimulatedTitle(youtubeId),
-        duration: getSimulatedDuration(youtubeId),
-        viewCount: Math.floor(Math.random() * 10000) + 1000,
-        publishedAt: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString()
-      };
-      
-      setVideoData(prev => ({
-        ...prev,
-        [youtubeId]: simulatedData
-      }));
-    } catch (error) {
-      console.error('Erreur lors de la récupération des données vidéo:', error);
-    }
-  };
-
   // Fonctions de simulation (à remplacer par de vraies données)
   const getSimulatedTitle = (youtubeId: string) => {
     const video = allVideos.find(v => v.youtubeId === youtubeId);
@@ -154,12 +133,33 @@ const [videoData, setVideoData] = useState<VideoData>({});
 
   // Effet pour charger les données des vidéos
   useEffect(() => {
+    // Fonction pour obtenir les données d&apos;une vidéo YouTube
+    const fetchVideoData = async (youtubeId: string) => {
+      try {
+        // Simulation d&apos;une API call - en réalité, vous utiliseriez l&apos;API YouTube
+        // Pour la démo, on simule des données
+        const simulatedData = {
+          title: getSimulatedTitle(youtubeId),
+          duration: getSimulatedDuration(youtubeId),
+          viewCount: Math.floor(Math.random() * 10000) + 1000,
+          publishedAt: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString()
+        };
+        
+        setVideoData(prev => ({
+          ...prev,
+          [youtubeId]: simulatedData
+        }));
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données vidéo:', error);
+      }
+    };
+
     allVideos.forEach(video => {
       if (!videoData[video.youtubeId]) {
         fetchVideoData(video.youtubeId);
       }
     });
-  }, [fetchVideoData, videoData]);
+  }, [videoData]);
 
   // Filtrage et tri des vidéos
   useEffect(() => {

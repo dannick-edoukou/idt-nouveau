@@ -194,7 +194,14 @@ export default function Phototheque() {
   const startIndex = (currentPage - 1) * stacksPerPage;
   const currentStacks = imageCategories.slice(startIndex, startIndex + stacksPerPage);
 
-  const createStackContent = (item) => (
+  interface ImageItem {
+    id: number;
+    title: string;
+    description: string;
+    img: string;
+  }
+
+  const createStackContent = (item: ImageItem) => (
     <div className="relative w-full h-full">
       <Image 
         src={item.img} 
