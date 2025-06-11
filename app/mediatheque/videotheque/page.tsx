@@ -7,8 +7,8 @@ const allVideos = [
   { 
     id: 1, 
     youtubeId: "dQw4w9WgXcQ",
-    title: "FC&apos;estival d&apos;IDTÉté 2024",
-    description: "Ambiance fC&apos;estive au cœur de la ville",
+    title: "FC'estival d'IDTÉté 2024",
+    description: "Ambiance fC'estive au cœur de la ville",
     date: "2024-07-15",
     category: "Événements"
   },
@@ -32,7 +32,7 @@ const allVideos = [
     id: 4, 
     youtubeId: "dQw4w9WgXcQ",
     title: "Entretien avec le Maire",
-    description: "Vision et projets pour l&apos;avenir",
+    description: "Vision et projets pour l'avenir",
     date: "2024-11-05",
     category: "Interviews"
   },
@@ -109,10 +109,10 @@ export default function Videotheque() {
   const [filteredVideos, setFilteredVideos] = useState(allVideos);
   const [videoData, setVideoData] = useState({});
 
-  // Fonction pour obtenir les données d&apos;une vidéo YouTube
+  // Fonction pour obtenir les données d'une vidéo YouTube
   const fetchVideoData = async (youtubeId) => {
     try {
-      // Simulation d&apos;une API call - en réalité, vous utiliseriez l&apos;API YouTube
+      // Simulation d'une API call - en réalité, vous utiliseriez l'API YouTube
       // Pour la démo, on simule des données
       const simulatedData = {
         title: getSimulatedTitle(youtubeId),
@@ -126,7 +126,7 @@ export default function Videotheque() {
         [youtubeId]: simulatedData
       }));
     } catch (error) {
-      console.error(&apos;Erreur lors de la récupération des données vidéo:&apos;, error);
+      console.error('Erreur lors de la récupération des données vidéo:', error);
     }
   };
 
@@ -176,7 +176,7 @@ export default function Videotheque() {
 
   const openVideoModal = (video) => {
     setSelectedVideo(video);
-    document.body.style.overflow = &apos;hidden&apos;; // Empêche le scroll
+    document.body.style.overflow = 'hidden'; // Empêche le scroll
   };
 
   const closeVideoModal = () => {
@@ -190,10 +190,10 @@ export default function Videotheque() {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString(&apos;fr-FR&apos;, {
-      year: &apos;numeric&apos;,
-      month: &apos;long&apos;,
-      day: &apos;numeric&apos;
+    return date.toLocaleDateString('fr-FR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     });
   };
 
@@ -212,7 +212,7 @@ export default function Videotheque() {
   return (
     <div className="relative">
       {/* Contenu principal de la page */}
-      <div className={`min-h-screen bg-gradient-to-br from-orange-50 to-white transition-all duration-300 ${selectedVideo ? &apos;blur-sm brightness-75&apos; : &apos;&apos;}`}>
+      <div className={`min-h-screen bg-gradient-to-br from-orange-50 to-white transition-all duration-300 ${selectedVideo ? 'blur-sm brightness-75' : ''}`}>
         {/* En-tête avec recherche et filtres */}
         <div className="bg-white shadow-sm border-b border-orange-100">
           <div className="max-w-7xl mx-auto px-4 py-8">
@@ -222,7 +222,7 @@ export default function Videotheque() {
               </h1>
               <p className="text-gray-600 text-lg max-w-3xl mx-auto mb-6">
                 Découvrez {allVideos.length} vidéos de votre communauté. 
-                Explorez nos contenus locaux et restez connecté avec l&apos;actualité.
+                Explorez nos contenus locaux et restez connecté avec l'actualité.
               </p>
               
               {/* Barre de recherche et filtres */}
