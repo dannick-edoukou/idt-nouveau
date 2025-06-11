@@ -32,7 +32,7 @@ const heroImages = [
 ];
 
 // Ajout des données pour les services
-
+const services = [
   {
     icon: "📺",
     title: "Production Audiovisuelle",
@@ -219,7 +219,7 @@ export default function Home() {
   const [newsStartIndex, setNewsStartIndex] = useState(0);
   const { width } = useWindowSize();
   const [isClient, setIsClient] = useState(false);
-  
+  const breadcrumbItems = [{ label: "Accueil", href: "/" }];
   const newsContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -254,7 +254,6 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       {/* Hero section */}
       <section className="relative h-[60vh] md:h-[75vh] overflow-hidden">
-  {/* Ensure all sections are properly closed and wrapped */}
         <AnimatePresence mode="wait">
           <motion.div
             key={currentImageIndex}
@@ -432,6 +431,22 @@ export default function Home() {
                     !isClient ? 'w-[23%]' : 
                     width < 768 ? 'w-[48%]' : 'w-[23%]'
                   }`}
+                  whileHover={{ y: -5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="bg-white rounded-lg md:rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 h-full">
+                    <div className="relative h-40 sm:h-44 md:h-48 lg:h-56">
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      
+                      {/* Date avec fond ombragé */}
+                      <div className="absolute top-3 md:top-4 right-3 md:right-4">
+                        <div className="px-2.5 py-1 bg-black/60 backdrop-blur-sm rounded-lg shadow-lg">
+                          <p className="text-xs font-medium text-white tabular-nums">
                             {formatDate(item.date)}
                           </p>
                         </div>
@@ -480,21 +495,26 @@ export default function Home() {
 
     {/* Grille responsive pour les cartes */}
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6 lg:gap-4 xl:gap-6">
-      {statistics.map((stat, index) => (
-        <motion.div
-          key={index}
-          className="group"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ 
-            duration: 0.6, 
-            delay: index * 0.15,
-            type: "spring",
-          }}
-        >
-          <div>{stat.value}</div>
-        </motion.div>
-      ))}
+      {statistics.map((stat, index) => {
+        const { displayValue, ref } = useCountAnimation(stat.value, 2.5);
+        
+        return (
+          <motion.div
+            key={index}
+            className="group"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ 
+              duration: 0.6, 
+              delay: index * 0.15,
+              type: "spring",
+              stiffness: 100
+            }}
+            viewport={{ once: true, margin: "-50px" }}
+            whileHover={{ y: -8, transition: { duration: 0.2 } }}
+          >
+            <div className="relative overflow-hidden rounded-2xl h-48 sm:h-52 md:h-56 lg:h-60 xl:h-56 shadow-lg group-hover:shadow-2xl transition-all duration-300">
+              {/* Image de fond avec effet parallax */}
               <div 
                 className="absolute inset-0 bg-cover bg-center transform group-hover:scale-105 transition-transform duration-700 ease-out"
                 style={{ backgroundImage: `url('${stat.image}')` }}
