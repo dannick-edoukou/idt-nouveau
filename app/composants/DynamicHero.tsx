@@ -2,9 +2,9 @@
 
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
-import Link from 'next/link';
+
 import Image from 'next/image';
-import { ChevronRight, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 // Configuration des menus - adaptée de votre structure
 const MENU_CONFIG = {

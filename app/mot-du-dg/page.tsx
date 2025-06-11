@@ -28,7 +28,7 @@ export default function MotDuDG() {
                   <div className="w-56 h-56 bg-gradient-to-br from-gray-300 to-gray-400 rounded-full flex items-center justify-center overflow-hidden relative">
                     <img 
                       src="/dg.jpeg" 
-                      alt="YEO Adama Benoit - Directeur Général IDT" 
+                      alt="YEO Adama Benoit - Directeur Général d&apos;IDT" 
                       className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-300" 
                     />
                   </div>
@@ -55,17 +55,17 @@ export default function MotDuDG() {
                 <div className="space-y-6 text-gray-700 leading-relaxed">
                   <div className="border-l-4 border-orange-500 pl-6">
                     <p className="text-lg italic text-orange-700 mb-4">
-                      "L'excellence dans la diffusion audiovisuelle au service de la nation ivoirienne"
+                      "L&apos;excellence dans la diffusion audiovisuelle au service de la nation ivoirienne"
                     </p>
                   </div>
 
                   <p className="text-lg">
-                    L'<strong className="text-orange-600">Ivoirienne de Télédiffusion (IDT)</strong> est une société d'État, créée par adoption en Conseil des Ministres du 20 Décembre 2017, d'un décret n°2017-844 portant création, organisation et fonctionnement de la société Ivoirienne de Télédiffusion dénommée Ivoirienne de Télédiffusion, en abrégé IDT.
+                    L&apos;Ivoirienne de Télédiffusion (d&apos;IDT) est une société d&apos;État, créée par adoption en Conseil des Ministres du 20 Décembre 2017, d&apos;un décret n°2017-844 portant création, organisation et fonctionnement de la société Ivoirienne de Télédiffusion dénommée Ivoirienne de Télédiffusion, en abrégé d&apos;IDT.
                   </p>
                   
                   <div className="bg-orange-50 border-l-4 border-orange-500 p-4 rounded-r-lg">
                     <p className="text-orange-800">
-                      <strong>Cette structure a pour mission principale</strong> d'assurer la diffusion des programmes radiophoniques et télévisuels sur le territoire national.
+                      <strong>Cette structure a pour mission principale</strong> d&apos;assurer la diffusion des programmes radiophoniques et télévisuels sur le territoire national.
                     </p>
                   </div>
 
@@ -81,12 +81,12 @@ export default function MotDuDG() {
                     
                     <div className="flex items-start space-x-3">
                       <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
-                      <p>La création, l'exploitation, l'entretien et l'extension des réseaux de diffusion de télévision numérique terrestre.</p>
+                      <p>La création, l&apos;exploitation, l&apos;entretien et l&apos;extension des réseaux de diffusion de télévision numérique terrestre.</p>
                     </div>
                     
                     <div className="flex items-start space-x-3">
                       <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
-                      <p>La gestion et l'entretien du réseau de diffusion de télévision analogique pendant la période de diffusion simultanée (Simulcast).</p>
+                      <p>La gestion et l&apos;entretien du réseau de diffusion de télévision analogique pendant la période de diffusion simultanée (Simulcast).</p>
                     </div>
                     
                     <div className="flex items-start space-x-3">
@@ -110,7 +110,7 @@ export default function MotDuDG() {
                     </div>
                     <div className="text-right">
                       <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-green-500 mb-2"></div>
-                      <p className="text-sm text-gray-500">IDT - 2017</p>
+                      <p className="text-sm text-gray-500">d&apos;IDT - 2017</p>
                     </div>
                   </div>
                 </div>

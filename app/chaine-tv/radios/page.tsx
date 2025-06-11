@@ -29,7 +29,7 @@ export default function Radios() {
                   </div>
                 </div>
               </div>
-              {/* Ajouter d'autres radios */}
+              {/* Ajouter d&apos;autres radios */}
             </div>
           </section>
 
@@ -59,7 +59,7 @@ export default function Radios() {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h3 className="text-xl font-medium">Radio en cours</h3>
-                  <p className="text-gray-600">Titre de l'émission en cours</p>
+                  <p className="text-gray-600">Titre de l&apos;émission en cours</p>
                 </div>
                 <div className="flex items-center space-x-4">
                   <button className="text-gray-600 hover:text-orange-500">

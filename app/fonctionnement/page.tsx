@@ -1,7 +1,7 @@
 export default function Fonctionnement() {
   return (
     <main className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Fonctionnement de l'IDT</h1>
+      <h1 className="text-3xl font-bold mb-6">Fonctionnement de l&apos;IDT</h1>
       <div className="prose max-w-none">
         <div className="grid gap-8">
           {/* Section Organisation */}
@@ -9,7 +9,7 @@ export default function Fonctionnement() {
             <h2 className="text-2xl font-semibold mb-4">Organisation</h2>
             <div className="space-y-4">
               <p className="text-lg">
-                Description de l'organisation interne de l'IDT...
+                Description de l&apos;organisation interne de l&apos;IDT...
               </p>
               {/* Structure organisationnelle à compléter */}
             </div>

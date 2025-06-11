@@ -9,7 +9,7 @@ export default function DocumentJuridique() {
             <h2 className="text-2xl font-semibold mb-4">Statuts et Réglementation</h2>
             <div className="space-y-4">
               <div className="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
-                <h3 className="text-xl font-medium mb-2">Statuts de l'IDT</h3>
+                <h3 className="text-xl font-medium mb-2">Statuts de l&apos;IDT</h3>
                 <p className="text-gray-600 mb-3">
                   Description du document...
                 </p>
@@ -20,7 +20,7 @@ export default function DocumentJuridique() {
                   </svg>
                 </a>
               </div>
-              {/* Ajouter d'autres documents */}
+              {/* Ajouter d&apos;autres documents */}
             </div>
           </section>
 
@@ -40,7 +40,7 @@ export default function DocumentJuridique() {
                   </svg>
                 </a>
               </div>
-              {/* Ajouter d'autres textes réglementaires */}
+              {/* Ajouter d&apos;autres textes réglementaires */}
             </div>
           </section>
         </div>

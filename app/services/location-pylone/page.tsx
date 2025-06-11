@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Link from "next/link";
+
 export default function LocationPylone() {
   return (
     <main className="container mx-auto px-4 py-8">
@@ -58,9 +61,9 @@ export default function LocationPylone() {
             <p className="text-gray-600 mb-4">
               Pour plus d'informations sur nos services de location de pylône...
             </p>
-            <a href="/contacts" className="inline-block bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 transition-colors">
+            <Link href="/contacts" className="inline-block bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 transition-colors">
               Nous contacter
-            </a>
+            </Link>
           </section>
         </div>
       </div>

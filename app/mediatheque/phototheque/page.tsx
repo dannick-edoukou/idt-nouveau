@@ -46,7 +46,7 @@ const imageCategories = [
         id: 5, 
         img: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=500&auto=format",
         title: "Studio Design",
-        description: "Optimisation d'espace parfaite"
+        description: "Optimisation d&apos;espace parfaite"
       },
       { 
         id: 6, 
@@ -329,19 +329,6 @@ export default function Phototheque() {
                   className="flex flex-col items-center cursor-pointer group" 
                   onClick={() => setSelectedCategory(category)}
                 >
-                  {/* Titre de la catégorie */}
-                  <div className="text-center mb-4">
-                    <h3 className="text-lg font-semibold text-orange-600 mb-1 group-hover:underline">
-                      {category.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm">
-                      {category.description}
-                    </p>
-                    <div className="text-orange-400 text-xs mt-1">
-                      {category.images.length} propriétés
-                    </div>
-                  </div>
-                  
                   {/* Stack avec toutes les images de la catégorie */}
                   <Stack
                     randomRotation={true}
@@ -356,6 +343,19 @@ export default function Phototheque() {
                       content: createStackContent(item)
                     }))}
                   />
+                  
+                  {/* Titre et description de la catégorie maintenant EN DESSOUS */}
+                  <div className="text-center mt-4">
+                    <h3 className="text-lg font-semibold text-orange-600 mb-1 group-hover:underline">
+                      {category.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm">
+                      {category.description}
+                    </p>
+                    <div className="text-orange-400 text-xs mt-1">
+                      {category.images.length} propriétés
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>

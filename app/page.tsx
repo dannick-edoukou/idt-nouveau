@@ -8,6 +8,7 @@ import { useState, useEffect, useRef } from "react";
 import { Partners } from "./composants/partners";
 import Services from "./composants/services";
 import CoverageMapWrapper from "./composants/CoverageMapWrapper";
+import Faq from "./composants/faq";
 
 const heroImages = [
   {
@@ -578,7 +579,7 @@ export default function Home() {
   </div>
 </section>
 <CoverageMapWrapper/>
-     
+     <Faq/>
     </div>
   );
 }
