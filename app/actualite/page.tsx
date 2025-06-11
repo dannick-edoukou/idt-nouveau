@@ -1,8 +1,8 @@
-
 "use client"
 import React, { useState } from 'react';
 import { Calendar, Filter, ArrowLeft, Search } from 'lucide-react';
 import DynamicHero from '../composants/DynamicHero';
+import Image from 'next/image';
 
 // Types
 interface NewsItem {
@@ -73,7 +73,7 @@ const NewsCard: React.FC<{ news: NewsItem; onClick: () => void }> = ({ news, onC
       onClick={onClick}
     >
       <div className="relative">
-        <img 
+        <Image 
           src={news.image} 
           alt={news.title}
           className="w-full h-48 object-cover"
@@ -119,7 +119,7 @@ const NewsDetail: React.FC<{ news: NewsItem; onBack: () => void }> = ({ news, on
         
         <article className="bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="relative">
-            <img 
+            <Image 
               src={news.image} 
               alt={news.title}
               className="w-full h-80 object-cover"

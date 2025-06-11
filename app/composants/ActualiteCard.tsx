@@ -1,11 +1,22 @@
-
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image'; // Added import
 
 import { Calendar, User, Clock, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { NewsItem } from '@/types/news';
+// import { NewsItem } from '@/types/news';
+// Local fallback type for NewsItem based on usage in this file
+type NewsItem = {
+  id: string | number;
+  image: string;
+  title: string;
+  date: string;
+  author: string;
+  readTime: number;
+  summary: string;
+  category: string;
+};
 
 interface NewsCardProps {
   news: NewsItem;
@@ -15,7 +26,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
   return (
     <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-orange/20">
       <div className="relative overflow-hidden">
-        <img 
+        <Image 
           src={news.image} 
           alt={news.title}
           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"

@@ -148,7 +148,7 @@ export default function Services() {
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold mb-6 text-gray-900">Nos services</h3>
                 <ul ref={listRef} className="space-y-3" role="tablist" aria-label="Liste des services">
-                  {activities.map((activity, index) => (
+                  {activities.map((activity) => (
                     <li key={activity.id} role="none">
                       <button
                         ref={selectedActivity.id === activity.id ? selectedButtonRef : null}

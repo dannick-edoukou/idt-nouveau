@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from 'next/image';
 
 const companies = [
     "Google",
@@ -41,10 +42,12 @@ const companies = [
                     key={idx}
                     className="flex-shrink-0"
                   >
-                    <img
+                    <Image
                       src={`https://cdn.magicui.design/companies/${logo}.svg`}
                       className="h-10 w-40 px-2 dark:brightness-0 dark:invert hover:opacity-80 transition-opacity"
                       alt={logo}
+                      width={160}
+                      height={40}
                     />
                   </div>
                 ))}

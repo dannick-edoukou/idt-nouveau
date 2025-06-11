@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Stack from "@/app/composants/stack";
 import DynamicHero from "../../composants/DynamicHero";
 
@@ -195,10 +196,12 @@ export default function Phototheque() {
 
   const createStackContent = (item) => (
     <div className="relative w-full h-full">
-      <img 
+      <Image 
         src={item.img} 
         alt={item.title}
         className="w-full h-full object-cover rounded-lg"
+        width={500}
+        height={300}
       />
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 rounded-b-lg">
         <h3 className="text-white font-semibold text-lg mb-1">
@@ -250,10 +253,12 @@ export default function Phototheque() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <img
+          <Image
             className="h-auto max-h-[420px] max-w-full rounded-lg mx-auto shadow-lg"
             src={currentImg.img}
             alt={currentImg.title || ''}
+            width={800}
+            height={420}
           />
           <button
             onClick={() => canGoNext && setCurrentImageIndex(i => i + 1)}
@@ -282,10 +287,12 @@ export default function Phototheque() {
                 style={{ width: 64, height: 48 }}
                 aria-label={`Voir l'image ${img.title || img.id}`}
               >
-                <img
+                <Image
                   src={img.img}
                   alt={img.title || ''}
                   className="object-cover w-full h-full"
+                  width={64}
+                  height={48}
                 />
               </button>
             ))}

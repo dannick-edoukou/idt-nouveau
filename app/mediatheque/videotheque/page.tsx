@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 // Données vidéos avec dates réelles
 const allVideos = [
@@ -103,14 +104,23 @@ const allVideos = [
 ];
 
 export default function Videotheque() {
-  const [selectedVideo, setSelectedVideo] = useState(null);
+  type Video = typeof allVideos[number];
+const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("recent"); // "recent" ou "oldest"
   const [filteredVideos, setFilteredVideos] = useState(allVideos);
-  const [videoData, setVideoData] = useState({});
+  type VideoData = {
+  [youtubeId: string]: {
+    title: string;
+    duration: string;
+    viewCount: number;
+    publishedAt: string;
+  };
+};
+const [videoData, setVideoData] = useState<VideoData>({});
 
   // Fonction pour obtenir les données d&apos;une vidéo YouTube
-  const fetchVideoData = async (youtubeId) => {
+  const fetchVideoData = async (youtubeId: string) => {
     try {
       // Simulation d&apos;une API call - en réalité, vous utiliseriez l&apos;API YouTube
       // Pour la démo, on simule des données
@@ -131,12 +141,12 @@ export default function Videotheque() {
   };
 
   // Fonctions de simulation (à remplacer par de vraies données)
-  const getSimulatedTitle = (youtubeId) => {
+  const getSimulatedTitle = (youtubeId: string) => {
     const video = allVideos.find(v => v.youtubeId === youtubeId);
     return video ? video.title : "Titre non disponible";
   };
 
-  const getSimulatedDuration = (youtubeId) => {
+  const getSimulatedDuration = (youtubeId: string) => {
     const durations = ["5:32", "12:45", "8:30", "15:20", "25:10", "18:45", "22:15", "14:30", "20:05", "28:40"];
     const index = parseInt(youtubeId.slice(-1), 16) % durations.length;
     return durations[index];
@@ -165,16 +175,16 @@ export default function Videotheque() {
     }
 
     // Tri par date
-    filtered.sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
+    filtered.sort((a: Video, b: Video) => {
+      const dateA = new Date(a.date).getTime();
+      const dateB = new Date(b.date).getTime();
       return sortOrder === "recent" ? dateB - dateA : dateA - dateB;
     });
 
     setFilteredVideos(filtered);
   }, [searchTerm, sortOrder]);
 
-  const openVideoModal = (video) => {
+  const openVideoModal = (video: Video) => {
     setSelectedVideo(video);
     document.body.style.overflow = 'hidden'; // Empêche le scroll
   };
@@ -184,11 +194,11 @@ export default function Videotheque() {
     document.body.style.overflow = 'unset'; // Restaure le scroll
   };
 
-  const getYoutubeThumbnail = (youtubeId) => {
+  const getYoutubeThumbnail = (youtubeId: string) => {
     return `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
   };
 
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('fr-FR', {
       year: 'numeric',
@@ -197,7 +207,7 @@ export default function Videotheque() {
     });
   };
 
-  const getCategoryColor = (category) => {
+  const getCategoryColor = (category: string) => {
     const colors = {
       "Événements": "bg-red-500",
       "Interviews": "bg-blue-500",
@@ -206,7 +216,7 @@ export default function Videotheque() {
       "Actualités": "bg-orange-500",
       "Patrimoine": "bg-indigo-500"
     };
-    return colors[category] || "bg-gray-500";
+    return colors[category as keyof typeof colors] || "bg-gray-500";
   };
 
   return (
@@ -280,12 +290,15 @@ export default function Videotheque() {
                 onClick={() => openVideoModal(video)}
               >
                 <div className="relative">
-                  <img 
+                  <Image 
                     src={getYoutubeThumbnail(video.youtubeId)}
                     alt={video.title}
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                    onError={(e) => {
-                      e.target.src = `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`;
+                    width={384}
+                    height={216}
+                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`;
                     }}
                   />
                   
