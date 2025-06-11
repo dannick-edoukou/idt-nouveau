@@ -3,9 +3,26 @@
 import { useState, useEffect } from "react";
 import Stack from "@/app/composants/stack";
 import DynamicHero from "../../composants/DynamicHero";
+import Image from "next/image";
+
+// Interface pour typer les images
+interface ImageItem {
+  id: number;
+  img: string;
+  title: string;
+  description: string;
+}
+
+// Interface pour typer les catégories
+interface ImageCategory {
+  id: number;
+  title: string;
+  description: string;
+  images: ImageItem[];
+}
 
 // Images organisées par catégories/dossiers
-const imageCategories = [
+const imageCategories: ImageCategory[] = [
   {
     id: 1,
     title: "Maisons Modernes",
@@ -160,7 +177,7 @@ const imageCategories = [
 
 export default function Phototheque() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState<ImageCategory | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   // Configuration responsive des stacks par page
@@ -193,11 +210,14 @@ export default function Phototheque() {
   const startIndex = (currentPage - 1) * stacksPerPage;
   const currentStacks = imageCategories.slice(startIndex, startIndex + stacksPerPage);
 
-  const createStackContent = (item) => (
+  // Fonction typée pour créer le contenu des stacks
+  const createStackContent = (item: ImageItem) => (
     <div className="relative w-full h-full">
-      <img 
+      <Image 
         src={item.img} 
         alt={item.title}
+        width={500}
+        height={300}
         className="w-full h-full object-cover rounded-lg"
       />
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 rounded-b-lg">
@@ -216,6 +236,8 @@ export default function Phototheque() {
 
   // Composant pour la vue détail de catégorie
   const CategoryDetailView = () => {
+    if (!selectedCategory) return null;
+    
     const images = selectedCategory.images;
     const currentImg = images[currentImageIndex];
     const canGoPrev = currentImageIndex > 0;
@@ -250,10 +272,12 @@ export default function Phototheque() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <img
+          <Image
             className="h-auto max-h-[420px] max-w-full rounded-lg mx-auto shadow-lg"
             src={currentImg.img}
             alt={currentImg.title || ''}
+            width={800}
+            height={420}
           />
           <button
             onClick={() => canGoNext && setCurrentImageIndex(i => i + 1)}
@@ -282,9 +306,11 @@ export default function Phototheque() {
                 style={{ width: 64, height: 48 }}
                 aria-label={`Voir l'image ${img.title || img.id}`}
               >
-                <img
+                <Image
                   src={img.img}
                   alt={img.title || ''}
+                  width={64}
+                  height={48}
                   className="object-cover w-full h-full"
                 />
               </button>
