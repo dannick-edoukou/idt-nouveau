@@ -1,15 +1,24 @@
 'use client';
 
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import { useState } from "react";
+import React, { useState, JSX as ReactJSX } from "react";
+import Image from 'next/image';
 
-function CardRotate({ children, onSendToBack, sensitivity }: any) {
+import { PanInfo } from "framer-motion";
+
+type CardRotateProps = {
+  children: React.ReactNode;
+  onSendToBack: () => void;
+  sensitivity: number;
+};
+
+function CardRotate({ children, onSendToBack, sensitivity }: CardRotateProps) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const rotateX = useTransform(y, [-100, 100], [60, -60]);
   const rotateY = useTransform(x, [-100, 100], [-60, 60]);
 
-  function handleDragEnd(_, info: any) {
+  function handleDragEnd(_: unknown, info: PanInfo) {
     if (
       Math.abs(info.offset.x) > sensitivity ||
       Math.abs(info.offset.y) > sensitivity
@@ -41,7 +50,7 @@ type CardData = {
   img: string;
   title?: string;
   description?: string;
-  content?: JSX.Element;
+  content?: React.ReactNode;
 };
 
 interface StackProps {
@@ -72,7 +81,7 @@ export default function Stack({
       ]
   );
 
-  const sendToBack = (id) => {
+  const sendToBack = (id: number) => {
     setCards((prev) => {
       const newCards = [...prev];
       const index = newCards.findIndex((card) => card.id === id);
@@ -121,7 +130,7 @@ export default function Stack({
                 height: cardDimensions.height,
               }}
             >
-              <img
+              <Image
                 src={card.img}
                 alt={`card-${card.id}`}
                 className="w-full h-full object-cover pointer-events-none"

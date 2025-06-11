@@ -28,7 +28,7 @@ const Header = () => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedMobileItems, setExpandedMobileItems] = useState<string[]>([]);
-  const headerRef = useRef<HTMLDivElement | null>(null);
+  
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const menuItems: MenuItem[] = [
@@ -104,17 +104,6 @@ const Header = () => {
       setActiveMenu(null);
     }, 150);
   }, []);
-
-  const handleMenuItemMouseEnter = (menuId: string) => {
-    setActiveMenu(menuId);
-  };
-
-  const handleMenuItemMouseLeave = () => {
-    // Ne pas fermer immédiatement, laisser un délai
-    setTimeout(() => {
-      setActiveMenu(null);
-    }, 100);
-  };
 
   // Nettoyer le timeout au démontage du composant
   useEffect(() => {
