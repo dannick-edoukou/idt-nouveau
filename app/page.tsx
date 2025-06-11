@@ -132,7 +132,7 @@ function useWindowSize() {
   return windowSize;
 }
 
-// Fonction utilitaire pour l'animation des nombres - CORRIGÉE
+// Fonction utilitaire pour l'animation des nombres
 function useCountAnimation(targetValue: string, duration: number = 2) {
   const [displayValue, setDisplayValue] = useState("0");
   const [isVisible, setIsVisible] = useState(false);
@@ -183,6 +183,81 @@ function useCountAnimation(targetValue: string, duration: number = 2) {
   }, [isVisible, targetValue, duration]);
 
   return { displayValue, ref };
+}
+
+// Composant séparé pour chaque carte statistique
+function StatisticCard({ stat, index }: { stat: typeof statistics[0], index: number }) {
+  const { displayValue, ref } = useCountAnimation(stat.value, 2.5);
+  
+  return (
+    <motion.div
+      className="group"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ 
+        duration: 0.6, 
+        delay: index * 0.15,
+        type: "spring",
+        stiffness: 100
+      }}
+      viewport={{ once: true, margin: "-50px" }}
+      whileHover={{ y: -8, transition: { duration: 0.2 } }}
+    >
+      <div className="relative overflow-hidden rounded-2xl h-48 sm:h-52 md:h-56 lg:h-60 xl:h-56 shadow-lg group-hover:shadow-2xl transition-all duration-300">
+        {/* Image de fond avec effet parallax */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center transform group-hover:scale-105 transition-transform duration-700 ease-out"
+          style={{ backgroundImage: `url('${stat.image}')` }}
+        />
+        
+        {/* Overlay gradient amélioré */}
+        <div className="absolute inset-0 bg-black opacity-85 group-hover:opacity-90 transition-opacity duration-300" />
+        {/* Effet de lumière sur hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        
+        {/* Contenu de la carte */}
+        <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-center items-center text-center text-white">
+          {/* Nombre animé */}
+          <motion.div
+            ref={ref}
+            className="text-3xl sm:text-4xl lg:text-5xl xl:text-4xl font-bold mb-2 sm:mb-3 font-mono tracking-tight drop-shadow-lg"
+            initial={{ scale: 0.5 }}
+            whileInView={{ scale: 1 }}
+            transition={{ 
+              delay: 0.3 + index * 0.1,
+              type: "spring",
+              stiffness: 200
+            }}
+          >
+            {displayValue}
+          </motion.div>
+          
+          {/* Titre */}
+          <motion.h3 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 + index * 0.1 }}
+            className="text-lg sm:text-xl font-semibold mb-2 leading-tight"
+          >
+            {stat.label}
+          </motion.h3>
+          
+          {/* Description */}
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.7 + index * 0.1 }}
+            className="text-sm sm:text-base text-white/90 leading-relaxed px-2"
+          >
+            {stat.description}
+          </motion.p>
+        </div>
+        
+        {/* Bordure décorative */}
+        <div className="absolute inset-0 rounded-2xl ring-1 ring-white/20 group-hover:ring-white/40 transition-all duration-300" />
+      </div>
+    </motion.div>
+  );
 }
 
 export default function Home() {
@@ -464,81 +539,9 @@ export default function Home() {
 
           {/* Grille responsive pour les cartes */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6 lg:gap-4 xl:gap-6">
-            {statistics.map((stat, index) => {
-              // CORRECTION : Appel du hook au niveau du composant principal
-              const { displayValue, ref } = useCountAnimation(stat.value, 2.5);
-              
-              return (
-                <motion.div
-                  key={index}
-                  className="group"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ 
-                    duration: 0.6, 
-                    delay: index * 0.15,
-                    type: "spring",
-                    stiffness: 100
-                  }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                >
-                  <div className="relative overflow-hidden rounded-2xl h-48 sm:h-52 md:h-56 lg:h-60 xl:h-56 shadow-lg group-hover:shadow-2xl transition-all duration-300">
-                    {/* Image de fond avec effet parallax */}
-                    <div 
-                      className="absolute inset-0 bg-cover bg-center transform group-hover:scale-105 transition-transform duration-700 ease-out"
-                      style={{ backgroundImage: `url('${stat.image}')` }}
-                    />
-                    
-                    {/* Overlay gradient amélioré */}
-                    <div className="absolute inset-0 bg-black opacity-85 group-hover:opacity-90 transition-opacity duration-300" />
-                    {/* Effet de lumière sur hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    
-                    {/* Contenu de la carte */}
-                    <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-center items-center text-center text-white">
-                      {/* Nombre animé */}
-                      <motion.div
-                        ref={ref}
-                        className="text-3xl sm:text-4xl lg:text-5xl xl:text-4xl font-bold mb-2 sm:mb-3 font-mono tracking-tight drop-shadow-lg"
-                        initial={{ scale: 0.5 }}
-                        whileInView={{ scale: 1 }}
-                        transition={{ 
-                          delay: 0.3 + index * 0.1,
-                          type: "spring",
-                          stiffness: 200
-                        }}
-                      >
-                        {displayValue}
-                      </motion.div>
-                      
-                      {/* Titre */}
-                      <motion.h3 
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5 + index * 0.1 }}
-                        className="text-lg sm:text-xl font-semibold mb-2 leading-tight"
-                      >
-                        {stat.label}
-                      </motion.h3>
-                      
-                      {/* Description */}
-                      <motion.p 
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        transition={{ delay: 0.7 + index * 0.1 }}
-                        className="text-sm sm:text-base text-white/90 leading-relaxed px-2"
-                      >
-                        {stat.description}
-                      </motion.p>
-                    </div>
-                    
-                    {/* Bordure décorative */}
-                    <div className="absolute inset-0 rounded-2xl ring-1 ring-white/20 group-hover:ring-white/40 transition-all duration-300" />
-                  </div>
-                </motion.div>
-              );
-            })}
+            {statistics.map((stat, index) => (
+              <StatisticCard key={index} stat={stat} index={index} />
+            ))}
           </div>
 
           {/* Animation de fond décorative */}
