@@ -304,8 +304,9 @@ export default function Videotheque() {
                     width={400}
                     height={300}
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                    onError={(e: any) => {
-                      e.target.src = `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`;
+                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`;
                     }}
                   />
                   
