@@ -161,7 +161,21 @@ const imageCategories = [
 
 export default function Phototheque() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  interface Image {
+  id: number;
+  img: string;
+  title: string;
+  description: string;
+}
+
+interface Category {
+  id: number;
+  title: string;
+  description: string;
+  images: Image[];
+}
+
+const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   // Configuration responsive des stacks par page
@@ -226,7 +240,9 @@ export default function Phototheque() {
 
   // Composant pour la vue détail de catégorie
   const CategoryDetailView = () => {
-    const images = selectedCategory.images;
+    if (!selectedCategory) return null; // Return null if no category is selected
+    
+    const { images } = selectedCategory;
     const currentImg = images[currentImageIndex];
     const canGoPrev = currentImageIndex > 0;
     const canGoNext = currentImageIndex < images.length - 1;
