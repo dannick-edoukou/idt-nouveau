@@ -1,6 +1,6 @@
 import React from 'react';
 import { Radio, Tv, Signal, Globe, Settings, Users } from 'lucide-react';
-import { div } from 'framer-motion/client';
+
 import DynamicHero from '../composants/DynamicHero';
 
 export default function IDTPresentation() {

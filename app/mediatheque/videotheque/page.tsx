@@ -159,7 +159,7 @@ const [videoData, setVideoData] = useState<VideoData>({});
         fetchVideoData(video.youtubeId);
       }
     });
-  }, []);
+  }, [fetchVideoData, videoData]);
 
   // Filtrage et tri des vidéos
   useEffect(() => {
