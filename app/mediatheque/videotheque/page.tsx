@@ -1,9 +1,27 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
+
+// Interface pour les données vidéo
+interface Video {
+  id: number;
+  youtubeId: string;
+  title: string;
+  description: string;
+  date: string;
+  category: string;
+}
+
+interface VideoData {
+  title: string;
+  duration: string;
+  viewCount: number;
+  publishedAt: string;
+}
 
 // Données vidéos avec dates réelles
-const allVideos = [
+const allVideos: Video[] = [
   { 
     id: 1, 
     youtubeId: "dQw4w9WgXcQ",
@@ -103,18 +121,18 @@ const allVideos = [
 ];
 
 export default function Videotheque() {
-  const [selectedVideo, setSelectedVideo] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [sortOrder, setSortOrder] = useState("recent"); // "recent" ou "oldest"
-  const [filteredVideos, setFilteredVideos] = useState(allVideos);
-  const [videoData, setVideoData] = useState({});
+  const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [sortOrder, setSortOrder] = useState<"recent" | "oldest">("recent");
+  const [filteredVideos, setFilteredVideos] = useState<Video[]>(allVideos);
+  const [videoData, setVideoData] = useState<Record<string, VideoData>>({});
 
   // Fonction pour obtenir les données d'une vidéo YouTube
-  const fetchVideoData = async (youtubeId) => {
+  const fetchVideoData = useCallback(async (youtubeId: string) => {
     try {
       // Simulation d'une API call - en réalité, vous utiliseriez l'API YouTube
       // Pour la démo, on simule des données
-      const simulatedData = {
+      const simulatedData: VideoData = {
         title: getSimulatedTitle(youtubeId),
         duration: getSimulatedDuration(youtubeId),
         viewCount: Math.floor(Math.random() * 10000) + 1000,
@@ -128,15 +146,15 @@ export default function Videotheque() {
     } catch (error) {
       console.error('Erreur lors de la récupération des données vidéo:', error);
     }
-  };
+  }, []);
 
   // Fonctions de simulation (à remplacer par de vraies données)
-  const getSimulatedTitle = (youtubeId) => {
+  const getSimulatedTitle = (youtubeId: string): string => {
     const video = allVideos.find(v => v.youtubeId === youtubeId);
     return video ? video.title : "Titre non disponible";
   };
 
-  const getSimulatedDuration = (youtubeId) => {
+  const getSimulatedDuration = (youtubeId: string): string => {
     const durations = ["5:32", "12:45", "8:30", "15:20", "25:10", "18:45", "22:15", "14:30", "20:05", "28:40"];
     const index = parseInt(youtubeId.slice(-1), 16) % durations.length;
     return durations[index];
@@ -149,7 +167,7 @@ export default function Videotheque() {
         fetchVideoData(video.youtubeId);
       }
     });
-  }, []);
+  }, [fetchVideoData, videoData]);
 
   // Filtrage et tri des vidéos
   useEffect(() => {
@@ -168,13 +186,13 @@ export default function Videotheque() {
     filtered.sort((a, b) => {
       const dateA = new Date(a.date);
       const dateB = new Date(b.date);
-      return sortOrder === "recent" ? dateB - dateA : dateA - dateB;
+      return sortOrder === "recent" ? dateB.getTime() - dateA.getTime() : dateA.getTime() - dateB.getTime();
     });
 
     setFilteredVideos(filtered);
   }, [searchTerm, sortOrder]);
 
-  const openVideoModal = (video) => {
+  const openVideoModal = (video: Video) => {
     setSelectedVideo(video);
     document.body.style.overflow = 'hidden'; // Empêche le scroll
   };
@@ -184,11 +202,11 @@ export default function Videotheque() {
     document.body.style.overflow = 'unset'; // Restaure le scroll
   };
 
-  const getYoutubeThumbnail = (youtubeId) => {
+  const getYoutubeThumbnail = (youtubeId: string): string => {
     return `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
   };
 
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
     return date.toLocaleDateString('fr-FR', {
       year: 'numeric',
@@ -197,8 +215,8 @@ export default function Videotheque() {
     });
   };
 
-  const getCategoryColor = (category) => {
-    const colors = {
+  const getCategoryColor = (category: string): string => {
+    const colors: Record<string, string> = {
       "Événements": "bg-red-500",
       "Interviews": "bg-blue-500",
       "Reportages": "bg-green-500",
@@ -280,11 +298,13 @@ export default function Videotheque() {
                 onClick={() => openVideoModal(video)}
               >
                 <div className="relative">
-                  <img 
+                  <Image 
                     src={getYoutubeThumbnail(video.youtubeId)}
                     alt={video.title}
+                    width={400}
+                    height={300}
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                    onError={(e) => {
+                    onError={(e: any) => {
                       e.target.src = `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`;
                     }}
                   />
