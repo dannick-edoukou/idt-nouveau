@@ -13,8 +13,8 @@ emailjs.init("84CLKZLXUD0IzZIz-")
 
 // Schéma de validation avec Zod
 const contactSchema = z.object({
-  firstName: z.string().min(2, "Le prénom doit contenir au moins 2 caractères"),
-  lastName: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
+  firstName: z.string().min(2, "L&apos;e prénom doit contenir au moins 2 caractères"),
+  lastName: z.string().min(2, "L&apos;e nom doit contenir au moins 2 caractères"),
   email: z.string().email("Veuillez entrer une adresse email valide"),
   phone: z.string().optional(),
   company: z.string().optional(),

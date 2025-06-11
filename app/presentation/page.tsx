@@ -77,12 +77,12 @@ export default function IDTPresentation() {
                       
                       <div className="flex items-start space-x-3">
                         <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
-                        <p>La création, l'exploitation, l'entretien et l'extension des réseaux de diffusion de télévision numérique terrestre.</p>
+                        <p>La création, l&apos;exploitation, l&apos;entretien et l&apos;extension des réseaux de diffusion de télévision numérique terrestre.</p>
                       </div>
                       
                       <div className="flex items-start space-x-3">
                         <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
-                        <p>La gestion et l'entretien du réseau de diffusion de télévision analogique pendant la période de diffusion simultanée (Simulcast).</p>
+                        <p>La gestion et l&apos;entretien du réseau de diffusion de télévision analogique pendant la période de diffusion simultanée (Simulcast).</p>
                       </div>
                       
                       <div className="flex items-start space-x-3">
@@ -106,7 +106,7 @@ export default function IDTPresentation() {
                     </span>
                     <span className="flex items-center">
                       <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-                      Société d'État
+                      Société d&apos;État
                     </span>
                     <span className="flex items-center">
                       <div className="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>

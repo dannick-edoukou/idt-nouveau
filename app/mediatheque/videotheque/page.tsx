@@ -7,8 +7,8 @@ const allVideos = [
   { 
     id: 1, 
     youtubeId: "dQw4w9WgXcQ",
-    title: "FC'estival d'IDTÉté 2024",
-    description: "Ambiance fC'estive au cœur de la ville",
+    title: "FC&apos;estival d&apos;IDTÉté 2024",
+    description: "Ambiance fC&apos;estive au cœur de la ville",
     date: "2024-07-15",
     category: "Événements"
   },
@@ -32,7 +32,7 @@ const allVideos = [
     id: 4, 
     youtubeId: "dQw4w9WgXcQ",
     title: "Entretien avec le Maire",
-    description: "Vision et projets pour l'avenir",
+    description: "Vision et projets pour l&apos;avenir",
     date: "2024-11-05",
     category: "Interviews"
   },
@@ -109,10 +109,10 @@ export default function Videotheque() {
   const [filteredVideos, setFilteredVideos] = useState(allVideos);
   const [videoData, setVideoData] = useState({});
 
-  // Fonction pour obtenir les données d'une vidéo YouTube
+  // Fonction pour obtenir les données d&apos;une vidéo YouTube
   const fetchVideoData = async (youtubeId) => {
     try {
-      // Simulation d'une API call - en réalité, vous utiliseriez l'API YouTube
+      // Simulation d&apos;une API call - en réalité, vous utiliseriez l&apos;API YouTube
       // Pour la démo, on simule des données
       const simulatedData = {
         title: getSimulatedTitle(youtubeId),
@@ -222,7 +222,7 @@ export default function Videotheque() {
               </h1>
               <p className="text-gray-600 text-lg max-w-3xl mx-auto mb-6">
                 Découvrez {allVideos.length} vidéos de votre communauté. 
-                Explorez nos contenus locaux et restez connecté avec l'actualité.
+                Explorez nos contenus locaux et restez connecté avec l&apos;actualité.
               </p>
               
               {/* Barre de recherche et filtres */}
@@ -341,7 +341,7 @@ export default function Videotheque() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-gray-600 mb-2">Aucune vidéo trouvée</h3>
-              <p className="text-gray-500">Essayez de modifier votre recherche ou changez l'ordre de tri.</p>
+              <p className="text-gray-500">Essayez de modifier votre recherche ou changez l&apos;ordre de tri.</p>
             </div>
           )}
         </div>
