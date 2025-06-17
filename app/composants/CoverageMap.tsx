@@ -89,17 +89,17 @@ export default function CoverageMap() {
   const filteredData = coverageData.filter((item) => activeFilters.includes(item.type))
 
   return (
-    <div className="w-full px-4 md:px-8 max-w-screen-xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="w-full px-4 md:px-6 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Colonne de gauche: Filtres et Légende */}
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* Contrôles */}
           <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Filtres de couverture</CardTitle>
+            <CardHeader className="pb-1">
+              <CardTitle className="text-base">Filtres de couverture</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="flex flex-col space-y-3">
+            <CardContent className="pt-0">
+              <div className="flex flex-col space-y-2">
                 {(Object.keys(SERVICE_TYPES) as ServiceType[]).map((type) => (
                   <div key={type} className="flex items-center space-x-2">
                     <Checkbox
@@ -109,7 +109,7 @@ export default function CoverageMap() {
                     />
                     <label htmlFor={type} className="flex items-center gap-2 cursor-pointer">
                       <div className="w-3 h-3 rounded-full" style={{ backgroundColor: SERVICE_TYPES[type].color }} />
-                      <span className="font-medium">{SERVICE_TYPES[type].label}</span>
+                      <span className="text-sm font-medium">{SERVICE_TYPES[type].label}</span>
                     </label>
                   </div>
                 ))}
@@ -119,24 +119,24 @@ export default function CoverageMap() {
 
           {/* Légende */}
           <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Légende</CardTitle>
+            <CardHeader className="pb-1">
+              <CardTitle className="text-base">Légende</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="flex flex-col space-y-4">
+            <CardContent className="pt-0">
+              <div className="flex flex-col space-y-1">
                 {(Object.entries(SERVICE_TYPES) as [ServiceType, (typeof SERVICE_TYPES)[ServiceType]][]).map(
                   ([type, config]) => (
-                    <div key={type} className="flex items-center gap-3">
-                      <div className="flex items-center gap-2">
+                    <div key={type} className="flex items-center gap-2">
+                      <div className="flex items-center gap-1">
                         <div
-                          className="w-4 h-4 rounded border-2 opacity-30"
+                          className="w-3 h-3 rounded border opacity-30"
                           style={{ backgroundColor: config.color, borderColor: config.color }}
                         />
-                        <div className="w-3 h-3 rounded-full" style={{ backgroundColor: config.color }} />
+                        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: config.color }} />
                       </div>
                       <div>
-                        <p className="font-medium">{config.label}</p>
-                        <p className="text-sm text-muted-foreground">{config.description}</p>
+                        <p className="text-sm font-medium">{config.label}</p>
+                        <p className="text-xs text-muted-foreground">{config.description}</p>
                       </div>
                     </div>
                   )
@@ -147,10 +147,10 @@ export default function CoverageMap() {
         </div>
 
         {/* Colonne de droite: Carte */}
-        <div className="md:col-span-2">
+        <div className="md:col-span-1">
           <Card>
             <CardContent className="p-0">
-              <div className="h-[400px] sm:h-[500px] md:h-[600px] w-full rounded-lg overflow-hidden">
+              <div className="h-[280px] sm:h-[320px] md:h-[350px] w-full rounded-lg overflow-hidden">
                 <MapContainer
                   center={[7.54, -5.55]}
                   zoom={7}
