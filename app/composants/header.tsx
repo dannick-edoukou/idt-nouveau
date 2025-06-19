@@ -33,8 +33,8 @@ const Header = () => {
 
   const menuItems: MenuItem[] = [
     {
-      id: "idt",
-      title: "IDT",
+      id: "entreprise",
+      title: "Entreprise",
       submenu: [
         { title: "Présentation", href: "/presentation" },
         { title: "Mot du DG", href: "/mot-du-dg" },
@@ -44,26 +44,24 @@ const Header = () => {
       ],
     },
     {
-      id: "services",
-      title: "Nos Services",
+      id: "latnt",
+      title: "La TNT",
       submenu: [
-        {
-          title: "Diffusion",
-          subItems: [
-            { title: "TNT", href: "/services/diffusion/tnt" },
-            { title: "Radio", href: "/services/diffusion/radio" },
-          ],
-        },
-        { title: "Location de pylone", href: "/services/location-pylone" },
-        { title: "OTT", href: "/services/ott" },
+        { title: "Qu'est-ce que la TNT ?", href: "/qu'est-ce-que-la-tnt" },
+        { title: "Comment bénéficier de la TNT ?", href: "/comment-beneficier-de-la-tnt" },
+        { title: "Déploiement de la TNT", href: "/deploiement-de-la-tnt" },
+        { title: "Choix de technologie", href: "/choix-de-technologie" },
+        { title: "Les Chaines", href: "/les-chaines" },
       ],
     },
+   
     {
-      id: "tv",
-      title: "Chaîne TV",
+      id: "autreservice",
+      title: "Autres Services",
       submenu: [
-        { title: "Bouquets TV", href: "/chaine-tv/bouquets" },
-        { title: "Radios", href: "/chaine-tv/radios" },
+        { title: "Radio", href: "/radio" },
+        { title: "Pylone", href: "/pylone" },
+        { title: "OTT", href: "/ott" },
       ],
     },
   ];
