@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 
 import Image from 'next/image';
 import { Sparkles } from 'lucide-react';
@@ -65,6 +65,18 @@ interface ParentMenuInfo {
   parentSegment: string;
 }
 
+// Particules prédéfinies pour éviter Math.random() côté serveur
+const PREDEFINED_PARTICLES = [
+  { left: 15, top: 25, delay: 0.5, duration: 2.5 },
+  { left: 85, top: 40, delay: 1.2, duration: 3.0 },
+  { left: 45, top: 70, delay: 0.8, duration: 2.8 },
+  { left: 75, top: 15, delay: 2.0, duration: 3.2 },
+  { left: 25, top: 85, delay: 1.5, duration: 2.2 },
+  { left: 65, top: 55, delay: 0.3, duration: 2.9 },
+  { left: 35, top: 30, delay: 1.8, duration: 3.5 },
+  { left: 90, top: 80, delay: 0.9, duration: 2.6 }
+];
+
 // Composant Breadcrumb compact
 const BreadcrumbNav = ({ items }: { items: BreadcrumbItem[] }) => {
   if (items.length === 0) return null;
@@ -78,6 +90,12 @@ const BreadcrumbNav = ({ items }: { items: BreadcrumbItem[] }) => {
 
 // Composant Background du Hero simplifié
 const HeroBackground = ({ backgroundImage }: { backgroundImage?: string }) => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <>
       {/* Image de fond */}
@@ -103,21 +121,23 @@ const HeroBackground = ({ backgroundImage }: { backgroundImage?: string }) => {
         <div className="absolute top-1/4 -left-16 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-xl animate-float-delayed" />
       </div>
       
-      {/* Particules réduites */}
-      <div className="absolute inset-0 z-20">
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-white/10 rounded-full animate-twinkle"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`
-            }}
-          />
-        ))}
-      </div>
+      {/* Particules avec valeurs prédéfinies - seulement côté client */}
+      {isClient && (
+        <div className="absolute inset-0 z-20">
+          {PREDEFINED_PARTICLES.map((particle, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-white/10 rounded-full animate-twinkle"
+              style={{
+                left: `${particle.left}%`,
+                top: `${particle.top}%`,
+                animationDelay: `${particle.delay}s`,
+                animationDuration: `${particle.duration}s`
+              }}
+            />
+          ))}
+        </div>
+      )}
       
       {/* Vague en bas simplifiée */}
       <div className="absolute bottom-0 left-0 right-0 z-30">

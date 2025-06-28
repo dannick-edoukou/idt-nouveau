@@ -7,8 +7,6 @@ import { useState, useEffect, useRef } from "react";
 import Image from 'next/image';
 import { NewsItem } from '../data/news';
 
-
-
 // Props for the Une component
 interface UneProps {
   news: NewsItem[];
@@ -64,7 +62,7 @@ export default function Une({ news = [], title }: UneProps) {
   };
 
   const visibleCards = getVisibleCards();
-  const maxIndex = newsItems.length > visibleCards ? newsItems.length - visibleCards : 0;
+  const maxIndex = Math.max(0, newsItems.length - visibleCards);
 
   const slideNews = (direction: 'left' | 'right') => {
     if (direction === 'left' && newsStartIndex > 0) {
@@ -72,6 +70,13 @@ export default function Une({ news = [], title }: UneProps) {
     } else if (direction === 'right' && newsStartIndex < maxIndex) {
       setNewsStartIndex(prev => Math.min(maxIndex, prev + 1));
     }
+  };
+
+  // Calcul simple et efficace du décalage
+  const getTranslatePercentage = () => {
+    // Chaque slide déplace d'une largeur de carte
+    const slidePercentage = 100 / visibleCards;
+    return newsStartIndex * slidePercentage;
   };
 
   const defaultTitle = (
@@ -85,7 +90,7 @@ export default function Une({ news = [], title }: UneProps) {
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-orange-100/20 to-transparent rounded-full blur-3xl -z-10" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-blue-100/20 to-transparent rounded-full blur-3xl -z-10" />
         
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-9xl">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 lg:gap-8 mb-12 lg:mb-16">
             <div className="flex-1">
               <div className="inline-flex items-center gap-2 mb-4">
@@ -102,35 +107,38 @@ export default function Une({ news = [], title }: UneProps) {
               </div>
             </div>
 
-            <div className="flex items-center gap-3 lg:gap-4">
-              <motion.button
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => slideNews('left')}
-                className={`group relative p-3 lg:p-4 rounded-2xl transition-all duration-300 shadow-lg backdrop-blur-sm ${
-                  newsStartIndex === 0 
-                    ? 'bg-gray-100/80 text-gray-400 cursor-not-allowed shadow-sm' 
-                    : 'bg-white/80 text-orange-600 hover:bg-orange-50 hover:shadow-xl hover:shadow-orange-500/20'
-                }`}
-                disabled={newsStartIndex === 0}
-              >
-                <ChevronLeft className="w-5 h-5 lg:w-6 lg:h-6 transition-transform group-hover:-translate-x-0.5" />
-              </motion.button>
+            {/* Afficher les boutons seulement s'il y a plus d'articles que visible */}
+            {newsItems.length > visibleCards && (
+              <div className="flex items-center gap-3 lg:gap-4">
+                <motion.button
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => slideNews('left')}
+                  className={`group relative p-3 lg:p-4 rounded-2xl transition-all duration-300 shadow-lg backdrop-blur-sm ${
+                    newsStartIndex === 0 
+                      ? 'bg-gray-100/80 text-gray-400 cursor-not-allowed shadow-sm' 
+                      : 'bg-white/80 text-orange-600 hover:bg-orange-50 hover:shadow-xl hover:shadow-orange-500/20'
+                  }`}
+                  disabled={newsStartIndex === 0}
+                >
+                  <ChevronLeft className="w-5 h-5 lg:w-6 lg:h-6 transition-transform group-hover:-translate-x-0.5" />
+                </motion.button>
 
-              <motion.button
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => slideNews('right')}
-                className={`group relative p-3 lg:p-4 rounded-2xl transition-all duration-300 shadow-lg backdrop-blur-sm ${
-                  newsStartIndex >= maxIndex
-                    ? 'bg-gray-100/80 text-gray-400 cursor-not-allowed shadow-sm'
-                    : 'bg-white/80 text-orange-600 hover:bg-orange-50 hover:shadow-xl hover:shadow-orange-500/20'
-                }`}
-                disabled={newsStartIndex >= maxIndex}
-              >
-                <ChevronRight className="w-5 h-5 lg:w-6 lg:h-6 transition-transform group-hover:translate-x-0.5" />
-              </motion.button>
-            </div>
+                <motion.button
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => slideNews('right')}
+                  className={`group relative p-3 lg:p-4 rounded-2xl transition-all duration-300 shadow-lg backdrop-blur-sm ${
+                    newsStartIndex >= maxIndex
+                      ? 'bg-gray-100/80 text-gray-400 cursor-not-allowed shadow-sm'
+                      : 'bg-white/80 text-orange-600 hover:bg-orange-50 hover:shadow-xl hover:shadow-orange-500/20'
+                  }`}
+                  disabled={newsStartIndex >= maxIndex}
+                >
+                  <ChevronRight className="w-5 h-5 lg:w-6 lg:h-6 transition-transform group-hover:translate-x-0.5" />
+                </motion.button>
+              </div>
+            )}
           </div>
 
           <div 
@@ -138,22 +146,25 @@ export default function Une({ news = [], title }: UneProps) {
             className="relative overflow-hidden rounded-xl md:rounded-2xl"
           >
             <motion.div
-              className="flex space-x-4 md:space-x-6"
-              animate={{ x: `${-newsStartIndex * (100 / visibleCards)}%` }}
+              className="flex"
+              animate={{ 
+                x: `-${getTranslatePercentage()}%`
+              }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
             >
               {newsItems.map((item, index) => (
-                <motion.div 
+                <div 
                   key={item.id} 
-                  className={`flex-shrink-0 transition-all duration-300 ${
-                    !isClient ? 'w-[19%]' : 
-                    width < 768 ? 'w-[48%]' : 
-                    width < 1280 ? 'w-[23%]' : 'w-[19%]'
-                  }`}
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.2 }}
+                  className="flex-shrink-0 px-2 md:px-3"
+                  style={{
+                    width: `${100 / visibleCards}%`
+                  }}
                 >
-                  <div className="bg-white rounded-lg md:rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 h-full">
+                  <motion.div
+                    className="bg-white rounded-lg md:rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 h-full"
+                    whileHover={{ y: -5 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     <div className="relative h-40 sm:h-44 md:h-48 lg:h-56">
                       <Image 
                         src={item.image} 
@@ -184,11 +195,12 @@ export default function Une({ news = [], title }: UneProps) {
                         <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 transform group-hover:translate-x-1 transition-transform duration-200" />
                       </Link>
                     </div>
-                  </div>
-                </motion.div>
+                  </motion.div>
+                </div>
               ))}
             </motion.div>
           </div>
+
         </div>
       </section>
   );

@@ -108,7 +108,7 @@ const NewsList: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
        <DynamicHero backgroundImage="/heroes.jpeg"/>
-       <Une news={recentNews} />
+     
 
       {/* Barre de recherche et filtres */}
       <div className="bg-white shadow-sm border-b border-orange-100">

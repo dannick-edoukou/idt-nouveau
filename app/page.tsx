@@ -12,17 +12,7 @@ import Une from "./composants/une";
 import { mockNews, NewsItem } from "./data/news";
 import { parseDate } from "./lib/utils";
 
-// pour le fichié .env
-// 
-// Configuration Gmail (recommandée)
- //EMAIL_USER=dannickothniel2000@gmail.com
- //EMAIL_PASS=fzapmfmfgiajoopz
- //CONTACT_EMAIL=dannickothniel2000@gmail.com
 
-// Clé API secrète (uniquement pour le serveur)
-//NEWS_API_KEY=155e2c1bd8764b758740c8991855624d
-// URL de l'API externe
-//NEWS_API_URL=https://newsapi.org/v2/top-headlines?country=fr&sortBy=publishedAt
 
 
 
@@ -328,9 +318,11 @@ export default function Home() {
      
       <Services />
       <div className="flex justify-center">
-        <button className="mt-6 px-6 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 transition-colors">
-          Voir nos actualités
-        </button>
+      
+                     
+        <Link  className="mt-6 px-6 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 transition-colors" 
+         href="/actualite" >Voir nos actualités</Link>
+
       </div>
       <Partners />
 
