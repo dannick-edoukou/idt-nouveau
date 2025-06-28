@@ -2,6 +2,7 @@
 
 import DynamicHero from '@/app/composants/DynamicHero';
 import { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 
 // --- Interfaces (partagées entre les composants) ---
 interface ApiVideo { id: number; title: string; category: string; type: string; description: string; links: string[]; views: number; enabled: number; created_at: string; }
@@ -67,7 +68,7 @@ function VideoGrid({ searchTerm, sortOrder, onVideoSelect, onVideoCountChange }:
   useEffect(() => { fetchVideos(); }, [fetchVideos]);
 
   useEffect(() => {
-    let filtered = videos.filter(v => 
+    const filtered = videos.filter(v => 
       v.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       v.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
       v.category.toLowerCase().includes(searchTerm.toLowerCase())
@@ -106,8 +107,15 @@ function VideoGrid({ searchTerm, sortOrder, onVideoSelect, onVideoCountChange }:
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {filteredVideos.map((video) => (
         <div key={video.id} onClick={() => onVideoSelect(video)} className="bg-white rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 overflow-hidden cursor-pointer group">
-          <div className="relative">
-            <img src={getYoutubeThumbnail(video.youtubeId)} alt={video.title} className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" onError={(e) => { (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`; }} />
+          <div className="relative w-full h-48">
+            <Image 
+              src={getYoutubeThumbnail(video.youtubeId)} 
+              alt={video.title} 
+              fill
+              className="object-cover group-hover:scale-110 transition-transform duration-500" 
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              onError={(e) => { (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`; }}
+            />
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
               <div className="bg-red-600 text-white p-4 rounded-full opacity-0 group-hover:opacity-100 transform scale-75 group-hover:scale-100 transition-all duration-300">
                 <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>

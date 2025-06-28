@@ -1,6 +1,7 @@
 import React from 'react';
 import { Quote, Calendar } from 'lucide-react';
 import DynamicHero from '../composants/DynamicHero';
+import Image from 'next/image';
 
 export default function MotDuDG() {
   return (
@@ -24,10 +25,12 @@ export default function MotDuDG() {
                   {/* Photo placeholder du DG */}
                   <div className="w-64 h-64 mx-auto rounded-full flex items-center justify-center mb-8 border-4 shadow-2xl overflow-hidden" style={{backgroundColor: 'rgba(255, 255, 255, 0.25)', backdropFilter: 'blur(8px)', borderColor: 'rgba(255, 255, 255, 0.5)'}}>
                     <div className="w-56 h-56 bg-gradient-to-br from-gray-300 to-gray-400 rounded-full flex items-center justify-center overflow-hidden relative">
-                      <img 
+                      <Image 
                         src="/dg.jpeg" 
                         alt="YEO Adama Benoit - Directeur Général IDT" 
-                        className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-300" 
+                        fill
+                        className="object-cover"
+                        sizes="192px"
                       />
                     </div>
                   </div>
