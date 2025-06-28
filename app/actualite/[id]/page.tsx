@@ -1,5 +1,3 @@
-"use client";
-
 import { ArrowLeft, Calendar } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,15 +5,19 @@ import { notFound } from 'next/navigation';
 import DynamicHero from '../../composants/DynamicHero';
 import { mockNews, NewsItem } from '../../data/news';
 
-
-
 // This function finds the news item by its ID
 const getNewsById = (id: number): NewsItem | undefined => {
   return mockNews.find(news => news.id === id);
 };
 
-export default function NewsDetailPage({ params }: { params: { id: string } }) {
-  const newsId = parseInt(params.id, 10);
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function NewsDetailPage({ params }: PageProps) {
+  // Await the params in Next.js 15
+  const { id } = await params;
+  const newsId = parseInt(id, 10);
   const news = getNewsById(newsId);
 
   // If no news item is found for the given ID, show a 404 page
@@ -79,4 +81,27 @@ export default function NewsDetailPage({ params }: { params: { id: string } }) {
       </div>
     </div>
   );
+}
+
+// Generate metadata for SEO
+export async function generateMetadata({ params }: PageProps) {
+  const { id } = await params;
+  const newsId = parseInt(id, 10);
+  const news = getNewsById(newsId);
+
+  if (!news) {
+    return {
+      title: 'Article non trouvé',
+    };
+  }
+
+  return {
+    title: news.title,
+    description: news.summary,
+    openGraph: {
+      title: news.title,
+      description: news.summary,
+      images: [news.image],
+    },
+  };
 }
