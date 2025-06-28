@@ -2,6 +2,14 @@
 const nextConfig = {
   images: {
     remotePatterns: [
+      // Le domaine pour votre API
+      {
+        protocol: 'http',
+        hostname: 'testapp.dioulatche.io',
+        port: '',
+        pathname: '/routes/api.php**',
+      },
+      // Les domaines qui étaient déjà configurés
       {
         protocol: 'https',
         hostname: 'images.pexels.com',

@@ -5,7 +5,7 @@ import Stack from "@/app/composants/stack";
 import DynamicHero from "../../composants/DynamicHero";
 import Image from "next/image";
 
-// Interface pour typer les images
+// Interface pour typer les images (adaptée à votre API)
 interface ImageItem {
   id: number;
   img: string;
@@ -13,172 +13,42 @@ interface ImageItem {
   description: string;
 }
 
-// Interface pour typer les catégories
+// Interface pour typer les catégories (adaptée à votre API)
 interface ImageCategory {
   id: number;
   title: string;
   description: string;
+  category: string;
   images: ImageItem[];
+  views: number;
+  enabled: number;
+  created_at: string;
 }
 
-// Images organisées par catégories/dossiers
-const imageCategories: ImageCategory[] = [
-  {
-    id: 1,
-    title: "Maisons Modernes",
-    description: "Architecture contemporaine",
-    images: [
-      { 
-        id: 1, 
-        img: "https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?q=80&w=500&auto=format",
-        title: "Architecture Moderne",
-        description: "Bâtiment contemporain aux lignes épurées"
-      },
-      { 
-        id: 2, 
-        img: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=500&auto=format",
-        title: "Maison Familiale",
-        description: "Parfaite pour une famille nombreuse"
-      },
-      { 
-        id: 3, 
-        img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=500&auto=format",
-        title: "Villa avec Piscine",
-        description: "Détente et confort absolu"
-      }
-    ]
-  },
-  {
-    id: 2,
-    title: "Appartements",
-    description: "Vie urbaine élégante",
-    images: [
-      { 
-        id: 4, 
-        img: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=500&auto=format",
-        title: "Appartement Luxe",
-        description: "Standing haut de gamme en centre-ville"
-      },
-      { 
-        id: 5, 
-        img: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=500&auto=format",
-        title: "Studio Design",
-        description: "Optimisation d'espace parfaite"
-      },
-      { 
-        id: 6, 
-        img: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=500&auto=format",
-        title: "Penthouse",
-        description: "Vue imprenable sur la ville"
-      }
-    ]
-  },
-  {
-    id: 3,
-    title: "Styles Unique",
-    description: "Architectures distinctives",
-    images: [
-      { 
-        id: 7, 
-        img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=500&auto=format",
-        title: "Loft Industriel",
-        description: "Style unique et moderne"
-      },
-      { 
-        id: 8, 
-        img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=500&auto=format",
-        title: "Duplex Moderne",
-        description: "Volumes généreux et luminosité"
-      },
-      { 
-        id: 9, 
-        img: "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?q=80&w=500&auto=format",
-        title: "Résidence Urbaine",
-        description: "Élégance en plein cœur de la ville"
-      }
-    ]
-  },
-  {
-    id: 4,
-    title: "Traditionnelles",
-    description: "Charme authentique",
-    images: [
-      { 
-        id: 10, 
-        img: "https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=500&auto=format",
-        title: "Maison Traditionnelle",
-        description: "Charme authentique et architecture classique"
-      },
-      { 
-        id: 11, 
-        img: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=500&auto=format",
-        title: "Maison de Campagne",
-        description: "Tranquillité et nature environnante"
-      },
-      { 
-        id: 12, 
-        img: "https://images.unsplash.com/photo-1452626212852-811d58933cae?q=80&w=500&auto=format",
-        title: "Villa Contemporaine",
-        description: "Design moderne avec vue panoramique"
-      }
-    ]
-  },
-  {
-    id: 5,
-    title: "Prestige",
-    description: "Propriétés d'exception",
-    images: [
-      { 
-        id: 13, 
-        img: "https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=500&auto=format",
-        title: "Château Moderne",
-        description: "Luxe et grandeur exceptionnelle"
-      },
-      { 
-        id: 14, 
-        img: "https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?q=80&w=500&auto=format",
-        title: "Villa de Prestige",
-        description: "Architecture de rêve avec jardins"
-      },
-      { 
-        id: 15, 
-        img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=500&auto=format",
-        title: "Résidence de Luxe",
-        description: "Standing exceptionnel et services"
-      }
-    ]
-  },
-  {
-    id: 6,
-    title: "Éco-responsables",
-    description: "Construction durable",
-    images: [
-      { 
-        id: 16, 
-        img: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?q=80&w=500&auto=format",
-        title: "Maison Écologique",
-        description: "Construction respectueuse de l'environnement"
-      },
-      { 
-        id: 17, 
-        img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=500&auto=format",
-        title: "Villa Solaire",
-        description: "Énergie renouvelable intégrée"
-      },
-      { 
-        id: 18, 
-        img: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=500&auto=format",
-        title: "Habitat Durable",
-        description: "Innovation et écologie"
-      }
-    ]
-  }
-];
+// Interface pour la réponse API
+interface ApiResponse {
+  success: number;
+  data: {
+    id: number;
+    title: string;
+    category: string;
+    type: string;
+    description: string;
+    links: string[];
+    views: number;
+    enabled: number;
+    created_at: string;
+  }[];
+  error?: string;
+}
 
 export default function Phototheque() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState<ImageCategory | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [imageCategories, setImageCategories] = useState<ImageCategory[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   
   // Configuration responsive des stacks par page
   const getStacksPerPage = () => {
@@ -191,6 +61,91 @@ export default function Phototheque() {
   };
 
   const [stacksPerPage, setStacksPerPage] = useState(getStacksPerPage());
+
+  // Fonction pour récupérer les données via le proxy API Next.js
+  const fetchApiData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      console.log('Appel de la route proxy API...');
+      
+      // On appelle notre propre route API qui va se charger de contacter l'API externe
+      const response = await fetch('/api/mediatheque');
+      
+      console.log('Réponse reçue du proxy:', response.status, response.statusText);
+      
+      const apiData: ApiResponse = await response.json();
+
+      if (!response.ok) {
+        // Si le proxy a renvoyé une erreur (ex: 500), on l'affiche
+        throw new Error(apiData.error || `Erreur HTTP: ${response.status}`);
+      }
+      
+      console.log('Données reçues du proxy:', apiData);
+      
+      if (apiData.success !== 1) {
+        throw new Error(apiData.error || 'Erreur dans la réponse de l\'API');
+      }
+      
+      // La transformation des données reste la même
+      const transformedCategories: ImageCategory[] = apiData.data
+        .filter(item => item.enabled === 1)
+        .map(item => ({
+          id: item.id,
+          title: item.title,
+          description: item.description,
+          category: item.category,
+          views: item.views,
+          enabled: item.enabled,
+          created_at: item.created_at,
+          images: item.links.map((link, index) => {
+            try {
+              // L'API renvoie une URL complète, on en extrait le nom de l'image.
+              const url = new URL(link);
+              const imageName = url.searchParams.get('type'); // Extrait '2.webp' de '...&type=2.webp'
+              if (!imageName) {
+                console.error("Impossible d'extraire le nom de l'image du lien:", link);
+                return null;
+              }
+              const imageUrl = `http://testapp.dioulatche.io/routes/api.php?action=image&name=${imageName}`;
+              
+              return {
+                id: item.id * 1000 + index,
+                img: imageUrl,
+                title: `${item.title} ${index + 1}`,
+                description: `Image ${index + 1} - ${item.category}`
+              };
+            } catch (e) {
+              console.error("Lien d'image invalide, impossible de construire l'URL:", link, e);
+              return null;
+            }
+          }).filter(Boolean) as { id: number; img: string; title: string; description: string; }[]
+        }));
+      
+      console.log('Catégories transformées:', transformedCategories);
+      setImageCategories(transformedCategories);
+      
+    } catch (err) {
+      console.error('Erreur lors du chargement des données:', err);
+      
+      let errorMessage = 'Erreur lors du chargement des données';
+      if (err instanceof Error) {
+        errorMessage = err.message;
+      }
+      
+      setError(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+
+  // Chargement initial des données
+  useEffect(() => {
+    fetchApiData();
+  }, []);
 
   // Mise à jour lors du redimensionnement
   useEffect(() => {
@@ -210,7 +165,7 @@ export default function Phototheque() {
   const startIndex = (currentPage - 1) * stacksPerPage;
   const currentStacks = imageCategories.slice(startIndex, startIndex + stacksPerPage);
 
-  // Fonction typée pour créer le contenu des stacks - CORRIGÉE
+  // Fonction typée pour créer le contenu des stacks
   const createStackContent = (item: ImageItem) => (
     <div className="relative w-full h-full">
       <Image 
@@ -220,6 +175,11 @@ export default function Phototheque() {
         height={280}
         sizes="220px"
         className="w-full h-full object-cover rounded-lg"
+        onError={(e) => {
+          console.error('Erreur de chargement d\'image:', item.img);
+          // Image de secours
+          e.currentTarget.src = '/placeholder-image.jpg';
+        }}
       />
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 rounded-b-lg">
         <h3 className="text-white font-semibold text-lg mb-1">
@@ -256,8 +216,9 @@ export default function Phototheque() {
           <h2 className="text-2xl lg:text-3xl font-bold text-orange-600 mb-2">
             {selectedCategory.title}
           </h2>
+          <p className="text-gray-600 mb-2">{selectedCategory.category}</p>
           <div className="text-orange-400 text-xs mb-4">
-            {images.length} propriétés
+            {images.length} propriétés • {selectedCategory.views} vues
           </div>
         </div>
         
@@ -279,6 +240,10 @@ export default function Phototheque() {
             alt={currentImg.title || ''}
             width={800}
             height={420}
+            onError={(e) => {
+              console.error('Erreur de chargement d\'image principale:', currentImg.img);
+              e.currentTarget.src = '/placeholder-image.jpg';
+            }}
           />
           <button
             onClick={() => canGoNext && setCurrentImageIndex(i => i + 1)}
@@ -313,6 +278,9 @@ export default function Phototheque() {
                   width={64}
                   height={48}
                   className="object-cover w-full h-full"
+                  onError={(e) => {
+                    e.currentTarget.src = '/placeholder-image.jpg';
+                  }}
                 />
               </button>
             ))}
@@ -324,10 +292,36 @@ export default function Phototheque() {
           <p className="text-gray-700 text-base lg:text-lg font-medium max-w-2xl mx-auto">
             {selectedCategory.description}
           </p>
+          <div className="mt-4 text-sm text-gray-500">
+            Créé le {new Date(selectedCategory.created_at).toLocaleDateString('fr-FR')}
+          </div>
         </div>
       </div>
     );
   };
+
+  // Composant de chargement
+  const LoadingComponent = () => (
+    <div className="flex flex-col items-center justify-center min-h-64">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mb-4"></div>
+      <p className="text-gray-600">Chargement de la photothèque...</p>
+    </div>
+  );
+
+  // Composant d'erreur simplifié
+  const ErrorComponent = () => (
+    <div className="flex flex-col items-center justify-center min-h-64">
+      <div className="text-red-500 text-6xl mb-4">⚠️</div>
+      <h3 className="text-xl font-semibold text-gray-800 mb-2">Erreur de chargement</h3>
+      <p className="text-gray-600 mb-4 text-center max-w-md">{error}</p>
+      <button
+        onClick={fetchApiData}
+        className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors"
+      >
+        Réessayer
+      </button>
+    </div>
+  );
 
   return (
     <div>
@@ -346,91 +340,108 @@ export default function Phototheque() {
               <p className="text-gray-600 text-base lg:text-lg max-w-2xl mx-auto">
                 Explorez nos collections organisées par catégories. Chaque dossier contient plusieurs propriétés à découvrir.
               </p>
-            </div>
-            
-            {/* Grille de Stack Components (Dossiers) */}
-            <div className="grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-5 gap-6 lg:gap-8 mb-8">
-              {currentStacks.map((category) => (
-                <div 
-                  key={category.id} 
-                  className="flex flex-col items-center cursor-pointer group" 
-                  onClick={() => setSelectedCategory(category)}
-                >
-                  {/* Titre de la catégorie */}
-                  <div className="text-center mb-4">
-                    <h3 className="text-lg font-semibold text-orange-600 mb-1 group-hover:underline">
-                      {category.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm">
-                      {category.description}
-                    </p>
-                    <div className="text-orange-400 text-xs mt-1">
-                      {category.images.length} propriétés
-                    </div>
-                  </div>
-                  
-                  {/* Stack avec toutes les images de la catégorie */}
-                  <Stack
-                    randomRotation={true}
-                    sensitivity={180}
-                    sendToBackOnClick={false}
-                    cardDimensions={{ 
-                      width: 220, 
-                      height: 280 
-                    }}
-                    cardsData={category.images.map(item => ({
-                      ...item,
-                      content: createStackContent(item)
-                    }))}
-                  />
-                </div>
-              ))}
-            </div>
-            
-            {/* Pagination */}
-            {totalPages > 1 && (
-              <div className="flex justify-center items-center space-x-2 mb-8">
-                <button
-                  onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                  disabled={currentPage === 1}
-                  className="px-4 py-2 rounded-lg bg-white border-2 border-orange-200 text-orange-600 hover:bg-orange-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                >
-                  Précédent
-                </button>
-                <div className="flex space-x-1">
-                  {[...Array(totalPages)].map((_, index) => {
-                    const pageNum = index + 1;
-                    return (
-                      <button
-                        key={pageNum}
-                        onClick={() => setCurrentPage(pageNum)}
-                        className={`px-3 py-2 rounded-lg transition-colors ${
-                          currentPage === pageNum
-                            ? 'bg-orange-500 text-white'
-                            : 'bg-white border border-orange-200 text-orange-600 hover:bg-orange-50'
-                        }`}
-                      >
-                        {pageNum}
-                      </button>
-                    );
-                  })}
-                </div>
-                <button
-                  onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                  disabled={currentPage === totalPages}
-                  className="px-4 py-2 rounded-lg bg-white border-2 border-orange-200 text-orange-600 hover:bg-orange-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                >
-                  Suivant
-                </button>
+              {/* Indicateur de débogage */}
+              <div className="mt-4 text-sm text-gray-500">
+                {imageCategories.length} catégories chargées
               </div>
-            )}
-            
-            {/* Indicateur de page */}
-            <div className="text-center mb-8">
-              <p className="text-gray-600 text-sm">
-                Page {currentPage} sur {totalPages} - {imageCategories.length} dossiers au total
-              </p>
             </div>
+            
+            {/* Gestion des états de chargement et d'erreur */}
+            {loading ? (
+              <LoadingComponent />
+            ) : error ? (
+              <ErrorComponent />
+            ) : imageCategories.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-gray-600">Aucune catégorie d'images disponible pour le moment.</p>
+              </div>
+            ) : (
+              <>
+                {/* Grille de Stack Components (Dossiers) */}
+                <div className="grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-5 gap-6 lg:gap-8 mb-8">
+                  {currentStacks.map((category) => (
+                    <div 
+                      key={category.id} 
+                      className="flex flex-col items-center cursor-pointer group" 
+                      onClick={() => setSelectedCategory(category)}
+                    >
+                      {/* Titre de la catégorie */}
+                      <div className="text-center mb-4">
+                        <h3 className="text-lg font-semibold text-orange-600 mb-1 group-hover:underline">
+                          {category.title}
+                        </h3>
+                        <p className="text-gray-500 text-sm">
+                          {category.category}
+                        </p>
+                        <div className="text-orange-400 text-xs mt-1">
+                          {category.images.length} propriétés • {category.views} vues
+                        </div>
+                      </div>
+                      
+                      {/* Stack avec toutes les images de la catégorie */}
+                      <Stack
+                        randomRotation={true}
+                        sensitivity={180}
+                        sendToBackOnClick={false}
+                        cardDimensions={{ 
+                          width: 220, 
+                          height: 280 
+                        }}
+                        cardsData={category.images.map(item => ({
+                          ...item,
+                          content: createStackContent(item)
+                        }))}
+                      />
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Pagination */}
+                {totalPages > 1 && (
+                  <div className="flex justify-center items-center space-x-2 mb-8">
+                    <button
+                      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                      disabled={currentPage === 1}
+                      className="px-4 py-2 rounded-lg bg-white border-2 border-orange-200 text-orange-600 hover:bg-orange-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      Précédent
+                    </button>
+                    <div className="flex space-x-1">
+                      {[...Array(totalPages)].map((_, index) => {
+                        const pageNum = index + 1;
+                        return (
+                          <button
+                            key={pageNum}
+                            onClick={() => setCurrentPage(pageNum)}
+                            className={`px-3 py-2 rounded-lg transition-colors ${
+                              currentPage === pageNum
+                                ? 'bg-orange-500 text-white'
+                                : 'bg-white border border-orange-200 text-orange-600 hover:bg-orange-50'
+                            }`}
+                          >
+                            {pageNum}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <button
+                      onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                      disabled={currentPage === totalPages}
+                      className="px-4 py-2 rounded-lg bg-white border-2 border-orange-200 text-orange-600 hover:bg-orange-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      Suivant
+                    </button>
+                  </div>
+                )}
+                
+                {/* Indicateur de page */}
+                <div className="text-center mb-8">
+                  <p className="text-gray-600 text-sm">
+                    Page {currentPage} sur {totalPages} - {imageCategories.length} dossiers au total
+                  </p>
+                </div>
+              </>
+            )}
           </>
         )}
       </div>
