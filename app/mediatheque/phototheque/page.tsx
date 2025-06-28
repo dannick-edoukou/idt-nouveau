@@ -47,6 +47,7 @@ export default function Phototheque() {
   const [selectedCategory, setSelectedCategory] = useState<ImageCategory | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageCategories, setImageCategories] = useState<ImageCategory[]>([]);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   
@@ -64,85 +65,51 @@ export default function Phototheque() {
 
   // Fonction pour récupérer les données via le proxy API Next.js
   const fetchApiData = async () => {
+    setLoading(true);
+    setError(null);
     try {
-      setLoading(true);
-      setError(null);
-      
-      console.log('Appel de la route proxy API...');
-      
-      // On appelle notre propre route API qui va se charger de contacter l'API externe
       const response = await fetch('/api/mediatheque');
-      
-      console.log('Réponse reçue du proxy:', response.status, response.statusText);
-      
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP: ${response.status}`);
+      }
       const apiData: ApiResponse = await response.json();
 
-      if (!response.ok) {
-        // Si le proxy a renvoyé une erreur (ex: 500), on l'affiche
-        throw new Error(apiData.error || `Erreur HTTP: ${response.status}`);
+      if (apiData.success !== 1 || !apiData.data) {
+        throw new Error(apiData.error || "L'API a renvoyé une erreur ou des données invalides.");
       }
-      
-      console.log('Données reçues du proxy:', apiData);
-      
-      if (apiData.success !== 1) {
-        throw new Error(apiData.error || 'Erreur dans la réponse de l\'API');
-      }
-      
-      // La transformation des données reste la même
-      const transformedCategories: ImageCategory[] = apiData.data
-        .filter(item => item.enabled === 1)
+
+      const transformedData: ImageCategory[] = apiData.data
+        .filter(item => item.type === 'image' && item.enabled === 1)
         .map(item => ({
           id: item.id,
           title: item.title,
-          description: item.description,
           category: item.category,
+          description: item.description,
+          images: item.links.map((link, index) => ({
+            id: item.id * 1000 + index, // Crée un ID unique pour chaque image
+            img: link,
+            title: `${item.title} - Image ${index + 1}`,
+            description: item.description
+          })),
           views: item.views,
           enabled: item.enabled,
-          created_at: item.created_at,
-          images: item.links.map((link, index) => {
-            try {
-              // L'API renvoie une URL complète, on en extrait le nom de l'image.
-              const url = new URL(link);
-              const imageName = url.searchParams.get('type'); // Extrait '2.webp' de '...&type=2.webp'
-              if (!imageName) {
-                console.error("Impossible d'extraire le nom de l'image du lien:", link);
-                return null;
-              }
-              const imageUrl = `http://testapp.dioulatche.io/routes/api.php?action=image&name=${imageName}`;
-              
-              return {
-                id: item.id * 1000 + index,
-                img: imageUrl,
-                title: `${item.title} ${index + 1}`,
-                description: `Image ${index + 1} - ${item.category}`
-              };
-            } catch (e) {
-              console.error("Lien d'image invalide, impossible de construire l'URL:", link, e);
-              return null;
-            }
-          }).filter(Boolean) as { id: number; img: string; title: string; description: string; }[]
+          created_at: item.created_at
         }));
-      
-      console.log('Catégories transformées:', transformedCategories);
-      setImageCategories(transformedCategories);
-      
+
+      setImageCategories(transformedData);
+
     } catch (err) {
-      console.error('Erreur lors du chargement des données:', err);
-      
-      let errorMessage = 'Erreur lors du chargement des données';
       if (err instanceof Error) {
-        errorMessage = err.message;
+        setError(err.message);
+      } else {
+        setError('Une erreur inconnue est survenue.');
       }
-      
-      setError(errorMessage);
+      console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
-
-
-  // Chargement initial des données
   useEffect(() => {
     fetchApiData();
   }, []);

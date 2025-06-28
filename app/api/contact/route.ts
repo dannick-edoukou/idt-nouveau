@@ -17,16 +17,21 @@ const contactSchema = z.object({
 
 // Configuration du transporteur Nodemailer
 const createTransporter = () => {
+  // Vérification des variables d'environnement essentielles
+  if (!process.env.EMAIL_SERVER_USER || !process.env.EMAIL_SERVER_PASSWORD || !process.env.EMAIL_TO) {
+    console.error("Variables d'environnement pour l'email manquantes.");
+    return null;
+  }
+
   return nodemailer.createTransport({
-    // Configuration pour Gmail
-    service: 'gmail',
+    host: process.env.EMAIL_SERVER_HOST || 'smtp.gmail.com',
+    port: Number(process.env.EMAIL_SERVER_PORT) || 587,
+    secure: false, // La plupart des serveurs sur le port 587 utilisent STARTTLS
     auth: {
-      user: process.env.EMAIL_USER, // votre email Gmail
-      pass: process.env.EMAIL_PASS, // mot de passe d'application Gmail
+      user: process.env.EMAIL_SERVER_USER,
+      pass: process.env.EMAIL_SERVER_PASSWORD,
     },
-    
-  
-  })
+  });
 }
 
 export async function POST(request: NextRequest) {
@@ -36,10 +41,18 @@ export async function POST(request: NextRequest) {
     const validatedData = contactSchema.parse(body)
 
     // Création du transporteur
-    const transporter = createTransporter()
+    const transporter = createTransporter();
+
+    if (!transporter) {
+      console.error('Échec de la création du transporteur, vérifiez la configuration des emails.');
+      return NextResponse.json(
+        { success: false, message: "La configuration du serveur d'email est incomplète." },
+        { status: 500 }
+      );
+    }
 
     // Vérification de la connexion
-    await transporter.verify()
+    await transporter.verify();
 
     const subjectLabels = {
       diffusion: "Diffusion TNT/Radio",
@@ -50,8 +63,8 @@ export async function POST(request: NextRequest) {
 
     // Configuration de l'email
     const mailOptions = {
-      from: `"${validatedData.firstName} ${validatedData.lastName}" <${process.env.EMAIL_USER}>`,
-      to: process.env.CONTACT_EMAIL,
+      from: `"${validatedData.firstName} ${validatedData.lastName}" <${process.env.EMAIL_SERVER_USER}>`,
+      to: process.env.EMAIL_TO,
       replyTo: validatedData.email,
       subject: `[Contact IDT] ${subjectLabels[validatedData.subject]} - ${validatedData.firstName} ${validatedData.lastName}`,
       html: `
@@ -105,7 +118,7 @@ export async function POST(request: NextRequest) {
 
     // Email de confirmation pour l'utilisateur (optionnel)
     const confirmationMailOptions = {
-      from: `"IDT - Institut de Diffusion Télévisuelle" <${process.env.EMAIL_USER}>`,
+      from: `"IDT - Institut de Diffusion Télévisuelle" <${process.env.EMAIL_SERVER_USER}>`,
       to: validatedData.email,
       subject: 'Confirmation de réception de votre message - IDT',
       html: `
