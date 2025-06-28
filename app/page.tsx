@@ -9,12 +9,8 @@ import Services from "./composants/services";
 import CoverageMapWrapper from "./composants/CoverageMapWrapper";
 import Faq from "./composants/faq";
 import Une from "./composants/une";
-import { mockNews, NewsItem } from "./data/news";
+import { mockNews } from "./data/news";
 import { parseDate } from "./lib/utils";
-
-
-
-
 
 const heroImages = [
   {
@@ -75,8 +71,6 @@ const statistics = [
     gradient: "from-red-600/90 to-red-500/80"
   }
 ];
-
-
 
 // Fonction utilitaire pour l'animation des nombres
 function useCountAnimation(targetValue: string, duration: number = 2) {

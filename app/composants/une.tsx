@@ -37,14 +37,7 @@ function useWindowSize() {
 }
 
 export default function Une({ news = [], title }: UneProps) {
-  // Ensure we only show a maximum of 5 news items, as requested
-  const newsItems = news.slice(0, 5);
-
-  // Don't render the component if there are no news items to display
-  if (newsItems.length === 0) {
-    return null;
-  }
-
+  // Move all hooks to the top, before any conditional logic
   const [newsStartIndex, setNewsStartIndex] = useState(0);
   const { width } = useWindowSize();
   const [isClient, setIsClient] = useState(false);
@@ -53,6 +46,14 @@ export default function Une({ news = [], title }: UneProps) {
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  // Ensure we only show a maximum of 5 news items, as requested
+  const newsItems = news.slice(0, 5);
+
+  // Don't render the component if there are no news items to display
+  if (newsItems.length === 0) {
+    return null;
+  }
 
   const getVisibleCards = () => {
     if (!isClient) return 5; // Default for SSR
@@ -152,7 +153,7 @@ export default function Une({ news = [], title }: UneProps) {
               }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
             >
-              {newsItems.map((item, index) => (
+              {newsItems.map((item) => (
                 <div 
                   key={item.id} 
                   className="flex-shrink-0 px-2 md:px-3"

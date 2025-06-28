@@ -1,8 +1,21 @@
 import { NextResponse } from 'next/server';
 import { mockNews, NewsItem } from '@/app/data/news';
 
+// Interface pour définir la structure des articles de l'API externe
+interface ExternalApiArticle {
+  title?: string;
+  description?: string;
+  content?: string;
+  urlToImage?: string;
+  publishedAt: string;
+  author?: string;
+  source: {
+    name?: string;
+  };
+}
+
 // Fonction pour adapter les données de l'API externe à notre format NewsItem
-const adaptApiDataToNewsItem = (articles: any[]): NewsItem[] => {
+const adaptApiDataToNewsItem = (articles: ExternalApiArticle[]): NewsItem[] => {
   return articles.map((article, index) => ({
     id: index + 1, // L'API ne fournit pas d'ID stable, nous en générons un
     title: article.title || 'Titre non disponible',

@@ -1,14 +1,12 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { Calendar, Filter, ArrowLeft, Search } from 'lucide-react';
+import { Calendar, Filter, Search } from 'lucide-react';
 import DynamicHero from '../composants/DynamicHero';
 import Image from 'next/image';
 import Link from 'next/link';
-import Une from '../composants/une'; // Étape 1: Importer le composant Une
+
 import { mockNews, NewsItem } from '../data/news';
 import { parseDate } from '../lib/utils';
-
-
 
 // Composant pour une carte d'actualité, maintenant un lien
 const NewsCard: React.FC<{ news: NewsItem }> = ({ news }) => {
@@ -49,8 +47,6 @@ const NewsCard: React.FC<{ news: NewsItem }> = ({ news }) => {
   );
 };
 
-
-
 // Composant principal
 const NewsList: React.FC = () => {
   const [newsData, setNewsData] = useState<NewsItem[]>([]);
@@ -90,11 +86,6 @@ const NewsList: React.FC = () => {
       return sortOrder === 'recent' ? dateB.getTime() - dateA.getTime() : dateA.getTime() - dateB.getTime();
     });
 
-  // Calculer les 5 actualités les plus récentes pour la section "Une"
-  const recentNews = [...newsData]
-    .sort((a, b) => parseDate(b.date).getTime() - parseDate(a.date).getTime())
-    .slice(0, 5);
-
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -109,7 +100,6 @@ const NewsList: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
        <DynamicHero backgroundImage="/heroes.jpeg"/>
      
-
       {/* Barre de recherche et filtres */}
       <div className="bg-white shadow-sm border-b border-orange-100">
         <div className="container mx-auto px-4 py-6">
