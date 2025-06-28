@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
@@ -8,6 +8,23 @@ import { Partners } from "./composants/partners";
 import Services from "./composants/services";
 import CoverageMapWrapper from "./composants/CoverageMapWrapper";
 import Faq from "./composants/faq";
+import Une from "./composants/une";
+import { mockNews, NewsItem } from "./data/news";
+import { parseDate } from "./lib/utils";
+
+// pour le fichié .env
+// 
+// Configuration Gmail (recommandée)
+ //EMAIL_USER=dannickothniel2000@gmail.com
+ //EMAIL_PASS=fzapmfmfgiajoopz
+ //CONTACT_EMAIL=dannickothniel2000@gmail.com
+
+// Clé API secrète (uniquement pour le serveur)
+//NEWS_API_KEY=155e2c1bd8764b758740c8991855624d
+// URL de l'API externe
+//NEWS_API_URL=https://newsapi.org/v2/top-headlines?country=fr&sortBy=publishedAt
+
+
 
 const heroImages = [
   {
@@ -69,68 +86,7 @@ const statistics = [
   }
 ];
 
-// Fonction pour formater la date
-function formatDate(dateStr: string) {
-  const date = new Date(dateStr);
-  const day = date.getDate().toString().padStart(2, '0');
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
-}
 
-const newsItems = [
-  {
-    image: "https://images.pexels.com/photos/3944425/pexels-photo-3944425.jpeg?auto=compress&cs=tinysrgb&w=600",
-    title: "TF1 renforce son engagement pour la transition écologique",
-    date: "2024-03-22",
-  },
-  {
-    image: "https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg?auto=compress&cs=tinysrgb&w=600",
-    title: "Résultats financiers : une année 2023 record",
-    date: "2024-03-20",
-  },
-  {
-    image: "https://images.pexels.com/photos/3938023/pexels-photo-3938023.jpeg?auto=compress&cs=tinysrgb&w=600",
-    title: "Lancement de notre nouvelle plateforme digitale",
-    date: "2024-03-18",
-  },
-  {
-    image: "https://images.pexels.com/photos/7681291/pexels-photo-7681291.jpeg?auto=compress&cs=tinysrgb&w=600",
-    title: "TF1 récompensé pour sa politique RH",
-    date: "2024-03-15",
-  },
-  {
-    image: "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=600",
-    title: "Nouveau partenariat stratégique",
-    date: "2024-03-12",
-  }
-];
-
-function useWindowSize() {
-  const [windowSize, setWindowSize] = useState({
-    width: 0,
-    height: 0,
-  });
-
-  useEffect(() => {
-    setWindowSize({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
-
-    function handleResize() {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  return windowSize;
-}
 
 // Fonction utilitaire pour l'animation des nombres
 function useCountAnimation(targetValue: string, duration: number = 2) {
@@ -261,23 +217,10 @@ function StatisticCard({ stat, index }: { stat: typeof statistics[0], index: num
 }
 
 export default function Home() {
+  const recentNews = [...mockNews]
+    .sort((a, b) => parseDate(b.date).getTime() - parseDate(a.date).getTime())
+    .slice(0, 5);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [newsStartIndex, setNewsStartIndex] = useState(0);
-  const { width } = useWindowSize();
-  const [isClient, setIsClient] = useState(false);
-  const newsContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  const getVisibleCards = () => {
-    if (!isClient) return 4;
-    return width < 768 ? 2 : 4;
-  };
-
-  const visibleCards = getVisibleCards();
-  const maxIndex = newsItems.length - visibleCards;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -286,14 +229,6 @@ export default function Home() {
 
     return () => clearInterval(interval);
   }, []);
-
-  const slideNews = (direction: 'left' | 'right') => {
-    if (direction === 'left' && newsStartIndex > 0) {
-      setNewsStartIndex(prev => Math.max(0, prev - 1));
-    } else if (direction === 'right' && newsStartIndex < maxIndex) {
-      setNewsStartIndex(prev => Math.min(maxIndex, prev + 1));
-    }
-  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -389,131 +324,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section Actualités améliorée */}
-      <section className="py-16 lg:py-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 relative overflow-hidden">
-        {/* Éléments décoratifs en arrière-plan */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-orange-100/20 to-transparent rounded-full blur-3xl -z-10" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-blue-100/20 to-transparent rounded-full blur-3xl -z-10" />
-        
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          {/* Header avec titre et contrôles */}
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 lg:gap-8 mb-12 lg:mb-16">
-            
-            {/* Section titre */}
-            <div className="flex-1">
-              <div className="inline-flex items-center gap-2 mb-4">
-                <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
-                <span className="text-sm font-medium text-orange-600 uppercase tracking-wider">
-                  En direct
-                </span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-                A la <span className="text-orange-600">Une</span>
-              </h2>
-              <div className="flex items-center gap-3">
-                <div className="h-1 w-20 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full" />
-                <div className="h-1 w-8 bg-orange-300 rounded-full" />
-                <div className="h-1 w-4 bg-orange-200 rounded-full" />
-              </div>
-            </div>
-
-            {/* Contrôles de navigation */}
-            <div className="flex items-center gap-3 lg:gap-4">
-              <motion.button
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => slideNews('left')}
-                className={`group relative p-3 lg:p-4 rounded-2xl transition-all duration-300 shadow-lg backdrop-blur-sm ${
-                  newsStartIndex === 0 
-                    ? 'bg-gray-100/80 text-gray-400 cursor-not-allowed shadow-sm' 
-                    : 'bg-white/80 text-orange-600 hover:bg-orange-50 hover:shadow-xl hover:shadow-orange-500/20'
-                }`}
-                disabled={newsStartIndex === 0}
-              >
-                <ChevronLeft className="w-5 h-5 lg:w-6 lg:h-6 transition-transform group-hover:-translate-x-0.5" />
-                {newsStartIndex !== 0 && (
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                )}
-              </motion.button>
-
-              <motion.button
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => slideNews('right')}
-                className={`group relative p-3 lg:p-4 rounded-2xl transition-all duration-300 shadow-lg backdrop-blur-sm ${
-                  newsStartIndex >= maxIndex
-                    ? 'bg-gray-100/80 text-gray-400 cursor-not-allowed shadow-sm'
-                    : 'bg-white/80 text-orange-600 hover:bg-orange-50 hover:shadow-xl hover:shadow-orange-500/20'
-                }`}
-                disabled={newsStartIndex >= maxIndex}
-              >
-                <ChevronRight className="w-5 h-5 lg:w-6 lg:h-6 transition-transform group-hover:translate-x-0.5" />
-                {newsStartIndex < maxIndex && (
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-l from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                )}
-              </motion.button>
-            </div>
-          </div>
-
-          {/* Container des actualités */}
-          <div 
-            ref={newsContainerRef}
-            className="relative overflow-hidden rounded-xl md:rounded-2xl"
-          >
-            <motion.div
-              className="flex space-x-4 md:space-x-6"
-              animate={{ 
-                x: `${-newsStartIndex * (100 / visibleCards)}%`
-              }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            >
-              {newsItems.map((item, index) => (
-                <motion.div 
-                  key={index} 
-                  className={`flex-shrink-0 ${
-                    !isClient ? 'w-[23%]' : 
-                    width < 768 ? 'w-[48%]' : 'w-[23%]'
-                  }`}
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="bg-white rounded-lg md:rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 h-full">
-                    <div className="relative h-40 sm:h-44 md:h-48 lg:h-56">
-                      <img 
-                        src={item.image} 
-                        alt={item.title}
-                        className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                      
-                      {/* Date avec fond ombragé */}
-                      <div className="absolute top-3 md:top-4 right-3 md:right-4">
-                        <div className="px-2.5 py-1 bg-black/60 backdrop-blur-sm rounded-lg shadow-lg">
-                          <p className="text-xs font-medium text-white tabular-nums">
-                            {formatDate(item.date)}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-4 md:p-6">
-                      <h3 className="text-base md:text-lg lg:text-xl font-semibold text-gray-900 mb-3 md:mb-4 line-clamp-2">
-                        {item.title}
-                      </h3>
-                      <Link 
-                        href="#" 
-                        className="group inline-flex items-center text-orange-600 font-medium hover:text-orange-800 transition-colors duration-200 text-sm md:text-base"
-                      >
-                        Lire la suite 
-                        <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 transform group-hover:translate-x-1 transition-transform duration-200" />
-                      </Link>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      <Une news={recentNews} />
      
       <Services />
       <div className="flex justify-center">

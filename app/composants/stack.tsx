@@ -133,6 +133,8 @@ export default function Stack({
               <Image
                 src={card.img}
                 alt={`card-${card.id}`}
+                width={cardDimensions.width}
+                height={cardDimensions.height}
                 className="w-full h-full object-cover pointer-events-none"
               />
             </motion.div>

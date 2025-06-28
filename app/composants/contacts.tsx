@@ -5,19 +5,15 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Send, CheckCircle, AlertCircle, Phone, Mail, MapPin, Clock } from "lucide-react"
-import emailjs from "@emailjs/browser"
 import DynamicHero from "./DynamicHero";
-
-// Initialisez EmailJS avec votre clé publique
-emailjs.init("84CLKZLXUD0IzZIz-")
 
 // Schéma de validation avec Zod
 const contactSchema = z.object({
-  firstName: z.string().min(2, "L&apos;e prénom doit contenir au moins 2 caractères"),
-  lastName: z.string().min(2, "L&apos;e nom doit contenir au moins 2 caractères"),
+  firstName: z.string().min(2, "Le prénom doit contenir au moins 2 caractères"),
+  lastName: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
   email: z.string().email("Veuillez entrer une adresse email valide"),
   phone: z.string().optional(),
-  compstring: z.string().optional(),
+  company: z.string().optional(),
   subject: z.enum(["diffusion", "infrastructure", "ott", "autre"], {
     errorMap: () => ({ message: "Veuillez sélectionner un type de demande" }),
   }),
@@ -58,50 +54,34 @@ const ContactForm = () => {
     setErrorMessage("")
 
     try {
-      // Configuration EmailJS
-      const templateParams = {
-        from_name: `${data.firstName} ${data.lastName}`,
-        from_email: data.email,
-        phone: data.phone || "Non renseigné",
-        compstring: data.compstring || "Non renseigné",
-        subject_type: subjectOptions.find((opt) => opt.value === data.subject)?.label || data.subject,
-        message: data.message,
-        newsletter: data.newsletter ? "Oui" : "Non",
-        to_email: "dannickothniel2000@gmail.com",
-      }
+      console.log("Envoi du formulaire avec les données:", data)
 
-      console.log("Envoi en cours avec les paramètres:", templateParams)
-
-      // Méthode alternative d&apos;envoi d&apos;email
-      const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+      // Appel à votre API route Nodemailer
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          service_id: "service_erdsj1j",
-          template_id: "template_pghsl7k",
-          user_id: "84CLKZLXUD0IzZIz-",
-          template_params: templateParams,
-        }),
+        body: JSON.stringify(data),
       })
 
-      if (response.ok) {
-        console.log("Email envoyé avec succès via EmailJS API")
+      const result = await response.json()
+
+      if (response.ok && result.success) {
+        console.log("Email envoyé avec succès via Nodemailer")
         setSubmitStatus("success")
         reset()
       } else {
-        const errorData = await response.text()
-        console.error("Erreur lors de l&apos;envoi via EmailJS API:", errorData)
-        setErrorMessage(`Erreur d&apos;envoi: ${errorData}`)
+        console.error("Erreur lors de l'envoi:", result)
+        setErrorMessage(result.message || "Une erreur s'est produite lors de l'envoi")
         setSubmitStatus("error")
       }
     } catch (error: unknown) {
-      console.error("Erreur lors de l&apos;envoi via EmailJS:", error)
+      console.error("Erreur lors de l'envoi:", error)
       if (typeof error === 'object' && error !== null && 'message' in error) {
-        setErrorMessage((error as { message?: string }).message || "Une erreur s&apos;est produite lors de l&apos;envoi");
+        setErrorMessage((error as { message?: string }).message || "Une erreur s'est produite lors de l'envoi");
       } else {
-        setErrorMessage("Une erreur s&apos;est produite lors de l&apos;envoi");
+        setErrorMessage("Une erreur s'est produite lors de l'envoi");
       }
       setSubmitStatus("error")
     } finally {
@@ -125,8 +105,8 @@ const ContactForm = () => {
                   <div>
                     <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Contactez-nous</h3>
                     <p className="text-orange-100 mb-6 sm:mb-8 text-sm sm:text-base">
-                      Notre équipe d&apos;experts est à votre disposition pour répondre à toutes vos questions concernant nos
-                      services de diffusion et d&apos;infrastructure.
+                      Notre équipe d'experts est à votre disposition pour répondre à toutes vos questions concernant nos
+                      services de diffusion et d'infrastructure.
                     </p>
                   </div>
 
@@ -193,7 +173,9 @@ const ContactForm = () => {
                     <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
                     <div>
                       <p className="text-green-800 font-medium">Message envoyé avec succès !</p>
-                      <p className="text-green-600 text-sm">Nous vous répondrons dans les plus brefs délais.</p>
+                      <p className="text-green-600 text-sm">
+                        Nous vous répondrons dans les plus brefs délais. Un email de confirmation vous a été envoyé.
+                      </p>
                     </div>
                   </div>
                 )}
@@ -202,7 +184,7 @@ const ContactForm = () => {
                   <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-3">
                     <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
                     <div>
-                      <p className="text-red-800 font-medium">Erreur lors de l&apos;envoi</p>
+                      <p className="text-red-800 font-medium">Erreur lors de l'envoi</p>
                       <p className="text-red-600 text-sm">
                         {errorMessage || "Veuillez réessayer ou nous contacter directement."}
                       </p>
@@ -280,13 +262,13 @@ const ContactForm = () => {
 
                   {/* Entreprise */}
                   <div>
-                    <label htmlFor="compstring" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
                       Entreprise
                     </label>
                     <input
-                      {...register("compstring")}
+                      {...register("company")}
                       type="text"
-                      id="compstring"
+                      id="company"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 transition-colors"
                       placeholder="Nom de votre entreprise"
                     />
@@ -345,7 +327,7 @@ const ContactForm = () => {
                       className="mt-1 h-4 w-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500"
                     />
                     <label htmlFor="newsletter" className="text-sm text-gray-700">
-                      Je souhaite recevoir les actualités et informations d&apos;IDT par email
+                      Je souhaite recevoir les actualités et informations d'IDT par email
                     </label>
                   </div>
 

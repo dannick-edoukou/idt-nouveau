@@ -210,14 +210,15 @@ export default function Phototheque() {
   const startIndex = (currentPage - 1) * stacksPerPage;
   const currentStacks = imageCategories.slice(startIndex, startIndex + stacksPerPage);
 
-  // Fonction typée pour créer le contenu des stacks
+  // Fonction typée pour créer le contenu des stacks - CORRIGÉE
   const createStackContent = (item: ImageItem) => (
     <div className="relative w-full h-full">
       <Image 
         src={item.img} 
         alt={item.title}
-        width={500}
-        height={300}
+        width={220}
+        height={280}
+        sizes="220px"
         className="w-full h-full object-cover rounded-lg"
       />
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 rounded-b-lg">
