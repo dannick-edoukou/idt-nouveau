@@ -1,6 +1,6 @@
 "use client";
 import { motion, AnimatePresence } from "motion/react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 // Animation utility for the "Expertise. Créativité. Impact." text
 const heroKeywords = [
@@ -38,13 +38,13 @@ function AnimatedKeywords() {
 }
 
 export function Hero() {
-  const images = [
+  const images = useMemo(() => [
     "/banniere/banniere1.jpg",
     "/banniere/banniere2.jpg",
     "/banniere/banniere3.jpg",
     "/banniere/banniere4.jpg",
     "/banniere/banniere5.jpg",
-  ];
+  ], []);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -61,7 +61,7 @@ export function Hero() {
   // Preload images to prevent white flashes
   useEffect(() => {
     const preloadImages = async () => {
-      const imagePromises = images.map((src) => {
+      const imagePromises = images.map((src: string) => {
         return new Promise((resolve, reject) => {
           const img = new window.Image();
           img.onload = resolve;
@@ -73,7 +73,7 @@ export function Hero() {
       try {
         await Promise.all(imagePromises);
         setIsLoaded(true);
-      } catch (error) {
+      } catch {
         setIsLoaded(true);
       }
     };
@@ -158,7 +158,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          {images.map((_, index) => (
+          {images.map((_: unknown, index: number) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}

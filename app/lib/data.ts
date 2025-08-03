@@ -18,9 +18,6 @@ interface ApiResponse {
   data: ApiNewsItem[];
 }
 
-const API_URL = 'http://testapp.dioulatche.io/routes/api.php';
-
-
 /**
  * Récupère un seul article d'actualité par son ID.
  * Cette fonction récupère la liste complète des actualités et la filtre ensuite par ID,
