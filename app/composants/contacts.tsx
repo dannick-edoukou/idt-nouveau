@@ -116,11 +116,18 @@ const ContactForm = () => {
                       <div>
                         <h4 className="font-semibold mb-1">Adresse</h4>
                         <p className="text-orange-100">
-                          Institut de Diffusion Télévisuelle
+                          28 BP 1400 Abidjan 28 COTE D'IVOIRE
                           <br />
-                          123 Avenue de la Télédiffusion
+                          II Plateaux derrière l'ENA, Rue J15.
                           <br />
-                          75001 Paris, France
+                          <a
+                            href="https://maps.app.goo.gl/D6Zir7oj69YAQbU68?g_st=ipc"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline text-orange-200 hover:text-white"
+                          >
+                            Localisation sur Google Maps
+                          </a>
                         </p>
                       </div>
                     </div>
@@ -129,8 +136,7 @@ const ContactForm = () => {
                       <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-orange-200 mt-1 flex-shrink-0" />
                       <div>
                         <h4 className="font-semibold mb-1">Téléphone</h4>
-                        <p className="text-orange-100">+33 1 23 45 67 89</p>
-                        <p className="text-orange-200 text-sm">Support technique: +33 1 23 45 67 90</p>
+                        <p className="text-orange-100">+225 25 22 01 05 00</p>
                       </div>
                     </div>
 
@@ -138,8 +144,7 @@ const ContactForm = () => {
                       <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-orange-200 mt-1 flex-shrink-0" />
                       <div>
                         <h4 className="font-semibold mb-1">Email</h4>
-                        <p className="text-orange-100">dannickothniel2000@gmail.com</p>
-                        <p className="text-orange-200 text-sm">technique@idt.fr</p>
+                        <p className="text-orange-100">contact@sidt.ci</p>
                       </div>
                     </div>
 
@@ -255,7 +260,7 @@ const ContactForm = () => {
                         type="tel"
                         id="phone"
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 transition-colors"
-                        placeholder="+33 1 23 45 67 89"
+                        placeholder="+225 25 22 01 05 00"
                       />
                     </div>
                   </div>

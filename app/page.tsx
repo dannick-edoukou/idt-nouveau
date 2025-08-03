@@ -1,74 +1,48 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
 import { Partners } from "./composants/partners";
 import Services from "./composants/services";
-import CoverageMapWrapper from "./composants/CoverageMapWrapper";
+
 import Faq from "./composants/faq";
 import Une from "./composants/une";
+import { Hero } from "./composants/Hero";
 import { mockNews } from "./data/news";
 import { parseDate } from "./lib/utils";
 
-const heroImages = [
-  {
-    url: "https://images.pexels.com/photos/3938023/pexels-photo-3938023.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    title: "Premier groupe média francophone",
-    description: "Acteur majeur de la production, de l'édition et de la distribution de contenus",
-    gradient: "from-orange-600/90 to-orange-500/80"
-  },
-  {
-    url: "https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    title: "Innovation et créativité",
-    description: "À la pointe de la technologie et de la création de contenus",
-    gradient: "from-blue-600/90 to-blue-500/80"
-  },
-  {
-    url: "https://images.pexels.com/photos/3944425/pexels-photo-3944425.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    title: "Engagement responsable",
-    description: "Un groupe engagé pour un avenir durable et inclusif",
-    gradient: "from-green-600/90 to-green-500/80"
-  }
-];
-
 // Ajout des données pour les statistiques
 const statistics = [
+ 
   {
-    value: "15M+",
-    label: "Spectateurs quotidiens",
-    description: "Audience cumulée sur nos chaînes",
-    image: "https://images.pexels.com/photos/3760259/pexels-photo-3760259.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    gradient: "from-blue-600/90 to-blue-500/80"
+    value: "68%",
+    label: "Foyers équipés TNT",
+    description: "Part des foyers ivoiriens équipés pour recevoir la TNT en 2021",
+    image: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    gradient: "from-green-600/90 to-green-400/80"
   },
   {
-    value: "200+",
-    label: "Émissions produites",
-    description: "Contenus originaux créés chaque année",
-    image: "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    gradient: "from-purple-600/90 to-purple-500/80"
+    value: "100%",
+    label: "Capital public",
+    description: "SIDT détenue à 100% par l’État ivoirien",
+    image: "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    gradient: "from-orange-600/90 to-orange-400/80"
+  },
+ 
+  {
+    value: "2017",
+    label: "Année de création",
+    description: "SIDT, société d’État créée en décembre 2017",
+    image: "https://images.pexels.com/photos/267614/pexels-photo-267614.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    gradient: "from-red-600/90 to-red-400/80"
   },
   {
-    value: "50+",
-    label: "Pays couverts",
-    description: "Distribution internationale de nos contenus",
-    image: "https://images.pexels.com/photos/3938023/pexels-photo-3938023.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    gradient: "from-green-600/90 to-green-500/80"
-  },
-  {
-    value: "1000+",
-    label: "Employés",
-    description: "Experts passionnés par la création de contenus",
-    image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    gradient: "from-orange-600/90 to-orange-500/80"
-  },
-  {
-    value: "25+",
-    label: "Années d'expertise",
-    description: "Leader du secteur audiovisuel",
-    image: "https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    gradient: "from-red-600/90 to-red-500/80"
+    value: "+10",
+    label: "Technologies internationales",
+    description: "Collaboration avec des partenaires technologiques mondiaux",
+    image: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    gradient: "from-cyan-600/90 to-cyan-400/80"
   }
 ];
 
@@ -204,119 +178,18 @@ export default function Home() {
   const recentNews = [...mockNews]
     .sort((a, b) => parseDate(b.date).getTime() - parseDate(a.date).getTime())
     .slice(0, 5);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero section */}
-      <section className="relative h-[60vh] md:h-[75vh] overflow-hidden">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentImageIndex}
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.1 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="absolute inset-0"
-          >
-            <div 
-              className={`absolute inset-0 bg-gradient-to-r ${heroImages[currentImageIndex].gradient} mix-blend-multiply backdrop-blur-sm`}
-            />
-            <div 
-              className="absolute inset-0 bg-cover bg-center transform-gpu"
-              style={{ 
-                backgroundImage: `url('${heroImages[currentImageIndex].url}')`,
-                transition: 'transform 12s cubic-bezier(0.4, 0, 0.2, 1)',
-                transform: 'scale(1.1)'
-              }}
-            />
-            <div className="relative h-full flex items-center">
-              <div className="container mx-auto px-4 md:px-8">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.8 }}
-                  className="max-w-3xl"
-                >
-                  <motion.h1 
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight tracking-tight"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
-                  >
-                    {heroImages[currentImageIndex].title}
-                  </motion.h1>
-                  <motion.p 
-                    className="text-lg sm:text-xl md:text-2xl text-white/95 mb-6 md:mb-8 font-light leading-relaxed"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.7 }}
-                  >
-                    {heroImages[currentImageIndex].description}
-                  </motion.p>
-                  <motion.div 
-                    className="flex flex-wrap gap-4"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.9 }}
-                  >
-                    <Link 
-                      href="/le-groupe" 
-                      className="group px-6 md:px-8 py-3 md:py-4 bg-white text-orange-600 font-medium rounded-lg hover:bg-orange-50 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-                    >
-                      <span className="flex items-center">
-                        Découvrir le groupe
-                        <ArrowRight className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
-                      </span>
-                    </Link>
-                    <Link 
-                      href="/activites" 
-                      className="group px-6 md:px-8 py-3 md:py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-medium rounded-lg hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
-                    >
-                      Nos activités
-                    </Link>
-                  </motion.div>
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Slider indicators */}
-        <div className="absolute bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 md:space-x-3">
-          {heroImages.map((_, index) => (
-            <motion.button
-              key={index}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-              className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-500 ${
-                index === currentImageIndex 
-                  ? 'bg-white w-6 md:w-10 shadow-lg shadow-white/30' 
-                  : 'bg-white/50 hover:bg-white/70'
-              }`}
-              onClick={() => setCurrentImageIndex(index)}
-            />
-          ))}
-        </div>
-      </section>
+      {/* Hero section amélioré */}
+      <Hero  />
 
       <Une news={recentNews} />
      
       <Services />
       <div className="flex justify-center">
-      
-                     
-        <Link  className="mt-6 px-6 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 transition-colors" 
+        <Link  className=" px-6 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 transition-colors" 
          href="/actualite" >Voir nos actualités</Link>
-
       </div>
       <Partners />
 
@@ -335,7 +208,7 @@ export default function Home() {
           </div>
 
           {/* Grille responsive pour les cartes */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6 lg:gap-4 xl:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-4 xl:gap-6">
             {statistics.map((stat, index) => (
               <StatisticCard key={index} stat={stat} index={index} />
             ))}
@@ -349,7 +222,7 @@ export default function Home() {
         </div>
       </section>
       
-      <CoverageMapWrapper/>
+   
       <Faq/> 
     </div>
   );

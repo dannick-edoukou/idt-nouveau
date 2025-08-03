@@ -32,9 +32,9 @@ const MENU_CONFIG = {
     title: 'Nos Services',
     description: 'Des solutions adaptées à vos besoins'
   },
-  'chaine-tv': {
-    title: 'Chaîne TV',
-    description: 'Votre média de référence'
+  'les-chaines': {
+    title: 'Les Chaînes',
+    description: 'Découvrez toutes les chaînes de la TNT'
   },
   'actualite': {
     title: 'Actualité',
@@ -47,7 +47,16 @@ const MENU_CONFIG = {
   'contacts': {
     title: 'Contact',
     description: 'Entrez en contact avec nos équipes'
-  }
+  },
+  'faq': {
+    title: 'FAQ',
+    description: 'Questions fréquentes sur la TNT et nos services'
+  },
+  'radio': {
+    title: 'Radio',
+    description: 'Découvrez notre radio'
+  },
+ 
 } as const;
 
 // Types

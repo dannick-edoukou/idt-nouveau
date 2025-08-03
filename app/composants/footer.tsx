@@ -2,66 +2,69 @@
 import Image from 'next/image'
 import React from 'react'
 import { Facebook, Twitter, Linkedin, Youtube, Phone, Mail, MapPin } from 'lucide-react'
+import Link from 'next/link'
 
 const Footer = () => {
   const navigationLinks = {
-    idt: {
-      title: 'IDT',
+    entreprise: {
+      title: 'Entreprise',
       links: [
-        'Présentation',
-        'Mot du DG',
-        'Nos Missions',
-        'Fonctionnement',
-        'Document juridique'
+        { title: 'Présentation', href: '/presentation' },
+        { title: 'Mot du DG', href: '/mot-du-dg' },
+        { title: 'Nos Missions', href: '/nos-missions' },
+        { title: 'Fonctionnement', href: '/fonctionnement' },
+        { title: 'Document juridique', href: '/document-juridique' }
       ]
     },
-    services: {
-      title: 'Nos Services',
+    latnt: {
+      title: 'La TNT',
       links: [
-        'Diffusion TNT',
-        'Diffusion Radio',
-        'Location de pylone',
-        'OTT'
+        { title: 'Les Chaînes', href: '/les-chaines' },
+        { title: 'FAQ', href: '/faq' }
       ]
     },
-    media: {
-      title: 'Média & Communication',
+    autreservice: {
+      title: 'Autres Services',
       links: [
-        'Chaînes TV',
-        'Bouquets TV',
-        'Radios',
-        'Actualités',
-        'Photothèque',
-        'Vidéothèque'
+        { title: 'Radio', href: '/radio' },
+        { title: 'Pylone', href: '/pylone' },
+        { title: 'OTT', href: '/ott' }
+      ]
+    },
+    mediatheque: {
+      title: 'Médiathèque',
+      links: [
+        { title: 'Photothèque', href: '/mediatheque/phototheque' },
+        { title: 'Vidéothèque', href: '/mediatheque/videotheque' }
       ]
     }
   }
 
   const socialLinks = [
-    { icon: Facebook, href: '#', name: 'Facebook' },
-    { icon: Twitter, href: '#', name: 'Twitter' },
-    { icon: Linkedin, href: '#', name: 'LinkedIn' },
-    { icon: Youtube, href: '#', name: 'YouTube' }
+    { icon: Youtube, href: 'https://www.youtube.com/@idt-societeivoiriennedetel9946', name: 'YouTube' },
+    { icon: Linkedin, href: 'https://ci.linkedin.com/company/societe-ivoirienne-de-telediffusion', name: 'LinkedIn' },
+    { icon: Facebook, href: 'https://www.facebook.com/idt.ci', name: 'Facebook' },
+    { icon: Twitter, href: 'https://x.com/idt_ci', name: 'Twitter' }
   ]
 
   return (
     <footer className="bg-gradient-to-b from-white to-orange-500 text-gray-800">
       {/* Section principale du footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="px-4 sm:px-6 lg:px-8 py-12 flex justify-around ">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
           {/* Logo et description */}
           <div className="lg:col-span-1">
-          <Image
-      src="/logo.jpg"
-      alt="IDT Logo"
-      width={120}
-      height={80}
-      className="hover:opacity-80 transition-opacity duration-200"
-      />
-            <p className="text-gray-700 mb-4">
-              Institut de Diffusion Télévisuelle - Leader dans la diffusion de contenus audiovisuels
-              et la gestion des infrastructures de télécommunication.
+            <Image
+              src="/logo.jpg"
+              alt="IDT Logo"
+              width={120}
+              height={80}
+              className="hover:opacity-80 transition-opacity duration-200"
+            />
+            <p className="text-gray-700 mb-4 mt-4">
+            La Société Ivoirienne de Télédiffusion IDT assure la diffusion des programmes 
+            radiophoniques et télévisuels sur le territoire national.
             </p>
 
             {/* Réseaux sociaux */}
@@ -72,6 +75,8 @@ const Footer = () => {
                   <a
                     key={social.name}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-gray-600 hover:text-white transition-colors duration-300"
                     aria-label={social.name}
                   >
@@ -90,13 +95,13 @@ const Footer = () => {
               </h3>
               <ul className="space-y-2">
                 {section.links.map((link) => (
-                  <li key={link}>
-                    <button
-                      type="button"
+                  <li key={link.title}>
+                    <Link
+                      href={link.href}
                       className="text-gray-700 hover:text-white transition-colors duration-300 block py-1 text-left w-full"
                     >
-                      {link}
-                    </button>
+                      {link.title}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -112,30 +117,31 @@ const Footer = () => {
               <div className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 text-white mt-0.5 flex-shrink-0" />
                 <div className="text-gray-700">
-                  <p>Institut de Diffusion Télévisuelle</p>
-                  <p>123 Avenue de la Télédiffusion</p>
-                  <p>75001 Paris, France</p>
+                  <p>Société Ivoirienne de Télédiffusion</p>
+                  <p>28 BP 1400 Abidjan 28</p>
+                  <p>II Plateaux derrière l'ENA</p>
+                  <p>Rue J15, Côte d'Ivoire</p>
                 </div>
               </div>
 
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-white flex-shrink-0" />
-                <a
-                  href="tel:+33123456789"
+                <Link
+                  href="tel:+2252522010500"
                   className="text-gray-700 hover:text-white transition-colors duration-300"
                 >
-                  +33 1 23 45 67 89
-                </a>
+                  +225 25 22 01 05 00
+                </Link>
               </div>
 
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-white flex-shrink-0" />
-                <a
-                  href="mailto:contact@idt.fr"
+                <Link
+                  href="mailto:contact@sidt.ci"
                   className="text-gray-700 hover:text-white transition-colors duration-300"
                 >
-                  contact@idt.fr
-                </a>
+                  contact@sidt.ci
+                </Link>
               </div>
             </div>
           </div>
@@ -149,22 +155,17 @@ const Footer = () => {
 
             {/* Copyright */}
             <div className="text-gray-700">
-              <p>&copy; {new Date().getFullYear()} Institut de Diffusion Télévisuelle. Tous droits réservés.</p>
+              <p>&copy; 2025 Société Ivoirienne de Télédiffusion. </p>
             </div>
 
             {/* Liens légaux */}
             <div className="flex space-x-6 text-sm">
+           
+              <p className="text-gray-700 hover:text-white transition-colors duration-300">
+              Tous droits réservés.
+              </p>
               <button type="button" className="text-gray-700 hover:text-white transition-colors duration-300">
-                Mentions légales
-              </button>
-              <button type="button" className="text-gray-700 hover:text-white transition-colors duration-300">
-                Politique de confidentialité
-              </button>
-              <button type="button" className="text-gray-700 hover:text-white transition-colors duration-300">
-                Cookies
-              </button>
-              <button type="button" className="text-gray-700 hover:text-white transition-colors duration-300">
-                Plan du site
+                par Optinov
               </button>
             </div>
           </div>

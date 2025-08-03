@@ -1,6 +1,10 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
+import DynamicHero from "./DynamicHero";
+
+// NOTE : La "marge" sur le DynamicHero vient probablement du padding/margin du parent ou du composant qui suit.
+// Ici, on retire tout padding/margin autour du DynamicHero pour qu'il soit collé en haut, et on gère le reste du contenu dans une section séparée.
 
 const faqItems = [
   {
@@ -33,56 +37,67 @@ export default function Faq() {
   };
 
   return (
-    <section id="faq" className="w-full flex justify-center items-center">
-      <div className="w-full max-w-2xl px-4 md:px-8 py-14 flex flex-col items-center">
-        <h3 className="text-center text-2xl font-bold text-orange-600 tracking-wide mb-8 uppercase">FAQ</h3>
-        <div className="w-full flex flex-col gap-4">
-          {faqItems.map((item, index) => {
-            const isOpen = openIndexes.includes(index);
-            return (
-              <div
-                key={index}
-                className={`rounded-xl bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 ${isOpen ? "ring-2 ring-orange-400" : ""}`}
-              >
-                <button
-                  onClick={() => toggleIndex(index)}
-                  className="w-full flex justify-between items-center p-5 focus:outline-none text-left"
-                  aria-expanded={isOpen}
-                >
-                  <span className="text-lg font-semibold text-gray-800 dark:text-white">
-                    {item.question}
-                  </span>
-                  <svg className={`w-5 h-5 ml-4 transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                <div
-                  className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[500px] opacity-100 py-4 px-5" : "max-h-0 opacity-0 py-0 px-5"}`}
-                  style={{
-                    borderTop: isOpen ? "1px solid #e5e7eb" : "none"
-                  }}
-                >
-                  {item.answer === "image" ? (
-                    <div className="flex items-center justify-center">
-                      <Image
-                        src="/Map.png"
-                        alt="Map of Côte d'Ivoire"
-                        width={620}
-                        height={400}
-                        className="rounded-lg shadow-lg"
-                      />
-                    </div>
-                  ) : (
-                    <p className="text-gray-600 dark:text-gray-300 whitespace-pre-line">
-                      {item.answer}
-                    </p>
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
+    <>
+      {/* On retire toute marge/padding autour du DynamicHero */}
+      <div className="w-full m-0 p-0">
+        <DynamicHero backgroundImage="/heroes.jpeg" />
       </div>
-    </section>
+      {/* On commence la section FAQ sans padding-top pour éviter une marge entre le hero et la FAQ */}
+      <section
+        id="faq"
+        className="w-full flex justify-center items-center bg-transparent"
+        style={{ marginTop: 0, paddingTop: 0 }}
+      >
+        <div className="w-full max-w-2xl px-4 md:px-8 py-14 flex flex-col items-center">
+          <h3 className="text-center text-2xl font-bold text-orange-600 tracking-wide mb-8 uppercase">FAQ</h3>
+          <div className="w-full flex flex-col gap-4">
+            {faqItems.map((item, index) => {
+              const isOpen = openIndexes.includes(index);
+              return (
+                <div
+                  key={index}
+                  className={`rounded-xl bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 ${isOpen ? "ring-2 ring-orange-400" : ""}`}
+                >
+                  <button
+                    onClick={() => toggleIndex(index)}
+                    className="w-full flex justify-between items-center p-5 focus:outline-none text-left"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="text-lg font-semibold text-gray-800 dark:text-white">
+                      {item.question}
+                    </span>
+                    <svg className={`w-5 h-5 ml-4 transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[800px] opacity-100 py-4 px-5" : "max-h-0 opacity-0 py-0 px-5"}`}
+                    style={{
+                      borderTop: isOpen ? "1px solid #e5e7eb" : "none"
+                    }}
+                  >
+                    {item.answer === "image" ? (
+                      <div className="flex items-center justify-center">
+                        <Image
+                          src="/Map.png"
+                          alt="Map of Côte d'Ivoire"
+                          width={700}
+                          height={600}
+                          className="rounded-lg shadow-lg"
+                        />
+                      </div>
+                    ) : (
+                      <p className="text-gray-600 dark:text-gray-300 whitespace-pre-line">
+                        {item.answer}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

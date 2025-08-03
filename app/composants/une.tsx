@@ -50,6 +50,9 @@ export default function Une({ news = [], title }: UneProps) {
   // Ensure we only show a maximum of 5 news items, as requested
   const newsItems = news.slice(0, 5);
 
+  // Prevent rendering on the server or before hydration to avoid layout shift
+
+
   // Don't render the component if there are no news items to display
   if (newsItems.length === 0) {
     return null;
@@ -81,13 +84,13 @@ export default function Une({ news = [], title }: UneProps) {
   };
 
   const defaultTitle = (
-    <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+    <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mt-6 leading-tight">
       A la <span className="text-orange-600">Une</span>
     </h2>
   );
 
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 relative overflow-hidden">
+        <section className="pt-16 lg:pt-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-orange-100/20 to-transparent rounded-full blur-3xl -z-10" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-blue-100/20 to-transparent rounded-full blur-3xl -z-10" />
         
@@ -142,7 +145,7 @@ export default function Une({ news = [], title }: UneProps) {
             )}
           </div>
 
-          <div 
+                    <div 
             ref={newsContainerRef}
             className="relative overflow-hidden rounded-xl md:rounded-2xl"
           >

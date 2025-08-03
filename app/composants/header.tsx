@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useRef, useCallback, useEffect } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
+import { faqData } from "../data/faqData";;
 import { cn } from "@/lib/utils";
 
 interface SubSubmenuItem {
@@ -47,11 +48,8 @@ const Header = () => {
       id: "latnt",
       title: "La TNT",
       submenu: [
-        { title: "Qu'est-ce que la TNT ?", href: "/qu'est-ce-que-la-tnt" },
-        { title: "Comment bénéficier de la TNT ?", href: "/comment-beneficier-de-la-tnt" },
-        { title: "Déploiement de la TNT", href: "/deploiement-de-la-tnt" },
-        { title: "Choix de technologie", href: "/choix-de-technologie" },
-        { title: "Les Chaines", href: "/les-chaines" },
+        ...faqData.map(item => ({ title: item.question, href: `/faq#${item.id}` })),
+        { title: "Les Chaînes", href: "/les-chaines" },
       ],
     },
    

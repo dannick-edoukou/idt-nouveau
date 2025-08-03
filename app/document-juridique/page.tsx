@@ -1,50 +1,76 @@
+"use client";
+
+import DynamicHero from "../composants/DynamicHero";
+
+const documents = [
+  {
+    title: "Décret de Création du SIDT 2017-8441",
+    description: "Décret portant création de la Société Ivoirienne de Diffusion Télévisuelle (SIDT).",
+    url: "/documents/DECRET_CREATION_SIDT_2017-8441.pdf",
+  },
+  {
+    title: "Décret N° 2020-643 - Renforcement Conditions d'Accès TNT",
+    description: "Décret du 19 août 2020 relatif au renforcement des conditions d'accès à la Télévision Numérique Terrestre.",
+    url: "/documents/DECRET N° 2020-643 DU 19 AOUT 2020 RENFORCEMENT CONDITIONS D'ACCES TNT.pdf",
+  },
+  {
+    title: "Décret N° 2020-642 - Extinction Analogique TV",
+    description: "Décret du 19 août 2020 relatif à l'extinction de la diffusion analogique de télévision.",
+    url: "/documents/DECRET N° 2020-642 DU 19 AOUT 2020 RELATIF A L'EXTINCTION ANALOGIQUE Tv.pdf",
+  },
+  {
+    title: "Ordonnance Exonération Équipements TNT",
+    description: "Ordonnance portant exonération des équipements de réception TNT.",
+    url: "/documents/Ordonnance Exonération équipements TNT.pdf",
+  },
+  {
+    title: "Directive UEMOA TNT 2015",
+    description: "Directive n°01/2015/CM/UEMOA relative à la Télévision Numérique Terrestre dans l'espace UEMOA.",
+    url: "/documents/Directive n°01_2015_ UEMOA_CM_TNT (1).pdf",
+  },
+  {
+    title: "Décret d'Interdiction Importation et Commercialisation",
+    description: "Décret portant interdiction d'importation et de commercialisation d'équipements non conformes.",
+    url: "/documents/Decret_d_interdiction d'importation et commercialisation.pdf",
+  },
+];
+
 export default function DocumentJuridique() {
   return (
-    <main className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Documents Juridiques</h1>
-      <div className="prose max-w-none">
-        <div className="grid gap-6">
-          {/* Section Statuts */}
-          <section className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-2xl font-semibold mb-4">Statuts et Réglementation</h2>
-            <div className="space-y-4">
-              <div className="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
-                <h3 className="text-xl font-medium mb-2">Statuts de l&apos;IDT</h3>
-                <p className="text-gray-600 mb-3">
-                  Description du document...
+    <>
+      <DynamicHero backgroundImage="/heroes.jpeg" />
+      <main className="min-h-screen bg-gray-50 dark:bg-gray-900 py-14">
+        <div className="container mx-auto px-4 md:px-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-center text-orange-600 mb-10 uppercase tracking-wide">
+            Documents Juridiques
+          </h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            {documents.map((doc, idx) => (
+              <div
+                key={idx}
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col justify-between"
+              >
+                <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                  {doc.title}
+                </h2>
+                <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                  {doc.description}
                 </p>
-                <a href="#" className="text-orange-500 hover:text-orange-600 inline-flex items-center">
-                  Télécharger le document
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                  </svg>
-                </a>
+                <div className="flex gap-4">
+                  <a
+                    href={doc.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 transition"
+                  >
+                    Télécharger
+                  </a>
+                </div>
               </div>
-              {/* Ajouter d&apos;autres documents */}
-            </div>
-          </section>
-
-          {/* Section Textes Réglementaires */}
-          <section className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-2xl font-semibold mb-4">Textes Réglementaires</h2>
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
-                <h3 className="font-semibold mb-2">Document 1</h3>
-                <p className="text-sm text-gray-600 mb-3">
-                  Description du texte réglementaire...
-                </p>
-                <a href="#" className="text-orange-500 hover:text-orange-600 text-sm inline-flex items-center">
-                  Consulter le document
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                </a>
-              </div>
-              {/* Ajouter d&apos;autres textes réglementaires */}
-            </div>
-          </section>
+            ))}
+          </div>
         </div>
-      </div>
-    </main>
-  )
-} 
+      </main>
+    </>
+  );
+}
