@@ -23,8 +23,8 @@ export default function MotDuDG() {
 
                 <div className="text-center text-white">
                   {/* Photo placeholder du DG */}
-                  <div className="w-64 h-64 mx-auto rounded-full flex items-center justify-center mb-8 border-4 shadow-2xl overflow-hidden" style={{backgroundColor: 'rgba(255, 255, 255, 0.25)', backdropFilter: 'blur(8px)', borderColor: 'rgba(255, 255, 255, 0.5)'}}>
-                    <div className="w-56 h-56 bg-gradient-to-br from-gray-300 to-gray-400 rounded-full flex items-center justify-center overflow-hidden relative">
+                  <div className="w-64 h-64 mx-auto rounded-sm flex items-center justify-center mb-8 border-4 shadow-2xl overflow-hidden" style={{backgroundColor: 'rgba(255, 255, 255, 0.25)', backdropFilter: 'blur(8px)', borderColor: 'rgba(255, 255, 255, 0.5)'}}>
+                    <div className="w-56 h-56 bg-gradient-to-br from-gray-300 to-gray-400 rounded-sm flex items-center justify-center overflow-hidden relative">
                       <Image 
                         src="/dg.jpeg" 
                         alt="YEO Adama Benoit - Directeur Général IDT" 

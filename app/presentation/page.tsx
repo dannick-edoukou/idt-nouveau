@@ -53,7 +53,7 @@ export default function IDTPresentation() {
                 
                 <div className="space-y-6 text-gray-700 leading-relaxed">
                   <p className="text-lg">
-                    L&apos;Ivoirienne de Télédiffusion (d&apos;IDT) est une société d&apos;État, créée par adoption en Conseil des Ministres du 20 Décembre 2017, d&apos;un décret n°2017-844 portant création, organisation et fonctionnement de la société Ivoirienne de Télédiffusion dénommée Ivoirienne de Télédiffusion, en abrégé d&apos;IDT.
+                    L&apos;Ivoirienne de Télédiffusion (IDT) est une société d&apos;État, créée par adoption en Conseil des Ministres du 20 Décembre 2017, d&apos;un décret n°2017-844 portant création, organisation et fonctionnement de la société Ivoirienne de Télédiffusion dénommée Ivoirienne de Télédiffusion, en abrégé d&apos;IDT.
                   </p>
                   
                   <div className="bg-orange-50 border-l-4 border-orange-500 p-4 rounded-r-lg">
