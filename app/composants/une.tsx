@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import Image from 'next/image';
 import { NewsItem } from '../data/news';
-
+import { Button } from "@/components/ui/button"
 // Props for the Une component
 interface UneProps {
   news: NewsItem[];
@@ -191,13 +191,16 @@ export default function Une({ news = [], title }: UneProps) {
                       <h3 className="text-base md:text-lg lg:text-xl font-semibold text-gray-900 mb-3 md:mb-4 line-clamp-2">
                         {item.title}
                       </h3>
+                      <Button className="bg-orange-600 text-white hover:text-orange-800 hover:bg-white">
                       <Link 
                         href={`/actualite/${item.id}`}
-                        className="group inline-flex items-center text-orange-600 font-medium hover:text-orange-800 transition-colors duration-200 text-sm md:text-base"
+                        className="group inline-flex items-center  font-medium  transition-colors duration-200 text-sm md:text-base"
                       >
-                        Lire la suite 
+                       Lire la suite
+                        
                         <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 transform group-hover:translate-x-1 transition-transform duration-200" />
                       </Link>
+                      </Button>
                     </div>
                   </motion.div>
                 </div>

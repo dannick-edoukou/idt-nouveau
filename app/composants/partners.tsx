@@ -27,7 +27,7 @@ export function Partners() {
                       src={partner.image}
                       width={160}
                       height={40}
-                      className="h-10 w-auto px-2 dark:brightness-0 dark:invert hover:opacity-80 transition-opacity"
+                       className="h-10 sm:h-20 w-auto px-2 dark:brightness-0 dark:invert hover:opacity-80 transition-opacity"
                       alt={partner.name}
                     />
                   </div>
@@ -41,7 +41,7 @@ export function Partners() {
                       src={partner.image}
                       width={160}
                       height={40}
-                      className="h-10 w-auto px-2 dark:brightness-0 dark:invert hover:opacity-80 transition-opacity"
+                      className="h-10 sm:h-20 w-auto px-2 dark:brightness-0 dark:invert hover:opacity-80 transition-opacity"
                       alt={partner.name}
                     />
                   </div>
