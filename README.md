@@ -1,36 +1,130 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# IDT - Société Ivoirienne de Télédiffusion
 
-## Getting Started
+Site web officiel de la Société Ivoirienne de Télédiffusion (IDT) construit avec Next.js 14.
 
-First, run the development server:
+## 🚀 Déploiement sur Vercel
 
+### Prérequis
+- Compte Vercel
+- Repository GitHub connecté à Vercel
+
+### Étapes de déploiement
+
+1. **Connectez votre repository à Vercel**
+   - Allez sur [vercel.com](https://vercel.com)
+   - Cliquez sur "New Project"
+   - Importez votre repository GitHub
+
+2. **Configuration automatique**
+   - Vercel détectera automatiquement Next.js
+   - Le fichier `vercel.json` est déjà configuré
+
+3. **Variables d'environnement**
+   Créez un fichier `.env.local` avec :
+   ```env
+   # Configuration Email
+   EMAIL_SERVER_HOST=smtp.gmail.com
+   EMAIL_SERVER_PORT=587
+   EMAIL_SERVER_USER=your-email@gmail.com
+   EMAIL_SERVER_PASSWORD=your-app-password
+   EMAIL_TO=contact@idt.ci
+   
+   # Configuration Next.js
+   NEXT_PUBLIC_SITE_URL=https://your-domain.vercel.app
+   ```
+
+4. **Déploiement**
+   - Vercel déploiera automatiquement à chaque push
+   - Le build utilise `npm install --legacy-peer-deps`
+
+## 🛠️ Développement local
+
+### Installation
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install --legacy-peer-deps
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Démarrage
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔧 Corrections apportées
 
-## Learn More
+### Problèmes résolus
+- ✅ Compatibilité Next.js 15 → 14.2.5
+- ✅ Configuration Tailwind CSS manquante
+- ✅ Polices Google Fonts non disponibles
+- ✅ Import `motion/react` → `framer-motion`
+- ✅ Conflits de dépendances React 18/19
+- ✅ Configuration PostCSS
+- ✅ Types TypeScript
 
-To learn more about Next.js, take a look at the following resources:
+### Fichiers modifiés
+- `package.json` - Versions compatibles
+- `tailwind.config.js` - Configuration Tailwind
+- `app/globals.css` - Variables CSS et Tailwind
+- `app/layout.tsx` - Polices disponibles
+- `app/composants/Hero.tsx` - Import framer-motion
+- `app/actualite/page.tsx` - Propriété readTime
+- `next.config.js` - Configuration Next.js
+- `postcss.config.mjs` - Configuration PostCSS
+- `tsconfig.json` - Configuration TypeScript
+- `eslint.config.mjs` - Configuration ESLint
+- `vercel.json` - Configuration Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 Structure du projet
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+idt/
+├── app/                    # App Router Next.js 14
+├── components/            # Composants UI
+├── hooks/                 # Hooks personnalisés
+├── lib/                   # Utilitaires
+├── public/                # Assets statiques
+└── config/                # Configuration
+```
 
-## Deploy on Vercel
+## 🌐 Technologies utilisées
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Framework**: Next.js 14.2.5
+- **React**: 18.3.1
+- **Styling**: Tailwind CSS 3.4.17
+- **Animations**: Framer Motion
+- **UI Components**: Radix UI
+- **Forms**: React Hook Form + Zod
+- **Maps**: React Leaflet
+- **TypeScript**: 5.x
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📝 Notes importantes
+
+- Le projet utilise `--legacy-peer-deps` pour résoudre les conflits de dépendances
+- Les polices Google Fonts sont configurées pour être robustes
+- L'API externe peut avoir des timeouts pendant le build (non bloquant)
+- Configuration optimisée pour Vercel avec headers de sécurité
+
+## 🚨 Dépannage
+
+### Erreur de build
+```bash
+npm run build
+```
+
+### Conflits de dépendances
+```bash
+npm install --legacy-peer-deps
+```
+
+### Problèmes de types
+```bash
+npm run lint
+```
+
+## 📞 Support
+
+Pour toute question concernant le déploiement ou la configuration, consultez la documentation Vercel ou contactez l'équipe de développement.
