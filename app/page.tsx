@@ -9,7 +9,6 @@ import Services from "./composants/services";
 import Faq from "./composants/faq";
 import Une from "./composants/une";
 import { Hero } from "./composants/Hero";
-import { mockNews } from "./data/news";
 import { parseDate } from "./lib/utils";
 
 // Ajout des données pour les statistiques
@@ -175,16 +174,12 @@ function StatisticCard({ stat, index }: { stat: typeof statistics[0], index: num
 }
 
 export default function Home() {
-  const recentNews = [...mockNews]
-    .sort((a, b) => parseDate(b.date).getTime() - parseDate(a.date).getTime())
-    .slice(0, 5);
-
   return (
     <div className="min-h-screen bg-white">
       {/* Hero section amélioré */}
       <Hero  />
 
-      <Une news={recentNews} />
+      <Une />
      
       <Services />
       <div className="flex justify-center">

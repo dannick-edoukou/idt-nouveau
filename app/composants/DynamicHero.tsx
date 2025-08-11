@@ -56,6 +56,18 @@ const MENU_CONFIG = {
     title: 'Radio',
     description: 'Découvrez notre radio'
   },
+  'pylone': {
+    title: 'Pylone',
+    description: 'Découvrez nos services pylone'
+  },
+  'ott': {
+    title: 'OTT',
+    description: 'Découvrez nos services OTT'
+  },
+  'news': {
+    title: 'Actualité',
+    description: 'Restez informé de nos dernières nouvelles'
+  },
  
 } as const;
 

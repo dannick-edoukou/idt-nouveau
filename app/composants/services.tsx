@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState, useCallback, useRef, useEffect } from "react"
+import Link from "next/link"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { ChevronRight, ExternalLink, Loader2 } from "lucide-react"
@@ -14,43 +15,75 @@ type Activity = {
   id: string
   title: string
   description: string
-  url: string
+  url: string // image URL
+  href: string // page cible pour en savoir plus
   category?: string
 }
 
-// Liste des activités avec des images différentes
+// Services réels de l'IDT (issus des pages et contenus du site)
 const activities: Activity[] = [
   {
-    id: "activity1",
-    title: "Consultation Stratégique",
+    id: "diffusion-radio",
+    title: "Diffusion Radio / TNT",
     description:
-      "Nous vous aidons à définir votre stratégie d'entreprise avec une approche personnalisée. Notre équipe d'experts analyse votre marché et propose des solutions adaptées à vos besoins spécifiques pour maximiser votre croissance et votre rentabilité.",
-    url: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    category: "Conseil",
+      "Transport et diffusion des chaînes TV et radios publiques/privées via la TNT et l'infrastructure nationale.",
+    url: "/banniere/banniere2.jpg",
+    href: "/services/diffusion/radio",
+    category: "Diffusion",
   },
   {
-    id: "activity2",
-    title: "Développement Web",
+    id: "multiplexage",
+    title: "Multiplexage TV",
     description:
-      "Création de sites web modernes et responsives adaptés à tous les appareils. Nous utilisons les dernières technologies pour vous offrir des solutions performantes, sécurisées et optimisées pour les moteurs de recherche.",
-    url: "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "Regroupement de plusieurs chaînes sur une même fréquence pour optimiser l'usage du spectre et la qualité.",
+    url: "/banniere/banniere2.jpg",
+    href: "/presentation",
+    category: "Diffusion",
+  },
+  {
+    id: "transport-signal",
+    title: "Transport de Signal",
+    description:
+      "Acheminement sécurisé des flux audiovisuels entre éditeurs, têtes de réseaux et sites de diffusion.",
+    url: "/banniere/banniere2.jpg",
+    href: "/presentation",
+    category: "Réseau",
+  },
+  {
+    id: "collocation",
+    title: "Collocation / Hébergement",
+    description:
+      "Hébergement d'équipements radio et télécom sur les sites IDT, avec énergie, sécurité et supervision.",
+    url: "/banniere/banniere2.jpg",
+    href: "/services/location-pylone",
+    category: "Infrastructure",
+  },
+  {
+    id: "location-pylone",
+    title: "Location de Pylônes",
+    description:
+      "Mise à disposition de pylônes et toitures pour antennes et équipements, avec accompagnement technique.",
+    url: "/banniere/banniere2.jpg",
+    href: "/services/location-pylone",
+    category: "Infrastructure",
+  },
+  {
+    id: "ott",
+    title: "Services OTT",
+    description:
+      "Solutions de streaming et de services numériques (OTT) pour la distribution de contenus sur internet.",
+    url: "/banniere/banniere2.jpg",
+    href: "/services/ott",
+    category: "Numérique",
+  },
+  {
+    id: "services-techniques",
+    title: "Services Techniques",
+    description:
+      "Interventions techniques, maintenance et support sur les équipements et sites de diffusion.",
+    url: "/banniere/banniere2.jpg",
+    href: "/nos-missions",
     category: "Technique",
-  },
-  {
-    id: "activity3",
-    title: "Marketing Digital",
-    description:
-      "Stratégies de marketing digital sur mesure pour augmenter votre visibilité en ligne. Nous gérons vos campagnes publicitaires, votre présence sur les réseaux sociaux et optimisons votre contenu pour attirer plus de clients.",
-    url: "https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    category: "Marketing",
-  },
-  {
-    id: "activity4",
-    title: "Formation Professionnelle",
-    description:
-      "Programmes de formation adaptés aux besoins de votre équipe. Nos formateurs expérimentés transmettent leurs connaissances et compétences pour permettre à vos collaborateurs de se développer et d'améliorer leurs performances.",
-    url: "https://images.pexels.com/photos/3183155/pexels-photo-3183155.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    category: "Formation",
   },
 ]
 
@@ -280,23 +313,16 @@ export default function Services() {
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Button
-                      size="lg"
-                      className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                    >
-                      En savoir plus
-                      <ExternalLink className="ml-2 h-4 w-4" />
-                    </Button>
-<a href="/contacts">
-                    <Button
                   
-                      variant="outline"
-                      size="lg"
-                      className="border-orange-200 text-orange-600 hover:bg-orange-50 hover:border-orange-300 transition-all duration-300"
-                    >
-                     Nous contacter
-                    </Button>
-                    </a>
+                    <Link href="/contacts">
+                      <Button
+                        variant="outline"
+                        size="lg"
+                        className="border-orange-200 text-orange-600 hover:bg-orange-50 hover:border-orange-300 transition-all duration-300"
+                      >
+                        Nous contacter
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </CardContent>
