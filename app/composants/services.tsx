@@ -40,24 +40,7 @@ const activities: Activity[] = [
     href: "/presentation",
     category: "Diffusion",
   },
-  {
-    id: "transport-signal",
-    title: "Transport de Signal",
-    description:
-      "Acheminement sécurisé des flux audiovisuels entre éditeurs, têtes de réseaux et sites de diffusion.",
-    url: "/banniere/banniere2.jpg",
-    href: "/presentation",
-    category: "Réseau",
-  },
-  {
-    id: "collocation",
-    title: "Collocation / Hébergement",
-    description:
-      "Hébergement d'équipements radio et télécom sur les sites IDT, avec énergie, sécurité et supervision.",
-    url: "/banniere/banniere2.jpg",
-    href: "/services/location-pylone",
-    category: "Infrastructure",
-  },
+  
   {
     id: "location-pylone",
     title: "Location de Pylônes",
@@ -67,15 +50,7 @@ const activities: Activity[] = [
     href: "/services/location-pylone",
     category: "Infrastructure",
   },
-  {
-    id: "ott",
-    title: "Services OTT",
-    description:
-      "Solutions de streaming et de services numériques (OTT) pour la distribution de contenus sur internet.",
-    url: "/banniere/banniere2.jpg",
-    href: "/services/ott",
-    category: "Numérique",
-  },
+
   {
     id: "services-techniques",
     title: "Services Techniques",
@@ -99,9 +74,13 @@ export default function Services() {
     async (activity: Activity) => {
       if (activity.id === selectedActivity.id) return
 
+      const isDifferentImage = activity.url !== selectedActivity.url
+
       setIsTransitioning(true)
-      setImageLoading(true)
       setImageError(false)
+      if (isDifferentImage) {
+        setImageLoading(true)
+      }
 
       // Petite pause pour l'animation
       await new Promise((resolve) => setTimeout(resolve, 150))
@@ -109,7 +88,7 @@ export default function Services() {
       setSelectedActivity(activity)
       setIsTransitioning(false)
     },
-    [selectedActivity.id],
+    [selectedActivity.id, selectedActivity.url],
   )
 
   const handleImageLoad = useCallback(() => {
@@ -263,6 +242,7 @@ export default function Services() {
 
                 {!imageError ? (
                   <Image
+                    key={selectedActivity.id}
                     src={selectedActivity.url || "/placeholder.svg"}
                     alt={`Image illustrant ${selectedActivity.title}`}
                     fill
@@ -272,6 +252,7 @@ export default function Services() {
                     )}
                     priority
                     onLoad={handleImageLoad}
+                    onLoadingComplete={() => setImageLoading(false)}
                     onError={handleImageError}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw"
                   />
