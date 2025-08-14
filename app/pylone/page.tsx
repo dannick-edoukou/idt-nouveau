@@ -67,7 +67,7 @@ export default function Pylone() {
               <iframe
                 className="absolute inset-0 h-full w-full"
                 ref={iframeRef}
-                src={`https://www.youtube.com/embed/cfGdr04qJ2w?autoplay=1&mute=1&loop=1&playlist=cfGdr04qJ2w&controls=1&modestbranding=1&rel=0&playsinline=1&enablejsapi=1`}
+                src={`https://www.youtube.com/embed/GGUsJ1VGqMs?autoplay=1&mute=1&loop=1&playlist=GGUsJ1VGqMs&controls=1&modestbranding=1&rel=0&playsinline=1&enablejsapi=1`}
                 title="Présentation - Réseau de pylônes IDT"
                 allow="autoplay; encrypted-media; picture-in-picture"
                 allowFullScreen

@@ -6,10 +6,10 @@ import { Tv, Smartphone, Globe, Clock } from 'lucide-react';
 import DynamicHero from '../composants/DynamicHero';
 
 const ottInfo = {
-  logo: "/ott.png",
+  logo: "/ott.jpg",
  
   description: "Notre service OTT  vous permettra bientôt d'accéder à vos chaînes et contenus préférés partout et à tout moment.",
-  youtubeVideoId: "dQw4w9WgXcQ",
+  youtubeVideoId: "w85bIc3JJkQ",
   features: [
     {
       icon: Tv,
