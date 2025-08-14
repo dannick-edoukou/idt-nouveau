@@ -12,7 +12,7 @@ const partners = [
 export function Partners() {
   return (
     <section id="partners">
-      <div className="py-14">
+      <div className="py-14 ">
         <div className="container mx-auto px-4 md:px-8">
           <h3 className="text-center text-sm font-semibold text-gray-500">
             Nos partenaires
@@ -25,9 +25,13 @@ export function Partners() {
                   <div key={`first-${idx}`} className="flex-shrink-0">
                     <Image
                       src={partner.image}
-                      width={160}
-                      height={40}
-                       className="h-10 sm:h-20 w-auto px-2 dark:brightness-0 dark:invert hover:opacity-80 transition-opacity"
+                      width={partner.name === "CIE" ? 200 : 160}
+                      height={partner.name === "CIE" ? 60 : 40}
+                      className={`w-auto px-2 dark:brightness-0 dark:invert hover:opacity-80 transition-opacity ${
+                        partner.name === "CIE"
+                          ? "h-14 sm:h-28"
+                          : "h-10 sm:h-20"
+                      }`}
                       alt={partner.name}
                     />
                   </div>
@@ -39,9 +43,13 @@ export function Partners() {
                   <div key={`second-${idx}`} className="flex-shrink-0">
                     <Image
                       src={partner.image}
-                      width={160}
-                      height={40}
-                      className="h-10 sm:h-20 w-auto px-2 dark:brightness-0 dark:invert hover:opacity-80 transition-opacity"
+                      width={partner.name === "CIE" ? 240 : 180}
+                      height={partner.name === "CIE" ? 80 : 60}
+                      className={`w-auto px-2 dark:brightness-0 dark:invert hover:opacity-80 transition-opacity ${
+                        partner.name === "CIE"
+                          ? "h-14 sm:h-28"
+                          : "h-10 sm:h-20"
+                      }`}
                       alt={partner.name}
                     />
                   </div>
