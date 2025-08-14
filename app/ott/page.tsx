@@ -64,7 +64,7 @@ export default function Ott() {
               <div className="mb-12">
                 <div className="flex flex-col items-start mb-8">
                   <div className="relative group self-start">
-                    <div className="absolute -inset-4 bg-gradient-to-r from-orange-400 to-red-400 rounded-full blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
+                    <div className="absolute -inset-4 shadow-2xl rounded-8 blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
                     <Image
                       src={ottInfo.logo}
                       alt='Ott Logo'
