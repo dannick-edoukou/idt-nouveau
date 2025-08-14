@@ -61,7 +61,10 @@ export default function LesChaines() {
   return (
     <>
       <DynamicHero backgroundImage="/heroes.jpeg"/>
-      <main className="min-h-screen bg-gray-50 dark:bg-gray-900 py-14">
+      <main
+        className="min-h-screen py-14"
+        style={{ backgroundColor: "#FFFACD" }} // Jaune poussin (LemonChiffon)
+      >
         <div className="container mx-auto px-4 md:px-8">
           <h1 className="text-3xl md:text-4xl font-bold text-center text-orange-600 mb-10 uppercase tracking-wide">
             Les Chaînes de la TNT
@@ -73,9 +76,35 @@ export default function LesChaines() {
                 href={chaine.site}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white dark:bg-gray-800 rounded-xl shadow-lg flex flex-col items-center p-6 hover:shadow-2xl transition-shadow hover:ring-2 hover:ring-orange-400 focus:ring-2 focus:ring-orange-400 outline-none cursor-pointer group"
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-3xl flex flex-col items-center p-6 hover:shadow-4xl transition-shadow hover:ring-2 hover:ring-orange-400 focus:ring-2 focus:ring-orange-400 outline-none cursor-pointer group"
                 tabIndex={0}
                 aria-label={`Visiter le site de ${chaine.name}`}
+                style={{
+                  boxShadow:
+                    "0 8px 32px 0 rgba(255,140,0,0.25), 0 1.5px 8px 0 rgba(0,0,0,0.10)",
+                  transition: "box-shadow 0.3s, border-color 0.3s",
+                  border: "2px solid transparent"
+                }}
+                onMouseOver={e => {
+                  (e.currentTarget as HTMLElement).style.boxShadow =
+                    "0 16px 48px 0 rgba(255,140,0,0.35), 0 3px 16px 0 rgba(0,0,0,0.15)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "#FF8C00";
+                }}
+                onMouseOut={e => {
+                  (e.currentTarget as HTMLElement).style.boxShadow =
+                    "0 8px 32px 0 rgba(255,140,0,0.25), 0 1.5px 8px 0 rgba(0,0,0,0.10)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "transparent";
+                }}
+                onFocus={e => {
+                  (e.currentTarget as HTMLElement).style.boxShadow =
+                    "0 16px 48px 0 rgba(255,140,0,0.35), 0 3px 16px 0 rgba(0,0,0,0.15)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "#FF8C00";
+                }}
+                onBlur={e => {
+                  (e.currentTarget as HTMLElement).style.boxShadow =
+                    "0 8px 32px 0 rgba(255,140,0,0.25), 0 1.5px 8px 0 rgba(0,0,0,0.10)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "transparent";
+                }}
               >
                 <div className="w-28 h-28 flex items-center justify-center mb-4">
                   <Image

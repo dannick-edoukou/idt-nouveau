@@ -5,7 +5,17 @@ import { Facebook, Twitter, Linkedin, Youtube, Phone, Mail, MapPin } from 'lucid
 import Link from 'next/link'
 
 const Footer = () => {
-  const navigationLinks = {
+  type NavLink = {
+    title: string
+    href: string
+    icon?: React.ComponentType<{ className?: string }>
+    type?: 'address' | 'phone' | 'email'
+  }
+  type NavigationLinkSection = {
+    title: string
+    links: NavLink[]
+  }
+  const navigationLinks: Record<string, NavigationLinkSection> = {
     entreprise: {
       title: 'Entreprise',
       links: [
@@ -37,6 +47,29 @@ const Footer = () => {
         { title: 'Photothèque', href: '/mediatheque/phototheque' },
         { title: 'Vidéothèque', href: '/mediatheque/videotheque' }
       ]
+    },
+    contact: {
+      title: 'Contact',
+      links: [
+        { 
+          title: 'IDT - 28 BP 1400 Abidjan 28, II Plateaux, Rue J15', 
+          href: '#',
+          icon: MapPin,
+          type: 'address'
+        },
+        { 
+          title: '+225 25 22 01 05 00', 
+          href: 'tel:+2252522010500',
+          icon: Phone,
+          type: 'phone'
+        },
+        { 
+          title: 'contact@sidt.ci', 
+          href: 'mailto:contact@sidt.ci',
+          icon: Mail,
+          type: 'email'
+        }
+      ]
     }
   }
 
@@ -50,11 +83,10 @@ const Footer = () => {
   return (
     <footer className="bg-gradient-to-b from-white to-orange-500 text-gray-800">
       {/* Section principale du footer */}
-      <div className="px-4 sm:px-6 lg:px-8 py-6 flex justify-around">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-3">
-
+      <div className="px-4 sm:px-6 lg:px-8 py-6 flex flex-col">
+        <div className="w-full flex flex-col lg:flex-row justify-center gap-8">
           {/* Logo et description */}
-          <div className="lg:col-span-1">
+          <div className="flex flex-col items-center lg:items-start lg:mr-8 mb-6 lg:mb-0">
             <Image
               src="/logo.png"
               alt="IDT Logo"
@@ -62,13 +94,12 @@ const Footer = () => {
               height={60}
               className="hover:opacity-80 transition-opacity duration-200"
             />
-            <p className="text-gray-700 mb-2 mt-2 text-sm leading-tight">
-            La Société Ivoirienne de Télédiffusion IDT assure la diffusion des programmes 
-            radiophoniques et télévisuels sur le territoire national.
+            <p className="text-gray-700 mb-2 mt-2 text-sm leading-tight text-center lg:text-left">
+              La Société Ivoirienne de Télédiffusion IDT assure la diffusion des programmes 
+              radiophoniques et télévisuels sur le territoire national.
             </p>
-
             {/* Réseaux sociaux */}
-            <div className="flex space-x-3">
+            <div className="flex space-x-3 justify-center lg:justify-start">
               {socialLinks.map((social) => {
                 const Icon = social.icon
                 return (
@@ -87,62 +118,48 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Liens de navigation */}
-          {Object.entries(navigationLinks).map(([key, section]) => (
-            <div key={key} className='ml-10'>
-              <h3 className="text-base font-semibold text-gray-800 mb-2 border-b border-white pb-1 ">
-                {section.title}
-              </h3>
-              <ul className="space-y-1">
-                {section.links.map((link) => (
-                  <li key={link.title}>
-                    <Link
-                      href={link.href}
-                      className="text-gray-700 hover:text-white transition-colors duration-300 block py-0.5 text-left w-full text-sm"
-                    >
-                      {link.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-
-          {/* Informations de contact */}
-          <div className="lg:col-span-1">
-            <h3 className="text-base font-semibold text-gray-800 mb-2 border-b border-white pb-1">
-              Contact
-            </h3>
-            <div className="space-y-2">
-              <div className="flex items-start space-x-2">
-                <MapPin className="h-4 w-4 text-white mt-0.5 flex-shrink-0" />
-                <div className="text-gray-700 text-sm">
-                  <p>IDT - 28 BP 1400 Abidjan 28</p>
-                  <p>II Plateaux, Rue J15</p>
-                </div>
+          {/* Liens de navigation incluant Contact - titres alignés à gauche, sous-liens alignés à gauche */}
+          <div className="w-full flex flex-wrap justify-center gap-8">
+            {Object.entries(navigationLinks).map(([key, section]) => (
+              <div key={key} className="min-w-[150px] flex flex-col ">
+                <h3 className="text-base font-semibold text-gray-800 mb-2 border-b border-white pb-1 text-left">
+                  {section.title}
+                </h3>
+                <ul className="space-y-1 w-full">
+                  {section.links.map((link, index) => (
+                    <li key={index} className="w-full">
+                      {key === 'contact' ? (
+                        <div className={`flex items-start space-x-2 ${link.type === 'address' ? 'mb-2' : 'mb-1'}`}>
+                          {link.icon && (
+                            <link.icon className="h-4 w-4 text-white mt-0.5 flex-shrink-0" />
+                          )}
+                          {link.type === 'address' ? (
+                            <div className="text-gray-700 text-sm">
+                              <p>IDT - 28 BP 1400 Abidjan 28</p>
+                              <p>II Plateaux, Rue J15</p>
+                            </div>
+                          ) : (
+                            <Link
+                              href={link.href}
+                              className="text-gray-700 hover:text-white transition-colors duration-300 text-sm"
+                            >
+                              {link.title}
+                            </Link>
+                          )}
+                        </div>
+                      ) : (
+                        <Link
+                          href={link.href}
+                          className="text-gray-700 hover:text-white transition-colors duration-300 block py-0.5 w-full text-sm text-left"
+                        >
+                          {link.title}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
               </div>
-
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4 text-white flex-shrink-0" />
-                <Link
-                  href="tel:+2252522010500"
-                  className="text-gray-700 hover:text-white transition-colors duration-300 text-sm"
-                >
-                  +225 25 22 01 05 00
-                </Link>
-              </div>
-
-              <div className="flex items-center space-x-2">
-                <Mail className="h-4 w-4 text-white flex-shrink-0" />
-                <Link
-                  href="mailto:contact@sidt.ci"
-                  className="text-gray-700 hover:text-white transition-colors duration-300 text-sm"
-                >
-                  contact@sidt.ci
-                </Link>
-              </div>
-              
-            </div>
+            ))}
           </div>
         </div>
       </div>
@@ -150,10 +167,10 @@ const Footer = () => {
       {/* Barre du bas */}
       <div className="border-t border-white/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
+          <div className="flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0">
 
             {/* Copyright */}
-            <div className="text-gray-700 text-sm">
+            <div className="text-gray-700 text-sm ">
               <p>&copy; 2025 Société Ivoirienne de Télédiffusion. </p>
             </div>
 
