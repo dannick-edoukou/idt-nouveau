@@ -51,12 +51,12 @@ const Footer = () => {
     <footer className="bg-gradient-to-b from-white to-orange-500 text-gray-800">
       {/* Section principale du footer */}
       <div className="px-4 sm:px-6 lg:px-8 py-6 flex justify-around">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
 
           {/* Logo et description */}
           <div className="lg:col-span-1">
             <Image
-              src="/logo.jpg"
+              src="/logo.png"
               alt="IDT Logo"
               width={100}
               height={60}
@@ -108,8 +108,8 @@ const Footer = () => {
             </div>
           ))}
 
-          {/* Informations de contact - Plus compact */}
-          <div>
+          {/* Informations de contact */}
+          <div className="lg:col-span-1">
             <h3 className="text-base font-semibold text-gray-800 mb-2 border-b border-white pb-1">
               Contact
             </h3>
