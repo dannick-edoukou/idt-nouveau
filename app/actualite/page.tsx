@@ -60,11 +60,7 @@ const NewsCard = React.memo(({ article }: { article: NewsItem }) => (
           Lire la suite
           <ChevronRight size={16} />
         </Link>
-        {/* Temps de lecture calculé basé sur la longueur du contenu */}
-        <div className="flex items-center gap-1 text-xs text-gray-400">
-          <Clock size={12} />
-          {Math.ceil(article.description.length / 200)} min
-        </div>
+      
       </div>
     </div>
   </article>

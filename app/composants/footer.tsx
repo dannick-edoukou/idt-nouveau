@@ -51,7 +51,7 @@ const Footer = () => {
     <footer className="bg-gradient-to-b from-white to-orange-500 text-gray-800">
       {/* Section principale du footer */}
       <div className="px-4 sm:px-6 lg:px-8 py-6 flex justify-around">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-3">
 
           {/* Logo et description */}
           <div className="lg:col-span-1">
@@ -89,8 +89,8 @@ const Footer = () => {
 
           {/* Liens de navigation */}
           {Object.entries(navigationLinks).map(([key, section]) => (
-            <div key={key}>
-              <h3 className="text-base font-semibold text-gray-800 mb-2 border-b border-white pb-1">
+            <div key={key} className='ml-10'>
+              <h3 className="text-base font-semibold text-gray-800 mb-2 border-b border-white pb-1 ">
                 {section.title}
               </h3>
               <ul className="space-y-1">
@@ -141,6 +141,7 @@ const Footer = () => {
                   contact@sidt.ci
                 </Link>
               </div>
+              
             </div>
           </div>
         </div>
