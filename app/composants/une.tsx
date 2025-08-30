@@ -182,12 +182,7 @@ export default function Une({ title }: UneProps) {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-9xl">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 lg:gap-8 mb-12 lg:mb-16">
           <div className="flex-1">
-            <div className="inline-flex items-center gap-2 mb-4">
-              <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
-              <span className="text-sm font-medium text-orange-600 uppercase tracking-wider">
-                En direct
-              </span>
-            </div>
+       
             {title || defaultTitle}
             <div className="flex items-center gap-3">
               <div className="h-1 w-20 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full" />

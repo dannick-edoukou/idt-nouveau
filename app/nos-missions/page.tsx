@@ -1,6 +1,6 @@
 import React from 'react';
 import {  Settings,  Antenna, Server, Building2, Target, Network } from 'lucide-react';
-
+import Image from 'next/image';
 import DynamicHero from '../composants/DynamicHero';
 
 export default function NosMissions() {
@@ -16,7 +16,7 @@ export default function NosMissions() {
                 <div className="text-center text-white">
                   <div className="mb-8">
                     <div className="w-32 h-32 mx-auto rounded-full flex items-center justify-center mb-6 shadow-lg" style={{backgroundColor: 'rgba(255, 255, 255, 0.25)', backdropFilter: 'blur(8px)'}}>
-                      <Target className="w-16 h-16 text-white" />
+                    <Image src="/reseau.png" alt="Logo" width={100} height={100} />
                     </div>
                     <h1 className="text-4xl font-bold mb-2">Nos Missions</h1>
                     <p className="text-xl opacity-90">IDT - Ivoirienne de Télédiffusion</p>

@@ -10,22 +10,42 @@ import { Sparkles } from 'lucide-react';
 const MENU_CONFIG = {
   'presentation': {
     title: 'IDT',
+    image: {
+      src: '/idt1.png',
+      alt: 'Logo OTT'
+    },
     description: 'Découvrez notre présentation institutionnelle'
   },
   'mot-du-dg': {
     title: 'IDT',
+    image: {
+      src: '/idt1.png',
+      alt: 'Logo OTT'
+    },
     description: 'Message du Directeur Général'
   },
   'nos-missions': {
     title: 'IDT',
+    image: {
+      src: '/idt1.png',
+      alt: 'Logo OTT'
+    },
     description: 'Nos missions et objectifs stratégiques'
   },
   'fonctionnement': {
     title: 'IDT',
+    image: {
+      src: '/idt1.png',
+      alt: 'Logo OTT'
+    },
     description: 'Comment nous fonctionnons'
   },
   'document-juridique': {
     title: 'IDT',
+    image: {
+      src: '/idt1.png',
+      alt: 'Logo OTT'
+    },
     description: 'Cadre juridique et réglementaire'
   },
   'services': {
@@ -62,6 +82,10 @@ const MENU_CONFIG = {
   },
   'ott': {
     title: 'OTT',
+    image: {
+      src: '/ott1.png',
+      alt: 'Logo OTT'
+    },
     description: 'Découvrez nos services OTT'
   },
   'news': {
@@ -78,9 +102,15 @@ interface BreadcrumbItem {
   isActive: boolean;
 }
 
+interface MenuImage {
+  src: string;
+  alt: string;
+}
+
 interface ParentMenuInfo {
   title: string;
   description?: string;
+  image?: MenuImage;
   currentPath: string;
   segments: string[];
   parentSegment: string;
@@ -270,6 +300,7 @@ export const DynamicHero = ({
 
   const displayTitle = customTitle || parentMenu.title;
   const displayDescription = customDescription || parentMenu.description;
+  const menuImage = parentMenu.image;
 
   return (
     <>
@@ -328,19 +359,42 @@ export const DynamicHero = ({
 
             {/* Contenu principal compact */}
             <div className="text-center space-y-4">
-              {/* Icône décorative petite */}
+              {/* Icône décorative étoile pour toutes les pages */}
               <div className="flex justify-center mb-3 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
                 <div className="p-2 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-full border border-white/20 backdrop-blur-sm">
                   <Sparkles className="w-5 h-5 text-orange-400" />
                 </div>
               </div>
 
-              {/* Titre principal compact */}
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 leading-tight tracking-tight animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-                <span className="inline-block bg-gradient-to-r from-white via-orange-200 to-white bg-clip-text text-transparent">
-                  {displayTitle}
-                </span>
-              </h1>
+              {/* Titre principal OU Image stylisée pour OTT */}
+              {menuImage ? (
+                <div className="flex justify-center mb-3 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+                  <div className="relative">
+                    {/* Conteneur avec effets visuels */}
+                    <div className="relative p-4 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-white/20 shadow-2xl">
+                      {/* Effet de lueur derrière l'image */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-2xl blur-xl -z-10 animate-pulse"></div>
+                      
+                      {/* Image */}
+                      <div className="relative w-40 h-20 md:w-56 md:h-28 lg:w-72 lg:h-36">
+                        <Image
+                          src={menuImage.src}
+                          alt={menuImage.alt}
+                          fill
+                          style={{ objectFit: 'contain' }}
+                          className="drop-shadow-xl filter brightness-110 contrast-110"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 leading-tight tracking-tight animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+                  <span className="inline-block bg-gradient-to-r from-white via-orange-200 to-white bg-clip-text text-transparent">
+                    {displayTitle}
+                  </span>
+                </h1>
+              )}
               
               {/* Description compacte */}
               {displayDescription && (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Radio, Tv, Signal, Globe, Settings, Users } from 'lucide-react';
-
+import Image from 'next/image';
 import DynamicHero from '../composants/DynamicHero';
 
 export default function IDTPresentation() {
@@ -17,9 +17,11 @@ export default function IDTPresentation() {
               <div className="text-center text-white">
                 <div className="mb-8">
                   <div className="w-32 h-32 mx-auto rounded-full flex items-center justify-center mb-6 shadow-lg" style={{backgroundColor: 'rgba(255, 255, 255, 0.25)', backdropFilter: 'blur(8px)'}}>
-                    <Radio className="w-16 h-16 text-white" />
+                  <Image src="/antenne.png" alt="Logo" width={100} height={100} />
                   </div>
-                  <h1 className="text-4xl font-bold mb-2">IDT</h1>
+                  <div className="w-32 h-32 mx-auto  rounded-xl flex items-center justify-center mb-6 " style={{backgroundColor: 'rgba(255, 255, 255, 0.25)', backdropFilter: 'blur(8px)'}}>
+                  <Image src="/idt1.png" alt="Logo" width={100} height={100} />
+                  </div>
                   <p className="text-xl opacity-90">Ivoirienne de Télédiffusion</p>
                 </div>
                 

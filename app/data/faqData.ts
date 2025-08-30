@@ -16,20 +16,20 @@ const createId = (question: string) => {
 
 const questionsAndAnswers: Omit<FaqItem, 'id'>[] = [
   {
-    question: "Qu’est-ce que la TNT ?",
-    answer: "La TNT, ou Télévision Numérique Terrestre, est une technologie de diffusion qui permet de recevoir la télévision en qualité numérique via une antenne râteau. Elle offre une meilleure qualité d’image et de son, plus de chaînes et des services interactifs, sans dépendre d'un abonnement internet ou satellite.",
+    question: "QU'EST CE QUE LA TNT ?",
+    answer: "La Télévision Numérique Terrestre (TNT) est cette évolution technologique en matière de télédiffusion terrestre qui permet d'optimiser l'usage de la ressource spectrale par un accroissement du nombre de chaines par fréquence, d'obtenir une meilleure qualité d'image et de réduire les coûts de transmission et de diffusion.\n\nCette nouvelle technologie de diffusion d'images et de son de qualité numérique offre des avantages multiples tels que :\n- La qualité d'image et de son\n- La diffusion de plusieurs programmes de chaînes de télévision sur une seule fréquence\n- L'accès à plus de chaînes et une multitude de programmes\n- La possibilité d'offrir des services innovants comme la vidéo à la demande (VOD), l'enregistrement des programmes (catch up TV), etc.\n\nAVEC LA TNT PAS DE COUPURE D'IMAGE NI DE SON DURANT L'ORAGE !\n\nNB : La Côte d'Ivoire s'engage à migrer de la télévision analogique vers la télévision numérique conformément au traité international appelé « Accord GE06 » initié par l'Union Internationale des télécommunications (IUT ou ITU) en 2006 à Genève.",
   },
   {
-    question: "Comment bénéficier de la TNT ?",
-    answer: "Pour recevoir la TNT, vous avez besoin d’un téléviseur compatible (la plupart des modèles récents le sont) ou d’un adaptateur TNT externe, ainsi que d’une simple antenne râteau (intérieure ou extérieure). Une fois l'équipement branché, lancez une recherche de chaînes.",
+    question: "COMMENT BÉNÉFICIER DE LA TNT ?",
+    answer: "La Télévision Numérique de Terre est cette évolution technologique qui permet d'optimiser grâce au codage numérique, l'usage des fréquences qui servent à la transmission des ondes par lesquelles l'on reçoit les images. Elle permet une meilleure qualité d'image en réduisant les couts de transmission et de diffusion.\n\nElle permettra aux foyers équipés d'une simple antenne râteau de recevoir une offre de plus d'une trentaine de chaines publiques et privées nationales et locales en qualité numérique.\n\nLa réception de la télévision numérique est possible avec :\n- Un téléviseur analogique et un décodeur numérique\n- Des téléviseurs conformes aux normes de compression MPEG 4 et de diffusion DVB-T2\n- Un téléviseur numérique avec décodeur intégré\n- Un ordinateur équipé d'une carte PC-TV tuner ou d'une clé USB TNT\n- Des équipements intelligents (smartphones, tablettes) capables de réceptionner la vidéo TV mobile\n\nLa réception des programmes numériques est possible en mode :\n- Fixe (avec une antenne extérieure fixe ou via un accès à un réseau spécifique)\n- Portable (avec une antenne intérieure posée sur le téléviseur ou intégrée)\n- Mobile (avec des équipements intelligents : smartphones, tablettes, etc.)",
   },
   {
-    question: "Le déploiement de la TNT",
-    answer: "Le déploiement de la TNT en Côte d'Ivoire se fait progressivement sur l'ensemble du territoire pour couvrir toutes les régions. Vous pouvez consulter la carte de couverture officielle pour vérifier la disponibilité du signal dans votre localité.",
+    question: "DÉPLOIEMENT DE LA TNT EN CÔTE D'IVOIRE",
+    answer: "image",
   },
   {
-    question: "Le choix de la technologie",
-    answer: "La Côte d'Ivoire a adopté la norme de diffusion DVB-T2 et la norme de compression vidéo MPEG-4. Ces technologies modernes permettent de diffuser des chaînes en Haute Définition (HD) et d'optimiser le spectre de fréquences pour un plus grand nombre de programmes.",
+    question: "CHOIX TECHNOLOGIQUE",
+    answer: "La Côte d'Ivoire a fait les choix technologiques suivants pour le déploiement de la TNT :\n\n- Norme de diffusion : DVB-T2\n- Norme de compression : MPEG 4 AVC\n- Format de diffusion : HD (Haute Définition)\n\nCes normes sont utilisées dans les espaces UEMOA et CEDEAO, favorisant ainsi l'interopérabilité régionale et permettant aux téléspectateurs de bénéficier d'une qualité d'image et de son optimale.",
   },
 ];
 

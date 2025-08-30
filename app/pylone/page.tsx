@@ -1,10 +1,10 @@
 'use client';
 
 
-import Link from 'next/link';
+
 import DynamicHero from '../composants/DynamicHero';
 import { useCallback, useRef, useState } from 'react';
-import {ArrowDownToLine} from 'lucide-react'
+
 export default function Pylone() {
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const [isMuted, setIsMuted] = useState(true);
@@ -50,39 +50,32 @@ export default function Pylone() {
               </ul>
             </div>
 
-            <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/files/zones.xlsx"
-                download
-                className="inline-flex items-center justify-center rounded-md bg-orange-600 px-5 py-3 text-white font-medium shadow hover:bg-orange-700 transition-colors duration-200"
-              >
-                Télécharger la liste des sites (Excel) <ArrowDownToLine />
-              </Link>
-            
-            </div>
           </div>
 
-          <div id="video" className="w-full">
-            <div className="relative w-full overflow-hidden rounded-xl shadow-xl bg-black pt-[42%]">
-              <iframe
-                className="absolute inset-0 h-full w-full"
-                ref={iframeRef}
-                src={`https://www.youtube.com/embed/GGUsJ1VGqMs?autoplay=1&mute=1&loop=1&playlist=GGUsJ1VGqMs&controls=1&modestbranding=1&rel=0&playsinline=1&enablejsapi=1`}
-                title="Présentation - Réseau de pylônes IDT"
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowFullScreen
-              />
-              {isMuted && (
-                <button
-                  type="button"
-                  onClick={handleUnmute}
-                  className="absolute bottom-3 right-3 z-10 rounded-full bg-white/90 text-gray-900 text-sm font-medium px-3 py-1.5 shadow hover:bg-white transition-colors"
-                  aria-label="Activer le son"
-                >
-                  Activer le son
-                </button>
-              )}
-            </div>
+          <div id="video" className="w-full mt-12 ">
+         
+            <div className="relative w-full overflow-hidden rounded-2xl shadow-2xl bg-black aspect-video hover:shadow-3xl transition-shadow duration-300">
+                    <iframe
+                      className="absolute inset-0 h-full w-full"
+                      ref={iframeRef}
+                      src={`https://www.youtube.com/embed/GGUsJ1VGqMs?autoplay=1&mute=1&loop=1&playlist=GGUsJ1VGqMs&controls=1&modestbranding=1&rel=0&playsinline=1&enablejsapi=1`}
+                      title="Présentation OTT Côte d'Ivoire"
+                      allow="autoplay; encrypted-media; picture-in-picture"
+                      allowFullScreen
+                    />
+                    {isMuted && (
+                      <button
+                        type="button"
+                        onClick={handleUnmute}
+                        className="absolute bottom-4 right-4 z-10 rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white text-sm font-semibold px-4 py-2 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 border border-white/20"
+                        aria-label="Activer le son"
+                      >
+                        🔊 Activer le son
+                      </button>
+                    )}
+                    {/* Overlay décoratif */}
+                    <div className="absolute inset-0 rounded-2xl ring-1 ring-white/10 pointer-events-none"></div>
+                  </div>
             <p className="mt-3 text-sm text-gray-500">
               Vidéo en lecture silencieuse pour un rendu cinématique. Cliquez pour plein écran.
             </p>

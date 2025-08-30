@@ -160,11 +160,11 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-8 lg:items-stretch">
           {/* Liste des activités */}
           <div className="lg:w-1/3">
-            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
-              <CardContent className="p-6">
+            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg h-full">
+              <CardContent className="p-6 h-full">
                 <h3 className="text-xl font-semibold mb-6 text-gray-900">Nos services</h3>
                 <ul ref={listRef} className="space-y-3" role="tablist" aria-label="Liste des services">
                   {activities.map((activity) => (
@@ -225,88 +225,89 @@ export default function Services() {
           <div className="lg:w-2/3">
             <Card
               className={cn(
-                "bg-white border-0 shadow-xl overflow-hidden transition-all duration-500",
+                "bg-white border-0 shadow-xl overflow-hidden transition-all duration-500 h-full",
                 isTransitioning ? "opacity-90 transform scale-[0.98]" : "opacity-100 transform scale-100",
               )}
               role="tabpanel"
               id={`panel-${selectedActivity.id}`}
               aria-labelledby={`tab-${selectedActivity.id}`}
             >
-              <div className="relative h-64 sm:h-80 md:h-96 overflow-hidden">
-                {/* Loading overlay */}
-                {imageLoading && (
-                  <div className="absolute inset-0 bg-gray-100 flex items-center justify-center z-10">
-                    <Loader2 className="h-8 w-8 animate-spin text-orange-500" />
-                  </div>
-                )}
+              <div className="flex flex-col h-full">
+                <div className="relative h-64 sm:h-80 md:h-96 lg:h-64 xl:h-80 overflow-hidden flex-shrink-0">
+                  {/* Loading overlay */}
+                  {imageLoading && (
+                    <div className="absolute inset-0 bg-gray-100 flex items-center justify-center z-10">
+                      <Loader2 className="h-8 w-8 animate-spin text-orange-500" />
+                    </div>
+                  )}
 
-                {!imageError ? (
-                  <Image
-                    key={selectedActivity.id}
-                    src={selectedActivity.url || "/placeholder.svg"}
-                    alt={`Image illustrant ${selectedActivity.title}`}
-                    fill
-                    className={cn(
-                      "object-cover transition-all duration-700",
-                      imageLoading ? "opacity-0 scale-110" : "opacity-100 scale-100",
-                    )}
-                    priority
-                    onLoad={handleImageLoad}
-                    onLoadingComplete={() => setImageLoading(false)}
-                    onError={handleImageError}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-gray-400 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <ExternalLink className="h-8 w-8 text-gray-600" />
+                  {!imageError ? (
+                    <Image
+                      key={selectedActivity.id}
+                      src={selectedActivity.url || "/placeholder.svg"}
+                      alt={`Image illustrant ${selectedActivity.title}`}
+                      fill
+                      className={cn(
+                        "object-cover transition-all duration-700",
+                        imageLoading ? "opacity-0 scale-110" : "opacity-100 scale-100",
+                      )}
+                      priority
+                      onLoad={handleImageLoad}
+                      onLoadingComplete={() => setImageLoading(false)}
+                      onError={handleImageError}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="w-16 h-16 bg-gray-400 rounded-full mx-auto mb-4 flex items-center justify-center">
+                          <ExternalLink className="h-8 w-8 text-gray-600" />
+                        </div>
+                        <p className="text-gray-600 font-medium">Image non disponible</p>
                       </div>
-                      <p className="text-gray-600 font-medium">Image non disponible</p>
+                    </div>
+                  )}
+
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                </div>
+
+                <CardContent className="p-6 sm:p-8 flex-1 flex flex-col">
+                  <div
+                    className={cn(
+                      "transition-all duration-500 flex-1 flex flex-col",
+                      isTransitioning ? "opacity-0 transform translate-y-4" : "opacity-100 transform translate-y-0",
+                    )}
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight">
+                        {selectedActivity.title}
+                      </h3>
+                      {selectedActivity.category && (
+                        <span className="px-3 py-1 bg-orange-100 text-orange-800 text-sm font-medium rounded-full flex-shrink-0">
+                          {selectedActivity.category}
+                        </span>
+                      )}
+                    </div>
+
+                    <p className="text-gray-700 leading-relaxed text-base sm:text-lg mb-8 flex-1">
+                      {selectedActivity.description}
+                    </p>
+
+                    <div className="flex flex-col sm:flex-row gap-4 mt-auto">
+                      <Link href="/contacts">
+                        <Button
+                          variant="outline"
+                          size="lg"
+                          className="border-orange-200 text-orange-600 hover:bg-orange-50 hover:border-orange-300 transition-all duration-300"
+                        >
+                          Nous contacter
+                        </Button>
+                      </Link>
                     </div>
                   </div>
-                )}
-
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                </CardContent>
               </div>
-
-              <CardContent className="p-6 sm:p-8">
-                <div
-                  className={cn(
-                    "transition-all duration-500",
-                    isTransitioning ? "opacity-0 transform translate-y-4" : "opacity-100 transform translate-y-0",
-                  )}
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight">
-                      {selectedActivity.title}
-                    </h3>
-                    {selectedActivity.category && (
-                      <span className="px-3 py-1 bg-orange-100 text-orange-800 text-sm font-medium rounded-full">
-                        {selectedActivity.category}
-                      </span>
-                    )}
-                  </div>
-
-                  <p className="text-gray-700 leading-relaxed text-base sm:text-lg mb-8">
-                    {selectedActivity.description}
-                  </p>
-
-                  <div className="flex flex-col sm:flex-row gap-4">
-                  
-                    <Link href="/contacts">
-                      <Button
-                        variant="outline"
-                        size="lg"
-                        className="border-orange-200 text-orange-600 hover:bg-orange-50 hover:border-orange-300 transition-all duration-300"
-                      >
-                        Nous contacter
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </CardContent>
             </Card>
           </div>
         </div>

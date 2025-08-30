@@ -6,10 +6,9 @@ import { useState, useRef, useEffect } from "react";
 import { Partners } from "./composants/partners";
 import Services from "./composants/services";
 
-import Faq from "./composants/faq";
+
 import Une from "./composants/une";
 import { Hero } from "./composants/Hero";
-import { parseDate } from "./lib/utils";
 
 // Ajout des données pour les statistiques
 const statistics = [
@@ -182,8 +181,8 @@ export default function Home() {
       <Une />
      
       <Services />
-      <div className="flex justify-center">
-        <Link  className=" px-6 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 transition-colors" 
+      <div className="flex justify-center mt-12">
+        <Link  className=" px-8 py-4 bg-orange-600 text-white rounded-md hover:bg-orange-700 transition-colors text-lg" 
          href="/actualite" >Voir nos actualités</Link>
       </div>
       <Partners />
@@ -218,7 +217,7 @@ export default function Home() {
       </section>
       
    
-      <Faq/> 
+ 
     </div>
   );
 }

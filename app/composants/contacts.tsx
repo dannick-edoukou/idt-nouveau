@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import { Send, CheckCircle, AlertCircle, Phone, Mail, MapPin, Clock } from "lucide-react"
+import { Send, CheckCircle, AlertCircle, Phone, Mail, MapPin, Clock, Headset } from "lucide-react"
 import DynamicHero from "./DynamicHero"
 
 // Schéma de validation
@@ -51,6 +51,7 @@ const CONTACT_INFO = [
   },
   { icon: Phone, title: "Téléphone", content: "+225 25 22 01 05 00" },
   { icon: Mail, title: "Email", content: "contact@sidt.ci" },
+  { icon: Headset, title: "Service Client", content: "1307" },
   {
     icon: Clock,
     title: "Horaires",
@@ -61,6 +62,7 @@ const CONTACT_INFO = [
       </>
     ),
   },
+  
 ]
 
 // Composant pour les messages de statut
@@ -132,6 +134,7 @@ const ContactInfo = () => (
               <h4 className="font-semibold text-sm mb-0.5">{title}</h4>
               <p className="text-orange-100 text-xs sm:text-sm">{content}</p>
             </div>
+          
           </div>
         ))}
       </div>

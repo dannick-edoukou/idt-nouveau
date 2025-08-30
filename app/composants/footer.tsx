@@ -111,7 +111,7 @@ const Footer = () => {
                     className="text-gray-600 hover:text-white transition-colors duration-300"
                     aria-label={social.name}
                   >
-                    <Icon className="h-4 w-4" />
+                    <Icon className="h-6 w-6" />
                   </a>
                 )
               })}
@@ -131,7 +131,7 @@ const Footer = () => {
                       {key === 'contact' ? (
                         <div className={`flex items-start space-x-2 ${link.type === 'address' ? 'mb-2' : 'mb-1'}`}>
                           {link.icon && (
-                            <link.icon className="h-4 w-4 text-white mt-0.5 flex-shrink-0" />
+                            <link.icon className="h-6 w-6 text-white mt-0.5 flex-shrink-0" />
                           )}
                           {link.type === 'address' ? (
                             <div className="text-gray-700 text-sm">
