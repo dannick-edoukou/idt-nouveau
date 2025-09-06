@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Stack from "@/app/composants/stack";
 import DynamicHero from "../../composants/DynamicHero";
 import Image from "next/image";
@@ -50,7 +50,11 @@ export default function Phototheque() {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  
+
+  // Barre de recherche et filtre
+  const [search, setSearch] = useState('');
+  const [filterCategory, setFilterCategory] = useState<string>(''); // valeur vide = toutes
+
   // Configuration responsive des stacks par page
   const getStacksPerPage = () => {
     if (typeof window !== 'undefined') {
@@ -128,9 +132,38 @@ export default function Phototheque() {
     setCurrentImageIndex(0);
   }, [selectedCategory]);
 
-  const totalPages = Math.ceil(imageCategories.length / stacksPerPage);
+  // Récupérer toutes les catégories uniques pour le filtre
+  const allCategories = useMemo(() => {
+    const cats = Array.from(new Set(imageCategories.map(cat => cat.category).filter(Boolean)));
+    return cats;
+  }, [imageCategories]);
+
+  // Filtrage par recherche et catégorie
+  const filteredCategories = useMemo(() => {
+    let filtered = imageCategories;
+    if (filterCategory) {
+      filtered = filtered.filter(cat => cat.category === filterCategory);
+    }
+    if (search.trim()) {
+      const s = search.trim().toLowerCase();
+      filtered = filtered.filter(cat =>
+        cat.title.toLowerCase().includes(s) ||
+        cat.category.toLowerCase().includes(s) ||
+        cat.description.toLowerCase().includes(s)
+      );
+    }
+    return filtered;
+  }, [imageCategories, search, filterCategory]);
+
+  // Pagination sur les catégories filtrées
+  const totalPages = Math.ceil(filteredCategories.length / stacksPerPage);
   const startIndex = (currentPage - 1) * stacksPerPage;
-  const currentStacks = imageCategories.slice(startIndex, startIndex + stacksPerPage);
+  const currentStacks = filteredCategories.slice(startIndex, startIndex + stacksPerPage);
+
+  // Remettre la page à 1 si le filtre ou la recherche change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, filterCategory]);
 
   // Fonction typée pour créer le contenu des stacks
   const createStackContent = (item: ImageItem) => (
@@ -184,9 +217,7 @@ export default function Phototheque() {
             {selectedCategory.title}
           </h2>
           <p className="text-gray-600 mb-2">{selectedCategory.category}</p>
-          <div className="text-orange-400 text-xs mb-4">
-            {images.length} propriétés • {selectedCategory.views} vues
-          </div>
+          
         </div>
         
         {/* SLIDER PRINCIPAL */}
@@ -260,7 +291,7 @@ export default function Phototheque() {
             {selectedCategory.description}
           </p>
           <div className="mt-4 text-sm text-gray-500">
-            Créé le {new Date(selectedCategory.created_at).toLocaleDateString('fr-FR')}
+            Publié le {new Date(selectedCategory.created_at).toLocaleDateString('fr-FR')}
           </div>
         </div>
       </div>
@@ -300,16 +331,34 @@ export default function Phototheque() {
         ) : (
           <>
             {/* En-tête de la section */}
-            <div className="text-center mb-8 lg:mb-12">
-              <h1 className="text-3xl lg:text-4xl font-bold text-orange-600 mb-4">
+            <div className="relative mb-8 lg:mb-12">
+              <h1 className="text-3xl lg:text-4xl font-bold text-orange-600 mb-4 text-center">
                 Notre Photothèque
               </h1>
-              <p className="text-gray-600 text-base lg:text-lg max-w-2xl mx-auto">
-                Explorez nos collections organisées par catégories. Chaque dossier contient plusieurs propriétés à découvrir.
-              </p>
-              {/* Indicateur de débogage */}
-              <div className="mt-4 text-sm text-gray-500">
-                {imageCategories.length} catégories chargées
+            
+              {/* Barre de recherche et filtre positionnée en haut à droite */}
+              <div className="absolute top-0 right-0 flex flex-row gap-2 items-center">
+                <input
+                  type="text"
+                  value={search}
+                  onChange={e => setSearch(e.target.value)}
+                  placeholder="Recherche..."
+                  className="w-32 md:w-40 px-2 py-1 border border-orange-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
+                  aria-label="Recherche"
+                  style={{ minWidth: 0 }}
+                />
+                <select
+                  value={filterCategory}
+                  onChange={e => setFilterCategory(e.target.value)}
+                  className="w-28 md:w-36 px-2 py-1 border border-orange-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
+                  aria-label="Filtrer par catégorie"
+                  style={{ minWidth: 0 }}
+                >
+                  <option value="">Toutes</option>
+                  {allCategories.map(cat => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                </select>
               </div>
             </div>
             
@@ -318,9 +367,9 @@ export default function Phototheque() {
               <LoadingComponent />
             ) : error ? (
               <ErrorComponent />
-            ) : imageCategories.length === 0 ? (
+            ) : filteredCategories.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-gray-600">Aucune catégorie d'images disponible pour le moment.</p>
+                <p className="text-gray-600">Aucune catégorie d'images ne correspond à votre recherche ou filtre.</p>
               </div>
             ) : (
               <>
@@ -340,9 +389,7 @@ export default function Phototheque() {
                         <p className="text-gray-500 text-sm">
                           {category.category}
                         </p>
-                        <div className="text-orange-400 text-xs mt-1">
-                          {category.images.length} propriétés • {category.views} vues
-                        </div>
+                      
                       </div>
                       
                       {/* Stack avec toutes les images de la catégorie */}
@@ -367,7 +414,16 @@ export default function Phototheque() {
                 {totalPages > 1 && (
                   <div className="flex justify-center items-center space-x-2 mb-8">
                     <button
-                      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                      onClick={() => {
+                        setCurrentPage(prev => {
+                          const newPage = Math.max(prev - 1, 1);
+                          return newPage;
+                        });
+                        // Remonter le visuel après le changement de page
+                        setTimeout(() => {
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }, 0);
+                      }}
                       disabled={currentPage === 1}
                       className="px-4 py-2 rounded-lg bg-white border-2 border-orange-200 text-orange-600 hover:bg-orange-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
@@ -379,7 +435,12 @@ export default function Phototheque() {
                         return (
                           <button
                             key={pageNum}
-                            onClick={() => setCurrentPage(pageNum)}
+                            onClick={() => {
+                              if (currentPage !== pageNum) {
+                                setCurrentPage(pageNum);
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                              }
+                            }}
                             className={`px-3 py-2 rounded-lg transition-colors ${
                               currentPage === pageNum
                                 ? 'bg-orange-500 text-white'
@@ -392,7 +453,16 @@ export default function Phototheque() {
                       })}
                     </div>
                     <button
-                      onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                      onClick={() => {
+                        setCurrentPage(prev => {
+                          const newPage = Math.min(prev + 1, totalPages);
+                          return newPage;
+                        });
+                        // Remonter le visuel après le changement de page
+                        setTimeout(() => {
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }, 0);
+                      }}
                       disabled={currentPage === totalPages}
                       className="px-4 py-2 rounded-lg bg-white border-2 border-orange-200 text-orange-600 hover:bg-orange-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
@@ -401,12 +471,7 @@ export default function Phototheque() {
                   </div>
                 )}
                 
-                {/* Indicateur de page */}
-                <div className="text-center mb-8">
-                  <p className="text-gray-600 text-sm">
-                    Page {currentPage} sur {totalPages} - {imageCategories.length} dossiers au total
-                  </p>
-                </div>
+              
               </>
             )}
           </>

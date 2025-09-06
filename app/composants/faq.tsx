@@ -24,18 +24,18 @@ export default function Faq() {
                 key={item.id}
                 className="rounded-xl bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:ring-2 hover:ring-orange-400"
               >
-                <Link 
-                  href={`/faq/${item.id}`}
+                <Link
+                  href={`/faq/${item.slug}`}
                   className="w-full flex justify-between items-center p-5 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors rounded-xl"
                 >
                   <span className="text-lg font-medium text-gray-800 dark:text-white first-letter:uppercase">
                     {item.question.toLowerCase()}
                   </span>
-                  <svg 
-                    className="w-5 h-5 ml-4 text-orange-500 flex-shrink-0" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
+                  <svg
+                    className="w-5 h-5 ml-4 text-orange-500 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
                     viewBox="0 0 24 24"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />

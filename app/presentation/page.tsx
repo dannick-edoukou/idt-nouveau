@@ -1,5 +1,5 @@
 import React from 'react';
-import { Radio, Tv, Signal, Globe, Settings, Users } from 'lucide-react';
+import { Radio, Tv, Signal, Globe, Settings, Users, Calendar } from 'lucide-react';
 import Image from 'next/image';
 import DynamicHero from '../composants/DynamicHero';
 
@@ -11,9 +11,17 @@ export default function IDTPresentation() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-orange-50 py-12 px-4"> 
       <div className="max-w-7xl mx-auto">
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+          
           <div className="grid lg:grid-cols-2 gap-0">
             {/* Section Image */}
             <div className="relative bg-gradient-to-br from-orange-500 to-green-600 p-8 flex items-center justify-center min-h-[500px]" style={{background: 'linear-gradient(135deg, #f97316 0%, #059669 100%)'}}>
+               {/* Badge "Créé en 2017" */}
+                <div className="absolute top-6 right-6 rounded-full px-4 py-2 shadow-lg" style={{backgroundColor: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(8px)'}}>
+                  <div className="flex items-center space-x-2 text-orange-800">
+                    < Calendar className="w-4 h-4" />
+                    <span className="text-sm font-semibold">Créé en 2017</span>
+                  </div>
+                </div>
               <div className="text-center text-white">
                 <div className="mb-8">
                   <div className="w-32 h-32 mx-auto rounded-full flex items-center justify-center mb-6 shadow-lg" style={{backgroundColor: 'rgba(255, 255, 255, 0.25)', backdropFilter: 'blur(8px)'}}>
@@ -22,7 +30,7 @@ export default function IDTPresentation() {
                   <div className="w-32 h-32 mx-auto  rounded-xl flex items-center justify-center mb-6 " style={{backgroundColor: 'rgba(255, 255, 255, 0.25)', backdropFilter: 'blur(8px)'}}>
                   <Image src="/idt1.png" alt="Logo" width={100} height={100} />
                   </div>
-                  <p className="text-xl opacity-90">Ivoirienne de Télédiffusion</p>
+                  <p className="text-xl opacity-90">Ivoirienne De Télédiffusion</p>
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4 mt-8">
@@ -55,7 +63,7 @@ export default function IDTPresentation() {
                 
                 <div className="space-y-6 text-gray-700 leading-relaxed">
                   <p className="text-lg">
-                    L&apos;Ivoirienne de Télédiffusion (IDT) est une société d&apos;État, créée par adoption en Conseil des Ministres du 20 Décembre 2017, d&apos;un décret n°2017-844 portant création, organisation et fonctionnement de la société Ivoirienne de Télédiffusion dénommée Ivoirienne de Télédiffusion en abrégé IDT.
+                    L&apos;Ivoirienne De Télédiffusion (IDT) est une société d&apos;État, créée par adoption en Conseil des Ministres du 20 Décembre 2017, d&apos;un décret n°2017-844 portant création, organisation et fonctionnement de la société Ivoirienne De Télédiffusion dénommée Ivoirienne De Télédiffusion en abrégé IDT.
                   </p>
                   
                   <div className="bg-orange-50 border-l-4 border-orange-500 p-4 rounded-r-lg">

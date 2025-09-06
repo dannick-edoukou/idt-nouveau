@@ -95,7 +95,7 @@ const Footer = () => {
               className="hover:opacity-80 transition-opacity duration-200"
             />
             <p className="text-gray-700 mb-2 mt-2 text-sm leading-tight text-center lg:text-left">
-              La Société Ivoirienne de Télédiffusion IDT assure la diffusion des programmes 
+              La Société Ivoirienne De Télédiffusion IDT assure la diffusion des programmes 
               radiophoniques et télévisuels sur le territoire national.
             </p>
             {/* Réseaux sociaux */}

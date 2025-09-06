@@ -19,7 +19,7 @@ export default function NosMissions() {
                     <Image src="/reseau.png" alt="Logo" width={100} height={100} />
                     </div>
                     <h1 className="text-4xl font-bold mb-2">Nos Missions</h1>
-                    <p className="text-xl opacity-90">IDT - Ivoirienne de Télédiffusion</p>
+                   
                   </div>
                   
                   <div className="grid grid-cols-2 gap-4 mt-8">
@@ -54,7 +54,7 @@ export default function NosMissions() {
                     <div className="bg-orange-50 border-l-4 border-orange-500 p-4 rounded-r-lg">
                       <h3 className="font-semibold text-orange-800 mb-2">Rôle de Diffuseur</h3>
                       <p className="text-orange-700">
-                        Le rôle de diffuseur qu'a la société ivoirienne de télédiffusion lui confère des prérogatives étendues dans la gestion et la diffusion des contenus audiovisuels.
+                        Le rôle de diffuseur qu'a la société ivoirienne De télédiffusion lui confère des prérogatives étendues dans la gestion et la diffusion des contenus audiovisuels.
                       </p>
                     </div>
 

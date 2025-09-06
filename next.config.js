@@ -34,6 +34,11 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: "https",
+        hostname: "api.mysidt.com",
+        pathname: "/routes/api.php**",
+      },
     ],
   },
 }

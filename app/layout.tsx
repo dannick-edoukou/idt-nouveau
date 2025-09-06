@@ -16,7 +16,7 @@ const robotoMono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Société Ivoirienne de Télédiffusion",
+  title: "Société Ivoirienne De Télédiffusion",
   description: "Société Ivoirienne de Télédiffusion",
   icons: {
     icon: '/favicon.png',

@@ -38,7 +38,7 @@ const MENU_CONFIG = {
       src: '/idt1.png',
       alt: 'Logo OTT'
     },
-    description: 'Comment nous fonctionnons'
+   
   },
   'document-juridique': {
     title: 'IDT',
@@ -53,12 +53,12 @@ const MENU_CONFIG = {
     description: 'Des solutions adaptées à vos besoins'
   },
   'les-chaines': {
-    title: 'Les Chaînes',
-    description: 'Découvrez toutes les chaînes de la TNT'
+    title: 'Les Chaînes et Bouquet TNT',
+    description: 'Découvrez toutes les chaînes et bouquet de la TNT'
   },
   'actualite': {
-    title: 'Actualité',
-    description: 'Restez informé de nos dernières nouvelles'
+    title: 'Actualités',
+    description: 'Rester informé de nos dernières nouvelles'
   },
   'mediatheque': {
     title: 'Médiathèque',
@@ -70,15 +70,19 @@ const MENU_CONFIG = {
   },
   'faq': {
     title: 'FAQ',
-    description: 'Questions fréquentes sur la TNT et nos services'
+    image: {
+      src: '/tnt.png',
+      alt: 'Logo OTT'
+    },
+    description: 'Television Numerique Terrestre'
   },
   'radio': {
-    title: 'Radio',
+    title: 'Les Radios Nationales et Internationales',
     description: 'Découvrez notre radio'
   },
   'pylone': {
-    title: 'Pylone',
-    description: 'Découvrez nos services pylone'
+    title: 'Pylônes',
+    description: 'Découvrez nos services pylônes'
   },
   'ott': {
     title: 'OTT',

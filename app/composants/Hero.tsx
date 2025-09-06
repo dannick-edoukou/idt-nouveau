@@ -39,9 +39,9 @@ function AnimatedKeywords() {
 
 export function Hero() {
   const images = useMemo(() => [
+    "/banniere/banniere3.jpg",
     "/banniere/banniere1.jpg",
     "/banniere/banniere2.jpg",
-    "/banniere/banniere3.jpg",
     "/banniere/banniere4.jpg",
     "/banniere/banniere5.jpg",
   ], []);
@@ -53,7 +53,7 @@ export function Hero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 4000);
+    }, 7000);
 
     return () => clearInterval(interval);
   }, [images.length]);
@@ -83,7 +83,7 @@ export function Hero() {
 
   if (!isLoaded) {
     return (
-            <div className="relative h-[24rem] sm:h-[30rem] md:h-[36rem] lg:h-[42rem] bg-gradient-to-br from-neutral-900 to-slate-800 flex items-center justify-center">
+      <div className="relative h-[24rem] sm:h-[30rem] md:h-[36rem] lg:h-[42rem] bg-gradient-to-br from-neutral-900 to-slate-800 flex items-center justify-center">
         <div className="flex flex-col items-center">
           <div className="w-8 h-8 border-2 border-orange-400 border-t-transparent rounded-full animate-spin mb-4"></div>
           <p className="text-neutral-100 text-lg font-medium">Chargement...</p>
@@ -95,7 +95,7 @@ export function Hero() {
   return (
     <div className="relative h-[24rem] sm:h-[30rem] md:h-[36rem] lg:h-[42rem] overflow-hidden bg-gradient-to-br from-neutral-900 to-black">
       {/* Background Images with smooth transitions */}
-      <AnimatePresence >
+      <AnimatePresence>
         <motion.div
           key={currentIndex}
           initial={{ opacity: 0, scale: 1.05 }}
@@ -200,7 +200,7 @@ export function Hero() {
           className="h-full bg-gradient-to-r from-orange-500 via-orange-400 to-orange-200 shadow"
           initial={{ width: "0%" }}
           animate={{ width: "100%" }}
-          transition={{ duration: 4, ease: "linear", repeat: Infinity }}
+          transition={{ duration: 6, ease: "linear" }}
           key={currentIndex}
         />
       </div>

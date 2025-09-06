@@ -1,5 +1,5 @@
 import React from 'react';
-import { Quote, Calendar } from 'lucide-react';
+import { Quote } from 'lucide-react';
 import DynamicHero from '../composants/DynamicHero';
 import Image from 'next/image';
 
@@ -13,13 +13,7 @@ export default function MotDuDG() {
             <div className="grid lg:grid-cols-2 gap-0">
               {/* Section Image du DG */}
               <div className="relative p-8 flex items-center justify-center min-h-[600px]" style={{background: 'linear-gradient(135deg, #f97316 0%, #059669 100%)'}}>
-                {/* Badge "Créé en 2017" */}
-                <div className="absolute top-6 right-6 rounded-full px-4 py-2 shadow-lg" style={{backgroundColor: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(8px)'}}>
-                  <div className="flex items-center space-x-2 text-orange-800">
-                    <Calendar className="w-4 h-4" />
-                    <span className="text-sm font-semibold">Créé en 2017</span>
-                  </div>
-                </div>
+              
 
                 <div className="text-center text-white">
                   {/* Photo placeholder du DG */}
@@ -61,7 +55,7 @@ export default function MotDuDG() {
                     </div>
 
                     <p className="text-lg">
-                      L'<strong className="text-orange-600">Ivoirienne de Télédiffusion (IDT)</strong> est une société d'État, créée par adoption en Conseil des Ministres du 20 Décembre 2017, d'un décret n°2017-844 portant création, organisation et fonctionnement de la société Ivoirienne de Télédiffusion dénommée Ivoirienne de Télédiffusion, en abrégé IDT.
+                      L'<strong className="text-orange-600">Ivoirienne De Télédiffusion (IDT)</strong> est une société d'État, créée par adoption en Conseil des Ministres du 20 Décembre 2017, d'un décret n°2017-844 portant création, organisation et fonctionnement de la société Ivoirienne De Télédiffusion dénommée Ivoirienne De Télédiffusion, en abrégé IDT.
                     </p>
                     
                     <div className="bg-orange-50 border-l-4 border-orange-500 p-4 rounded-r-lg">

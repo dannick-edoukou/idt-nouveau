@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  const externalApiUrl = `http://testapp.dioulatche.io/routes/api.php?action=mediatheque&type=video`;
+  const externalApiUrl = `http://api.mysidt.com/routes/api.php?action=mediatheque&type=video`;
 
   try {
     const response = await fetch(externalApiUrl, {

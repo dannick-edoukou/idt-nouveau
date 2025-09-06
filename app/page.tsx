@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
-import { Partners } from "./composants/partners";
+import {  Partners1 } from "./composants/partners1";
+import {  Partners2 } from "./composants/partners2";
 import Services from "./composants/services";
 
 
@@ -14,11 +15,18 @@ import { Hero } from "./composants/Hero";
 const statistics = [
  
   {
-    value: "68%",
-    label: "Foyers équipés TNT",
-    description: "Part des foyers ivoiriens équipés pour recevoir la TNT en 2021",
+    value: "37",
+    label: "Centres emetteurs",
+    description: "Réseau de 37 centres émetteurs à travers la Côte d’Ivoire",
     image: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     gradient: "from-green-600/90 to-green-400/80"
+  },
+  {
+    value: "87%",
+    label: "Taux de couverture",
+    description: "Couverture nationale assurée par la SIDT",
+    image: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    gradient: "from-cyan-600/90 to-cyan-400/80"
   },
   {
     value: "100%",
@@ -34,13 +42,6 @@ const statistics = [
     description: "SIDT, société d’État créée en décembre 2017",
     image: "https://images.pexels.com/photos/267614/pexels-photo-267614.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     gradient: "from-red-600/90 to-red-400/80"
-  },
-  {
-    value: "+10",
-    label: "Technologies internationales",
-    description: "Collaboration avec des partenaires technologiques mondiaux",
-    image: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    gradient: "from-cyan-600/90 to-cyan-400/80"
   }
 ];
 
@@ -185,7 +186,8 @@ export default function Home() {
         <Link  className=" px-8 py-4 bg-orange-600 text-white rounded-md hover:bg-orange-700 transition-colors text-lg" 
          href="/actualite" >Voir nos actualités</Link>
       </div>
-      <Partners />
+      <Partners1 />
+      <Partners2 />
 
       {/* section chiffres clés */}
       <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">

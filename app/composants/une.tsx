@@ -100,7 +100,7 @@ export default function Une({ title }: UneProps) {
   // Gérer l'état de chargement
   if (loading) {
     return (
-      <section className="pt-16 lg:pt-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
+      <section className="pt-10 lg:pt-16 bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-9xl">
           <div className="flex items-center justify-center py-8">
             <Loader2 className="w-8 h-8 animate-spin text-orange-600" />
@@ -168,14 +168,14 @@ export default function Une({ title }: UneProps) {
   };
 
   const defaultTitle = (
-    <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mt-6 leading-tight">
+    <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mt-2 leading-tight">
       A la <span className="text-orange-600">Une</span>
     </h2>
   );
 
   return (
   
-    <section className="pt-16 lg:pt-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 relative overflow-hidden">
+    <section className="pt-10 lg:pt-16 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-orange-100/20 to-transparent rounded-full blur-3xl -z-10" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-blue-100/20 to-transparent rounded-full blur-3xl -z-10" />
       
@@ -243,6 +243,7 @@ export default function Une({ title }: UneProps) {
                   width: `${100 / visibleCards}%`
                 }}
               >
+                 <Link href={`/news/${item.id}`}>
                 <motion.div
                   className="bg-white rounded-lg md:rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 h-full"
                   whileHover={{ y: -5 }}
@@ -259,27 +260,24 @@ export default function Une({ title }: UneProps) {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     
                     <div className="absolute top-3 md:top-4 right-3 md:right-4">
-                      <div className="px-2.5 py-1 bg-black/60 backdrop-blur-sm rounded-lg shadow-lg">
-                        <p className="text-xs font-medium text-white tabular-nums">
-                          {item.date}
-                        </p>
-                      </div>
+                    
                     </div>
                   </div>
                   <div className="p-4 md:p-6">
                     <h3 className="text-base md:text-lg lg:text-xl font-semibold text-gray-900 mb-3 md:mb-4 line-clamp-2">
                       {item.title}
                     </h3>
-                    <Link href={`/news/${item.id}`}>
+                   
                       <Button className="bg-orange-600 text-white hover:text-orange-800 hover:bg-white w-full">
                         <span className="group inline-flex items-center font-medium transition-colors duration-200 text-sm md:text-base">
                           Lire la suite
                           <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 transform group-hover:translate-x-1 transition-transform duration-200" />
                         </span>
                       </Button>
-                    </Link>
+                  
                   </div>
                 </motion.div>
+                  </Link>
               </div>
             ))}
           </motion.div>

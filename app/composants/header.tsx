@@ -50,9 +50,9 @@ const Header = () => {
       submenu: [
         ...faqData.map(item => ({ 
           title: item.question.charAt(0).toUpperCase() + item.question.slice(1).toLowerCase(),
-          href: `/faq/${item.id}` 
+          href: `/faq/${item.slug}` 
         })),
-        { title: "Les Chaînes et Bouquets", href: "/les-chaines" },
+        { title: "Les Chaînes et Bouquet", href: "/les-chaines" },
       ],
     },
    

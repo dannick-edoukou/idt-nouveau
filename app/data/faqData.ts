@@ -1,20 +1,22 @@
 export interface FaqItem {
-  id: string;
+  id: number;
+  slug: string;
   question: string;
   answer: string;
 }
 
-// Helper function to generate URL-friendly IDs
-const createId = (question: string) => {
+// Helper function to generate URL-friendly slugs
+const createSlug = (question: string): string => {
   return question
     .toLowerCase()
     .normalize("NFD") // Handle accents
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/[?,':]/g, '') // Remove special characters
     .replace(/[^a-z0-9-]/g, ''); // Remove invalid characters
 };
 
-const questionsAndAnswers: Omit<FaqItem, 'id'>[] = [
+const questionsAndAnswers: Omit<FaqItem, 'id' | 'slug'>[] = [
   {
     question: "QU'EST CE QUE LA TNT ?",
     answer: "La Télévision Numérique Terrestre (TNT) est cette évolution technologique en matière de télédiffusion terrestre qui permet d'optimiser l'usage de la ressource spectrale par un accroissement du nombre de chaines par fréquence, d'obtenir une meilleure qualité d'image et de réduire les coûts de transmission et de diffusion.\n\nCette nouvelle technologie de diffusion d'images et de son de qualité numérique offre des avantages multiples tels que :\n- La qualité d'image et de son\n- La diffusion de plusieurs programmes de chaînes de télévision sur une seule fréquence\n- L'accès à plus de chaînes et une multitude de programmes\n- La possibilité d'offrir des services innovants comme la vidéo à la demande (VOD), l'enregistrement des programmes (catch up TV), etc.\n\nAVEC LA TNT PAS DE COUPURE D'IMAGE NI DE SON DURANT L'ORAGE !\n\nNB : La Côte d'Ivoire s'engage à migrer de la télévision analogique vers la télévision numérique conformément au traité international appelé « Accord GE06 » initié par l'Union Internationale des télécommunications (IUT ou ITU) en 2006 à Genève.",
@@ -33,7 +35,8 @@ const questionsAndAnswers: Omit<FaqItem, 'id'>[] = [
   },
 ];
 
-export const faqData: FaqItem[] = questionsAndAnswers.map(item => ({
+export const faqData: FaqItem[] = questionsAndAnswers.map((item, index) => ({
   ...item,
-  id: createId(item.question),
+  id: index + 1,
+  slug: createSlug(item.question),
 }));

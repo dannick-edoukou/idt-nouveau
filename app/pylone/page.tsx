@@ -29,7 +29,7 @@ export default function Pylone() {
             </h1>
             <div className="mt-4 space-y-4 text-gray-700 leading-relaxed">
               <p>
-                La société Ivoirienne de Télédiffusion dispose d'un réseau de pylônes stratégiquement déployés sur l'ensemble du territoire national, qu'elle propose en location aux opérateurs du secteur.
+                La société Ivoirienne De Télédiffusion dispose d'un réseau de pylônes stratégiquement déployés sur l'ensemble du territoire national, qu'elle propose en location aux opérateurs du secteur.
               </p>
               <p>
                 Les infrastructures dont bénéficie IDT dans la bonne réalisation de sa mission s'adressent aux opérateurs évoluant dans quatre secteurs clés :

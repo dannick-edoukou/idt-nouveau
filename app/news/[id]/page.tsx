@@ -90,7 +90,7 @@ export default function NewsDetailPage() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-16">
         {/* Bouton retour */}
-        <Link href="/">
+        <Link href="/actualite">
           <Button 
             variant="ghost" 
             className="mb-8 text-gray-600 hover:text-orange-600 hover:bg-orange-50 transition-colors duration-200"

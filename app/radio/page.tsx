@@ -84,13 +84,11 @@ export default function LesRadios() {
     <>
       <DynamicHero backgroundImage="/heroes.jpeg" />
       <main
-        className="min-h-screen py-14"
-        style={{ backgroundColor: "#95cc56" }}
+        className="min-h-screen py-14 bg-purple-300"
+       
       >
         <div className="container mx-auto px-4 md:px-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-center text-orange-600 mb-10 uppercase tracking-wide">
-            Les Radios Nationales et Internationales
-          </h1>
+        
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {radios.map((radio, idx) => (
               <div

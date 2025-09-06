@@ -36,7 +36,7 @@ const activities: Activity[] = [
     title: "Multiplexage TV",
     description:
       "Regroupement de plusieurs chaînes sur une même fréquence pour optimiser l'usage du spectre et la qualité.",
-    url: "/banniere/banniere2.jpg",
+    url: "/banniere/emetteur.jpg",
     href: "/presentation",
     category: "Diffusion",
   },
@@ -46,7 +46,7 @@ const activities: Activity[] = [
     title: "Location de Pylônes",
     description:
       "Mise à disposition de pylônes et toitures pour antennes et équipements, avec accompagnement technique.",
-    url: "/banniere/banniere2.jpg",
+    url: "/banniere/pylone.png",
     href: "/services/location-pylone",
     category: "Infrastructure",
   },
@@ -56,7 +56,7 @@ const activities: Activity[] = [
     title: "Services Techniques",
     description:
       "Interventions techniques, maintenance et support sur les équipements et sites de diffusion.",
-    url: "/banniere/banniere2.jpg",
+    url: "/banniere/technique.jpg",
     href: "/nos-missions",
     category: "Technique",
   },
@@ -147,9 +147,9 @@ export default function Services() {
   }, [selectedActivity.id]);
 
   return (
-        <section className="pb-2 bg-gradient-to-br from-gray-50 to-white">
+        <section className="pb-2 bg-gradient-to-br from-gray-50 to-white mt-10">
       <div className="container mx-auto px-4">
-        <div className="text-center lg:text-left mb-8 sm:mb-12 lg:mb-16">
+        <div className="text-center lg:text-left mb-6 sm:mb-10 lg:mb-8">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
             Nos Services
           </h2>
@@ -165,7 +165,7 @@ export default function Services() {
           <div className="lg:w-1/3">
             <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg h-full">
               <CardContent className="p-6 h-full">
-                <h3 className="text-xl font-semibold mb-6 text-gray-900">Nos services</h3>
+             
                 <ul ref={listRef} className="space-y-3" role="tablist" aria-label="Liste des services">
                   {activities.map((activity) => (
                     <li key={activity.id} role="none">
@@ -248,14 +248,23 @@ export default function Services() {
                       alt={`Image illustrant ${selectedActivity.title}`}
                       fill
                       className={cn(
+                        // Amélioration de la visibilité : suppression du flou, accentuation du contraste et de la netteté
                         "object-cover transition-all duration-700",
+                        "brightness-105 contrast-110 saturate-125",
                         imageLoading ? "opacity-0 scale-110" : "opacity-100 scale-100",
                       )}
                       priority
                       onLoad={handleImageLoad}
                       onLoadingComplete={() => setImageLoading(false)}
                       onError={handleImageError}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
+                      // Utilisation de la plus haute résolution possible pour éviter le flou
+                      sizes="100vw"
+                      // Désactivation du placeholder flou si activé ailleurs
+                      placeholder={undefined}
+                      // Optionnel : style pour forcer le rendu net sur certains navigateurs
+                      style={{
+                        imageRendering: "auto", // ou "crisp-edges" ou "pixelated" selon le besoin
+                      }}
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">

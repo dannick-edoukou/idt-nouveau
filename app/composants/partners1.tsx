@@ -1,7 +1,7 @@
 "use client";
 
 import Image from 'next/image';
-
+import GradientText from "@/components/GradientText";
 const partners = [
   { name: "ORANGE", image: "/partner/ORANGE.png" },
   { name: "MTN", image: "/partner/MTN.png" },
@@ -9,14 +9,15 @@ const partners = [
   { name: "CIE", image: "/partner/CIE.jpg" },
 ];
 
-export function Partners() {
+export function Partners1() {
   return (
     <section id="partners">
-      <div className="py-14">
+      <div className="mt-8">
         <div className="container mx-auto px-4 md:px-8">
-          <h3 className="text-start text-sm font-semibold text-gray-500">
-            Nos partenaires
-          </h3>
+            <GradientText className="text-start text-xl font-semibold">
+  Nos partenaires
+</GradientText>
+          
           <div className="relative mt-6 overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
             <div className="flex animate-scroll">
               {/* Premier groupe de partenaires */}

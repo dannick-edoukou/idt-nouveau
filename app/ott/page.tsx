@@ -28,7 +28,7 @@ const ottInfo = {
   benefits: [
     "Qualité HD et 4K",
     "Interface intuitive",
-    "Pas de publicité",
+    
     "Téléchargement hors ligne",
     "Profils familiaux"
   ]
