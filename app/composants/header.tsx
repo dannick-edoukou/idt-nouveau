@@ -132,7 +132,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gray-50 sticky py-6 top-0 z-50">
+    <header className="bg-gray-50 sticky py-4 top-0 z-50">
       {/* Desktop Navigation */}
       <div className="hidden lg:flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 items-center justify-between w-full">
         {/* Left Navigation Items */}
