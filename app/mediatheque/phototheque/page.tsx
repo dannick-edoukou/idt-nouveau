@@ -336,21 +336,43 @@ export default function Phototheque() {
                 Notre Photothèque
               </h1>
             
-              {/* Barre de recherche et filtre positionnée en haut à droite */}
-              <div className="absolute top-0 right-0 flex flex-row gap-2 items-center">
+              {/* Barre de recherche et filtre responsive */}
+              <div
+                className="
+                  w-full
+                  flex flex-col gap-2 items-stretch
+                  sm:flex-row sm:gap-2 sm:items-center
+                  sm:justify-center
+                  mt-4
+                  z-10
+                "
+              >
                 <input
                   type="text"
                   value={search}
                   onChange={e => setSearch(e.target.value)}
                   placeholder="Recherche..."
-                  className="w-32 md:w-40 px-2 py-1 border border-orange-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
+                  className="
+                    w-full
+                    sm:w-48
+                    md:w-64
+                    px-2 py-2 border border-orange-200 rounded-md text-sm
+                    focus:outline-none focus:ring-2 focus:ring-orange-400 transition
+                    min-w-0
+                  "
                   aria-label="Recherche"
                   style={{ minWidth: 0 }}
                 />
                 <select
                   value={filterCategory}
                   onChange={e => setFilterCategory(e.target.value)}
-                  className="w-28 md:w-36 px-2 py-1 border border-orange-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
+                  className="
+                    w-full
+                    sm:w-44
+                    px-2 py-2 border border-orange-200 rounded-md text-sm
+                    focus:outline-none focus:ring-2 focus:ring-orange-400 transition
+                    min-w-0
+                  "
                   aria-label="Filtrer par catégorie"
                   style={{ minWidth: 0 }}
                 >

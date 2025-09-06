@@ -279,32 +279,59 @@ export default function VideothequePage() {
               <h1 className="text-4xl lg:text-5xl font-bold text-orange-600 mb-4">
                 Notre Vidéothèque
               </h1>
-              {/* Barre de recherche et tri positionnée en haut à droite */}
-              <div className="absolute top-0 right-0 flex flex-row gap-2 items-center">
-                <input
-                  type="text"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Recherche..."
-                  className="w-32 md:w-40 px-2 py-1 border border-orange-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
-                  aria-label="Recherche"
-                  style={{ minWidth: 0 }}
-                />
-                {/* Suppression du select de filtre par catégorie */}
-                <select
-                  value={sortOrder}
-                  onChange={(e) =>
-                    setSortOrder(
-                      e.target.value === 'oldest' ? 'oldest' : 'recent'
-                    )
-                  }
-                  className="w-28 md:w-36 px-2 py-1 border border-orange-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
-                  aria-label="Trier"
-                  style={{ minWidth: 0 }}
-                >
-                  <option value="recent">Plus récentes</option>
-                  <option value="oldest">Plus anciennes</option>
-                </select>
+              {/* Barre de recherche et tri responsive */}
+              <div>
+                {/* Desktop: absolute top-0 right-0, flex-row; Mobile: static, flex-col, full width */}
+                <div className="absolute top-0 right-0 flex-row gap-2 items-center hidden sm:flex">
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Recherche..."
+                    className="w-32 md:w-40 px-2 py-1 border border-orange-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
+                    aria-label="Recherche"
+                    style={{ minWidth: 0 }}
+                  />
+                  {/* Suppression du select de filtre par catégorie */}
+                  <select
+                    value={sortOrder}
+                    onChange={(e) =>
+                      setSortOrder(
+                        e.target.value === 'oldest' ? 'oldest' : 'recent'
+                      )
+                    }
+                    className="w-28 md:w-36 px-2 py-1 border border-orange-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
+                    aria-label="Trier"
+                    style={{ minWidth: 0 }}
+                  >
+                    <option value="recent">Plus récentes</option>
+                    <option value="oldest">Plus anciennes</option>
+                  </select>
+                </div>
+                {/* Mobile: stack search and sort below the title */}
+                <div className="flex flex-col gap-2 items-stretch mt-4 sm:hidden">
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Recherche..."
+                    className="w-full px-2 py-1 border border-orange-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
+                    aria-label="Recherche"
+                  />
+                  <select
+                    value={sortOrder}
+                    onChange={(e) =>
+                      setSortOrder(
+                        e.target.value === 'oldest' ? 'oldest' : 'recent'
+                      )
+                    }
+                    className="w-full px-2 py-1 border border-orange-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
+                    aria-label="Trier"
+                  >
+                    <option value="recent">Plus récentes</option>
+                    <option value="oldest">Plus anciennes</option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
