@@ -3,8 +3,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useRef, useCallback, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
-import { faqData } from "../data/faqData";;
+import { faqData } from "../data/faqData";
 import { cn } from "@/lib/utils";
 
 interface SubSubmenuItem {
@@ -29,7 +30,8 @@ const Header = () => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedMobileItems, setExpandedMobileItems] = useState<string[]>([]);
-  
+  const router = useRouter();
+
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const menuItems: MenuItem[] = [
@@ -119,6 +121,14 @@ const Header = () => {
     } else {
       setExpandedMobileItems([...expandedMobileItems, itemId]);
     }
+  };
+
+  // Helper pour fermer le menu mobile et naviguer
+  const handleMobileNavigate = (href: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    setExpandedMobileItems([]);
+    router.push(href);
   };
 
   return (
@@ -371,23 +381,25 @@ const Header = () => {
                               </div>
                               <div className="ml-4 space-y-1">
                                 {subItem.subItems.map((subSubItem) => (
-                                  <Link
+                                  <a
                                     key={subSubItem.title}
                                     href={subSubItem.href || "#"}
                                     className="block px-3 py-2 text-sm text-gray-700 hover:text-orange-500 hover:bg-white rounded-md transition-colors duration-200"
+                                    onClick={handleMobileNavigate(subSubItem.href || "#")}
                                   >
                                     {subSubItem.title}
-                                  </Link>
+                                  </a>
                                 ))}
                               </div>
                             </>
                           ) : (
-                            <Link
+                            <a
                               href={subItem.href || "#"}
                               className="block px-3 py-2 text-sm text-gray-700 hover:text-orange-500 hover:bg-white rounded-md transition-colors duration-200"
+                              onClick={handleMobileNavigate(subItem.href || "#")}
                             >
                               {subItem.title}
-                            </Link>
+                            </a>
                           )}
                         </div>
                       ))}
@@ -395,12 +407,13 @@ const Header = () => {
                   )}
                 </>
               ) : (
-                <Link
+                <a
                   href={item.href || "#"}
                   className="block px-3 py-3 text-gray-800 hover:text-orange-500 hover:bg-white rounded-md transition-all duration-200 font-medium"
+                  onClick={handleMobileNavigate(item.href || "#")}
                 >
                   {item.title}
-                </Link>
+                </a>
               )}
             </div>
           ))}
