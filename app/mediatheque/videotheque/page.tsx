@@ -192,7 +192,7 @@ function VideoGrid({
     );
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {filteredVideos.map((video) => (
         <div
           key={video.id}
@@ -205,7 +205,7 @@ function VideoGrid({
               alt={video.title}
               fill
               className="object-cover group-hover:scale-110 transition-transform duration-500"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
               onError={(e) => {
                 (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`;
               }}
@@ -250,12 +250,6 @@ export default function VideothequePage() {
   const [sortOrder, setSortOrder] = useState<'recent' | 'oldest'>('recent');
   const [videoCount, setVideoCount] = useState(0);
 
-  // Suppression de la gestion des catégories
-  // const [filterCategory, setFilterCategory] = useState<string>('');
-  // const [allCategories, setAllCategories] = useState<string[]>([]);
-
-  // Suppression du useEffect pour récupérer les catégories
-
   const openVideoModal = (video: Video) => {
     setSelectedVideo(video);
     document.body.style.overflow = 'hidden';
@@ -273,10 +267,10 @@ export default function VideothequePage() {
           selectedVideo ? 'blur-sm brightness-75' : ''
         }`}
       >
-        <div className="bg-white shadow-sm border-b border-orange-100">
-          <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className=" shadow-sm border-b border-orange-100">
+          <div className="max-w-7xl mx-auto px-4 py-4">
             <div className="text-center mb-8 relative">
-              <h1 className="text-4xl lg:text-5xl font-bold text-orange-600 mb-4">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-orange-600 mb-4">
                 Notre Vidéothèque
               </h1>
               {/* Barre de recherche et tri responsive */}
@@ -292,21 +286,7 @@ export default function VideothequePage() {
                     aria-label="Recherche"
                     style={{ minWidth: 0 }}
                   />
-                  {/* Suppression du select de filtre par catégorie */}
-                  <select
-                    value={sortOrder}
-                    onChange={(e) =>
-                      setSortOrder(
-                        e.target.value === 'oldest' ? 'oldest' : 'recent'
-                      )
-                    }
-                    className="w-28 md:w-36 px-2 py-1 border border-orange-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
-                    aria-label="Trier"
-                    style={{ minWidth: 0 }}
-                  >
-                    <option value="recent">Plus récentes</option>
-                    <option value="oldest">Plus anciennes</option>
-                  </select>
+               
                 </div>
                 {/* Mobile: stack search and sort below the title */}
                 <div className="flex flex-col gap-2 items-stretch mt-4 sm:hidden">
@@ -315,22 +295,10 @@ export default function VideothequePage() {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="Recherche..."
-                    className="w-full px-2 py-1 border border-orange-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
+                    className="w-full px-3 py-2 border border-orange-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
                     aria-label="Recherche"
                   />
-                  <select
-                    value={sortOrder}
-                    onChange={(e) =>
-                      setSortOrder(
-                        e.target.value === 'oldest' ? 'oldest' : 'recent'
-                      )
-                    }
-                    className="w-full px-2 py-1 border border-orange-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
-                    aria-label="Trier"
-                  >
-                    <option value="recent">Plus récentes</option>
-                    <option value="oldest">Plus anciennes</option>
-                  </select>
+               
                 </div>
               </div>
             </div>
@@ -356,15 +324,15 @@ export default function VideothequePage() {
             className="bg-white rounded-2xl max-w-6xl w-full max-h-[95vh] overflow-y-auto shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex justify-between items-start p-6 border-b border-gray-200">
-              <div className="flex-1 mr-4">
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">
+            <div className="flex flex-col sm:flex-row justify-between items-start p-6 border-b border-gray-200">
+              <div className="flex-1 mr-4 w-full">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
                   {selectedVideo.title}
                 </h3>
                 <p className="text-gray-600 mb-3">
                   {selectedVideo.description}
                 </p>
-                <div className="flex items-center space-x-6 text-sm text-gray-500">
+                <div className="flex flex-wrap items-center space-x-6 text-sm text-gray-500">
                   <span className="flex items-center">
                     <svg
                       className="w-4 h-4 mr-1"
@@ -423,7 +391,7 @@ export default function VideothequePage() {
               </div>
               <button
                 onClick={closeVideoModal}
-                className="text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-gray-100 transition-colors"
+                className="text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-gray-100 transition-colors mt-4 sm:mt-0"
               >
                 <svg
                   className="w-8 h-8"

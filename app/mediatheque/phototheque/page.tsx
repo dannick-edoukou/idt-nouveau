@@ -51,9 +51,8 @@ export default function Phototheque() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Barre de recherche et filtre
+  // Barre de recherche uniquement
   const [search, setSearch] = useState('');
-  const [filterCategory, setFilterCategory] = useState<string>(''); // valeur vide = toutes
 
   // Configuration responsive des stacks par page
   const getStacksPerPage = () => {
@@ -132,18 +131,9 @@ export default function Phototheque() {
     setCurrentImageIndex(0);
   }, [selectedCategory]);
 
-  // Récupérer toutes les catégories uniques pour le filtre
-  const allCategories = useMemo(() => {
-    const cats = Array.from(new Set(imageCategories.map(cat => cat.category).filter(Boolean)));
-    return cats;
-  }, [imageCategories]);
-
-  // Filtrage par recherche et catégorie
+  // Filtrage par recherche uniquement
   const filteredCategories = useMemo(() => {
     let filtered = imageCategories;
-    if (filterCategory) {
-      filtered = filtered.filter(cat => cat.category === filterCategory);
-    }
     if (search.trim()) {
       const s = search.trim().toLowerCase();
       filtered = filtered.filter(cat =>
@@ -153,17 +143,17 @@ export default function Phototheque() {
       );
     }
     return filtered;
-  }, [imageCategories, search, filterCategory]);
+  }, [imageCategories, search]);
 
   // Pagination sur les catégories filtrées
   const totalPages = Math.ceil(filteredCategories.length / stacksPerPage);
   const startIndex = (currentPage - 1) * stacksPerPage;
   const currentStacks = filteredCategories.slice(startIndex, startIndex + stacksPerPage);
 
-  // Remettre la page à 1 si le filtre ou la recherche change
+  // Remettre la page à 1 si la recherche change
   useEffect(() => {
     setCurrentPage(1);
-  }, [search, filterCategory]);
+  }, [search]);
 
   // Fonction typée pour créer le contenu des stacks
   const createStackContent = (item: ImageItem) => (
@@ -336,7 +326,7 @@ export default function Phototheque() {
                 Notre Photothèque
               </h1>
             
-              {/* Barre de recherche et filtre responsive */}
+              {/* Barre de recherche uniquement */}
               <div
                 className="
                   w-full
@@ -363,24 +353,6 @@ export default function Phototheque() {
                   aria-label="Recherche"
                   style={{ minWidth: 0 }}
                 />
-                <select
-                  value={filterCategory}
-                  onChange={e => setFilterCategory(e.target.value)}
-                  className="
-                    w-full
-                    sm:w-44
-                    px-2 py-2 border border-orange-200 rounded-md text-sm
-                    focus:outline-none focus:ring-2 focus:ring-orange-400 transition
-                    min-w-0
-                  "
-                  aria-label="Filtrer par catégorie"
-                  style={{ minWidth: 0 }}
-                >
-                  <option value="">Toutes</option>
-                  {allCategories.map(cat => (
-                    <option key={cat} value={cat}>{cat}</option>
-                  ))}
-                </select>
               </div>
             </div>
             
@@ -391,7 +363,7 @@ export default function Phototheque() {
               <ErrorComponent />
             ) : filteredCategories.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-gray-600">Aucune catégorie d'images ne correspond à votre recherche ou filtre.</p>
+                <p className="text-gray-600">Aucune catégorie d'images ne correspond à votre recherche.</p>
               </div>
             ) : (
               <>
