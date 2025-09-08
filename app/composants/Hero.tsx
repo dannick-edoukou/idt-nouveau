@@ -20,7 +20,7 @@ function AnimatedKeywords() {
   }, [index]);
 
   return (
-    <span className="inline-block min-h-[2.5rem]">
+    <span className="inline-block min-h-[2.2rem]">
       <AnimatePresence mode="wait">
         <motion.span
           key={index}
@@ -28,7 +28,7 @@ function AnimatedKeywords() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -24 }}
           transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-          className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 font-extrabold text-3xl md:text-5xl block"
+          className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 font-extrabold text-2xl sm:text-3xl md:text-4xl block"
         >
           {heroKeywords[index]}
         </motion.span>
@@ -109,71 +109,71 @@ export function Hero() {
   const isBanniere3 = images[currentIndex] === "/banniere/banniere3.jpg";
 
   return (
-    <div className="relative h-[24rem] sm:h-[30rem] md:h-[36rem] lg:h-[42rem] overflow-hidden bg-gradient-to-br from-neutral-900 to-black">
+    <div className="relative h-[15rem] sm:h-[30rem] md:h-[36rem] lg:h-[42rem] overflow-hidden bg-gradient-to-br from-neutral-900 to-black bg-white">
       {/* Background Images with smooth transitions */}
       <AnimatePresence>
         <motion.div
           key={currentIndex}
-          initial={{ opacity: 0, scale: 1 }} // No zoom, scale set to 1
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 1 }} // No zoom, scale set to 1
+          initial={{ opacity: 0, scale: 1 }}
+          animate={{ opacity: 1, scale: isMobile ? 1 : 1.06 }}
+          exit={{ opacity: 0, scale: 1 }}
           transition={{
             duration: 1.1,
             ease: [0.4, 0, 0.2, 1]
           }}
           className="absolute inset-0"
         >
-       <div
-  className="w-full h-full bg-cover bg-center bg-no-repeat object-cover"
+ <div
+  className="w-full h-full bg-center bg-no-repeat bg-white"
   style={{
     backgroundImage: `url(${images[currentIndex]})`,
+    backgroundSize: isMobile ? "contain" : "cover",
+    backgroundColor: "white", // ✅ fond blanc au lieu de noir
     filter: isBanniere3 
-      ? "brightness(1) saturate(1)" // pas d’assombrissement
-      : "brightness(0.82) saturate(1.05)", // autres images plus sombres
+      ? "brightness(1) saturate(1)"
+      : "brightness(0.82) saturate(1.05)",
   }}
 />
-
-{/* Overlay (on le supprime si c’est banniere3) */}
-{!isBanniere3 && (
-  <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/20 via-black/10 to-orange-500/5 pointer-events-none" />
-)}
-
+          {/* Overlay (on le supprime si c’est banniere3) */}
+          {!isBanniere3 && (
+            <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/20 via-black/10 to-orange-500/5 pointer-events-none" />
+          )}
         </motion.div>
       </AnimatePresence>
 
       {/* Content */}
       {!isBanniere3 && (
         <div className="relative z-20 flex flex-col justify-center items-center h-full px-4">
-          <motion.div
-            initial={{ opacity: 0, y: -60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.8,
-              delay: 0.2,
-              ease: [0.4, 0, 0.2, 1]
-            }}
-            className="text-center"
-          >
-            <motion.h1
-              className="font-bold text-3xl sm:text-4xl md:text-6xl text-center bg-clip-text text-transparent bg-gradient-to-b from-white via-neutral-100 to-orange-200 py-4 leading-tight"
-              initial={{ opacity: 0, y: 20 }}
+         
+            <motion.div
+              initial={{ opacity: 0, y: -60 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{
+                duration: 0.8,
+                delay: 0.2,
+                ease: [0.4, 0, 0.2, 1]
+              }}
+              className="text-center"
             >
-              La nouvelle ère de la télédiffusion <br />
-              <AnimatedKeywords />
-            </motion.h1>
+              <motion.h1
+                className="font-bold text-2xl sm:text-3xl md:text-5xl text-center bg-clip-text text-transparent bg-gradient-to-b from-white via-neutral-100 to-orange-200 py-3 leading-tight"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <AnimatedKeywords />
+              </motion.h1>
 
-            <motion.p
-              className="text-base sm:text-lg md:text-2xl text-neutral-100/90 mt-1 max-w-2xl mx-auto font-medium"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              Découvrez l'excellence de la télédiffusion portée par une équipe passionnée, <span className="text-orange-500 font-semibold">alliant innovation technologique, créativité visuelle et puissance de diffusion</span> pour connecter vos contenus à des millions de téléspectateurs.
-            </motion.p>
-          </motion.div>
-
+              <motion.p
+                className="text-sm sm:text-base md:text-xl text-neutral-100/90 mt-1 max-w-2xl mx-auto font-medium"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                Découvrez l'excellence de la télédiffusion portée par une équipe passionnée, <span className="text-orange-500 font-semibold">alliant innovation technologique, créativité visuelle et puissance de diffusion</span> pour connecter vos contenus à des millions de téléspectateurs.
+              </motion.p>
+            </motion.div>
+        
           {/* Slide indicators */}
           <motion.div
             className="flex space-x-3 mt-8 sm:mt-10 md:mt-12"
