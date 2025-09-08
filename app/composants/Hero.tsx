@@ -114,18 +114,9 @@ export function Hero() {
       <AnimatePresence>
         <motion.div
           key={currentIndex}
-          initial={{ 
-            opacity: 0, 
-            scale: isMobile ? 1 : 1.05 // Pas de zoom sur mobile
-          }}
-          animate={{ 
-            opacity: 1, 
-            scale: 1 
-          }}
-          exit={{ 
-            opacity: 0, 
-            scale: isMobile ? 1 : 0.98 // Pas de zoom sur mobile
-          }}
+          initial={{ opacity: 0, scale: 1 }} // No zoom, scale set to 1
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1 }} // No zoom, scale set to 1
           transition={{
             duration: 1.1,
             ease: [0.4, 0, 0.2, 1]
@@ -133,14 +124,14 @@ export function Hero() {
           className="absolute inset-0"
         >
           <div
-            className="w-full h-full bg-cover bg-center bg-no-repeat"
+            className="w-full h-full bg-cover bg-center bg-no-repeat object-cover" // Added object-cover for proper scaling
             style={{
               backgroundImage: `url(${images[currentIndex]})`,
-              filter: "brightness(0.82) saturate(1.05)"
+              filter: "brightness(0.88) saturate(1.05)"
             }}
           />
           {/* Subtle neutral overlay for pro look, with a touch of orange for brand */}
-          <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/60 via-black/40 to-orange-500/10 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/40 via-black/20 to-orange-500/5 pointer-events-none" />
         </motion.div>
       </AnimatePresence>
 
@@ -190,7 +181,7 @@ export function Hero() {
                 onClick={() => setCurrentIndex(index)}
                 className={`h-1.5 w-6 rounded transition-all duration-300 border border-white/40 ${
                   index === currentIndex
-                    ? 'bg-orange-500 scale-110 shadow-lg shadow-orange-500/30'
+                    ? 'bg-orange-500 scale-110 shadow-lg shadow-orange-500/20'
                     : 'bg-white/40 hover:bg-orange-200/80'
                 }`}
                 aria-label={`Aller à la diapositive ${index + 1}`}
