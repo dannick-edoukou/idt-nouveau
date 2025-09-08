@@ -123,15 +123,21 @@ export function Hero() {
           }}
           className="absolute inset-0"
         >
-          <div
-            className="w-full h-full bg-cover bg-center bg-no-repeat object-cover" // Added object-cover for proper scaling
-            style={{
-              backgroundImage: `url(${images[currentIndex]})`,
-              filter: "brightness(0.88) saturate(1.05)"
-            }}
-          />
-          {/* Subtle neutral overlay for pro look, with a touch of orange for brand */}
-          <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/40 via-black/20 to-orange-500/5 pointer-events-none" />
+       <div
+  className="w-full h-full bg-cover bg-center bg-no-repeat object-cover"
+  style={{
+    backgroundImage: `url(${images[currentIndex]})`,
+    filter: isBanniere3 
+      ? "brightness(1) saturate(1)" // pas d’assombrissement
+      : "brightness(0.82) saturate(1.05)", // autres images plus sombres
+  }}
+/>
+
+{/* Overlay (on le supprime si c’est banniere3) */}
+{!isBanniere3 && (
+  <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/20 via-black/10 to-orange-500/5 pointer-events-none" />
+)}
+
         </motion.div>
       </AnimatePresence>
 
