@@ -22,7 +22,7 @@ const statistics = [
     gradient: "from-green-600/90 to-green-400/80"
   },
   {
-    value: "87%",
+    value: "96.87%",
     label: "Taux de couverture",
     description: "Couverture nationale assurée par la SIDT",
     image: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
