@@ -112,15 +112,15 @@ export function Hero() {
           }}
           className="absolute inset-0"
         >
-          <div
+       <div
             className="w-full h-full bg-cover bg-center bg-no-repeat transition-all duration-700"
             style={{
               backgroundImage: `url(${images[currentIndex]})`,
-              filter: "brightness(1.1) saturate(1.1) blur(0.5px)"
+              filter: "brightness(0.75) saturate(1.2)"
             }}
           />
-          {/* Subtle neutral overlay for pro look, with a touch of orange for brand */}
-          <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/70 via-black/50 to-orange-500/20 pointer-events-none" />
+          {/* Light overlay for text readability only */}
+          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-black/20 to-transparent pointer-events-none" />
         </motion.div>
       </AnimatePresence>
 
