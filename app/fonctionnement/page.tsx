@@ -2,20 +2,20 @@
 
 import React from "react";
 import DynamicHero from "../composants/DynamicHero";
-import { ExternalLinkIcon, DownloadIcon, FileTextIcon } from "lucide-react";
+import { ExternalLinkIcon, DownloadIcon, ImageIcon } from "lucide-react";
 
-interface PDFViewerProps {
+interface ImageViewerProps {
   src: string;
   title: string;
   description?: string;
   className?: string;
 }
 
-const PDFViewer: React.FC<PDFViewerProps> = ({ 
-  src, 
-  title, 
+const ImageViewer: React.FC<ImageViewerProps> = ({
+  src,
+  title,
   description,
-  className = "" 
+  className = ""
 }) => {
   const handleOpen = () => {
     window.open(src, "_blank", "noopener,noreferrer");
@@ -25,17 +25,17 @@ const PDFViewer: React.FC<PDFViewerProps> = ({
     try {
       const response = await fetch(src);
       if (!response.ok) throw new Error('Erreur lors du téléchargement');
-      
+
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = src.split("/").pop() || `${title}.pdf`;
+      link.download = src.split("/").pop() || `${title}.jpg`;
       link.rel = "noopener";
-      
+
       document.body.appendChild(link);
       link.click();
-      
+
       // Nettoyage
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
@@ -44,7 +44,7 @@ const PDFViewer: React.FC<PDFViewerProps> = ({
       // Fallback vers l'ancienne méthode
       const link = document.createElement("a");
       link.href = src;
-      link.download = src.split("/").pop() || `${title}.pdf`;
+      link.download = src.split("/").pop() || `${title}.jpg`;
       link.rel = "noopener";
       document.body.appendChild(link);
       link.click();
@@ -58,28 +58,34 @@ const PDFViewer: React.FC<PDFViewerProps> = ({
       <header className="mb-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-        
-            
           </div>
-          
         </div>
       </header>
 
       {/* Carte principale */}
       <div className="rounded-2xl border border-gray-200 bg-gradient-to-br from-gray-50 to-white shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
-        <div className="flex flex-col items-center justify-center py-20 px-6">
+        <div className="flex flex-col items-center justify-center py-12 px-6">
           <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mb-4">
-            <FileTextIcon size={32} className="text-orange-400" />
+            <ImageIcon size={32} className="text-orange-400" />
           </div>
-          
+
           <h3 className="text-xl font-semibold text-gray-900 mb-2 text-center">
-         Organigramme
+            Organigramme
           </h3>
-          
+
           <p className="text-gray-600 text-center max-w-md leading-relaxed mb-6">
-            Ce document PDF vous presente l'organigramme de la Société Ivoirienne De Télédiffusion (SIDT). 
+            Ce document image (JPEG) vous présente l'organigramme de la Société Ivoirienne De Télédiffusion (SIDT).
             Utilisez les boutons ci-dessous pour l'ouvrir dans un nouvel onglet ou le télécharger.
           </p>
+
+          <div className="w-full flex justify-center mb-6">
+            <img
+              src={src}
+              alt={title}
+              className="max-w-full max-h-[400px] rounded-lg border border-gray-200 shadow"
+              style={{ objectFit: "contain" }}
+            />
+          </div>
 
           <div className="flex flex-col sm:flex-row gap-3 w-full max-w-sm">
             <button
@@ -89,7 +95,7 @@ const PDFViewer: React.FC<PDFViewerProps> = ({
               <ExternalLinkIcon size={14} />
               Ouvrir maintenant
             </button>
-            
+
             <button
               onClick={handleDownload}
               className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors"
@@ -100,8 +106,6 @@ const PDFViewer: React.FC<PDFViewerProps> = ({
           </div>
         </div>
       </div>
-
-   
     </section>
   );
 };
@@ -110,10 +114,9 @@ export default function FonctionnementPage() {
   return (
     <>
       <DynamicHero />
-      <PDFViewer
-        src="/documents/orgt.pdf"
+      <ImageViewer
+        src="/documents/organigramme.jpg"
         title="Organigramme"
-       
       />
     </>
   );
