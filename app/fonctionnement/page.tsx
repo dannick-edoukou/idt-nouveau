@@ -78,13 +78,16 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
             Utilisez les boutons ci-dessous pour l'ouvrir dans un nouvel onglet ou le télécharger.
           </p>
 
+          {/* Agrandir le cadre de l'image */}
           <div className="w-full flex justify-center mb-6">
-            <img
-              src={src}
-              alt={title}
-              className="max-w-full max-h-[400px] rounded-lg border border-gray-200 shadow"
-              style={{ objectFit: "contain" }}
-            />
+            <div className="w-full max-w-4xl"> {/* Augmente la largeur max du cadre */}
+              <img
+                src={src}
+                alt={title}
+                className="w-full max-h-[650px] rounded-lg border border-gray-200 shadow object-contain"
+                style={{ objectFit: "contain" }}
+              />
+            </div>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 w-full max-w-sm">

@@ -116,7 +116,7 @@ export function Hero() {
             className="w-full h-full bg-cover bg-center bg-no-repeat transition-all duration-700"
             style={{
               backgroundImage: `url(${images[currentIndex]})`,
-              filter: "brightness(0.78) saturate(1.1) blur(0.5px)"
+              filter: "brightness(1.1) saturate(1.1) blur(0.5px)"
             }}
           />
           {/* Subtle neutral overlay for pro look, with a touch of orange for brand */}

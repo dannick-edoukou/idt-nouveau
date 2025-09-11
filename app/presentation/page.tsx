@@ -40,7 +40,17 @@ export default function IDTPresentation() {
                         backdropFilter: 'blur(8px)',
                       }}
                     >
-                      <Image src="/antenne.png" alt="Logo" width={80} height={80} className="sm:w-[100px] sm:h-[100px]" />
+                      <Image
+                        src="/antenne.png"
+                        alt="Logo"
+                        width={128}
+                        height={128}
+                        className="sm:w-[100px] sm:h-[100px] w-full h-full object-contain"
+                        quality={100}
+                        priority
+                        sizes="(max-width: 640px) 96px, 128px"
+                        unoptimized={false}
+                      />
                     </div>
                     <div
                       className="w-24 h-24 sm:w-32 sm:h-32 mx-auto rounded-xl flex items-center justify-center mb-4 sm:mb-6"
@@ -49,7 +59,17 @@ export default function IDTPresentation() {
                         backdropFilter: 'blur(8px)',
                       }}
                     >
-                      <Image src="/idt1.png" alt="Logo" width={80} height={80} className="sm:w-[100px] sm:h-[100px]" />
+                      <Image
+                        src="/idt1.png"
+                        alt="Logo"
+                        width={160}
+                        height={160}
+                        className="w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] object-contain"
+                        quality={100}
+                        priority
+                        sizes="(max-width: 640px) 100px, 120px"
+                        unoptimized={false}
+                      />
                     </div>
                     <p className="text-lg sm:text-xl opacity-90">Ivoirienne De Télédiffusion</p>
                   </div>

@@ -264,7 +264,7 @@ export default function Une({ title }: UneProps) {
                     </div>
                   </div>
                   <div className="p-4 md:p-6">
-                    <h3 className="text-base md:text-lg lg:text-xl font-semibold text-gray-900 mb-3 md:mb-4 line-clamp-2">
+                    <h3 className="text-sm md:text-base lg:text-base font-semibold text-gray-900 mb-3 md:mb-4 line-clamp-2">
                       {item.title}
                     </h3>
                    
