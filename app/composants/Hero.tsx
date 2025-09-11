@@ -144,7 +144,7 @@ export function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                Société Ivoirienne de Diffusion
+                Société Ivoirienne de TéléDiffusion
               </motion.h1>
               <motion.p
                 className="text-base sm:text-lg md:text-2xl text-neutral-100/90 mt-4 max-w-2xl mx-auto font-medium"
@@ -164,7 +164,7 @@ export function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                La nouvelle ère de la Télédifusion <br />
+                La nouvelle ère de la TéléDifusion <br />
                 <AnimatedKeywords />
               </motion.h1>
 
