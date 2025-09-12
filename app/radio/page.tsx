@@ -7,7 +7,7 @@ import DynamicHero from "@/app/composants/DynamicHero";
 const radios = [
   {
     name: "La Voix de l'IFFOU",
-    logo: "/radios/Logo radio la Voix de l'IFFOU.jpeg",
+    logo: "/radios/iffou.jpeg",
     description: "Radio régionale de l'IFFOU, voix des communautés locales.",
   
   },
@@ -25,7 +25,7 @@ const radios = [
   },
   {
     name: "Life Radio",
-    logo: "/radios/life radio.png",
+    logo: "/radios/liferadio.png",
     description: "Radio lifestyle, bien-être et développement personnel.",
   
   },
@@ -49,25 +49,25 @@ const radios = [
   },
   {
     name: "Al Fourquane",
-    logo: "/radios/AL FOURQUANE.png",
+    logo: "/radios/ALFOURQUANE.png",
     description: "Radio confessionnelle musulmane, spiritualité et culture.",
   
   },
   {
     name: "Al Hikmah",
-    logo: "/radios/AL HIKMAH.jpg",
+    logo: "/radios/ALHIKMAH.jpg",
     description: "Radio islamique, sagesse et éducation religieuse.",
  
   },
   {
     name: "Al Bayane",
-    logo: "/radios/AL BAYANE.jpg",
+    logo: "/radios/ALBAYANE.jpg",
     description: "Radio confessionnelle musulmane, information et spiritualité.",
    
   },
   {
     name: "Radio La Paix",
-    logo: "/radios/radio la paix.png",
+    logo: "/radios/paix.png",
     description: "Radio de paix et de réconciliation nationale.",
    
   },

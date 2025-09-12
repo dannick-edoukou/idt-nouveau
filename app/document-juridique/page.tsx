@@ -11,27 +11,27 @@ const documents = [
   {
     title: "Décret N° 2020-643 - Renforcement Conditions d'Accès TNT",
     description: "Décret du 19 août 2020 relatif au renforcement des conditions d'accès à la Télévision Numérique Terrestre.",
-    url: "/documents/DECRET N° 2020-643 DU 19 AOUT 2020 RENFORCEMENT CONDITIONS D'ACCES TNT.pdf",
+    url: "/documents/DECRET_N_2020-643_DU_19_AOUT_2020_RENFORCEMENT_CONDITIONS_D'ACCES_TNT.pdf",
   },
   {
     title: "Décret N° 2020-642 - Extinction Analogique TV",
     description: "Décret du 19 août 2020 relatif à l'extinction de la diffusion analogique de télévision.",
-    url: "/documents/DECRET N° 2020-642 DU 19 AOUT 2020 RELATIF A L'EXTINCTION ANALOGIQUE Tv.pdf",
+    url: "/documents/DECRET_N_2020-642_DU_19_AOUT_2020_RELATIF_A_L_EXTINCTION_ANALOGIQUE_Tv.pdf",
   },
   {
     title: "Ordonnance Exonération Équipements TNT",
     description: "Ordonnance portant exonération des équipements de réception TNT.",
-    url: "/documents/Ordonnance Exonération équipements TNT.pdf",
+    url: "/documents/Ordonnance_Exonération_équipements_TNT.pdf",
   },
   {
     title: "Directive UEMOA TNT 2015",
     description: "Directive n°01/2015/CM/UEMOA relative à la Télévision Numérique Terrestre dans l'espace UEMOA.",
-    url: "/documents/Directive n°01_2015_ UEMOA_CM_TNT (1).pdf",
+    url: "/documents/Directive_n°01_2015__UEMOA_CM_TNT_(1).pdf",
   },
   {
     title: "Décret d'Interdiction Importation et Commercialisation",
     description: "Décret portant interdiction d'importation et de commercialisation d'équipements non conformes.",
-    url: "/documents/Decret_d_interdiction d'importation et commercialisation.pdf",
+    url: "/documents/Decret_d_interdiction_d'importation_et_commercialisation.pdf",
   },
 ];
 
