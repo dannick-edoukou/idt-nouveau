@@ -8,6 +8,11 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { faqData } from "../data/faqData";
 import { cn } from "@/lib/utils";
 
+
+const forceTNTUppercase = (text: string): string => {
+  return text.replace(/tnt/gi, "TNT");
+};
+
 interface SubSubmenuItem {
   title: string;
   href?: string;
@@ -43,19 +48,22 @@ const Header = () => {
         { title: "Mot du DG", href: "/mot-du-dg" },
         { title: "Nos Missions", href: "/nos-missions" },
         { title: "Fonctionnement", href: "/fonctionnement" },
-        { title: "Document juridique", href: "/document-juridique" },
+        { title: "DOCUMENTS JURIDIQUES", href: "/document-juridique" },
       ],
     },
     {
       id: "latnt",
       title: "La TNT",
-      submenu: [
-        ...faqData.map(item => ({ 
-          title: item.question.charAt(0).toUpperCase() + item.question.slice(1).toLowerCase(),
-          href: `/faq/${item.slug}` 
-        })),
-        { title: "Les Chaînes et Bouquet", href: "/les-chaines" },
-      ],
+     submenu: [
+  ...faqData.map(item => ({
+    title: forceTNTUppercase(
+      item.question.charAt(0).toUpperCase() + item.question.slice(1).toLowerCase()
+    ),
+    href: `/faq/${item.slug}`
+  })),
+  { title: "Les Chaînes et Bouquet", href: "/les-chaines" },
+],
+
     },
    
     {
@@ -63,7 +71,7 @@ const Header = () => {
       title: "Autres Services",
       submenu: [
         { title: "Radio", href: "/radio" },
-        { title: "Pylone", href: "/pylone" },
+        { title: "Pylône", href: "/pylone" },
         { title: "OTT", href: "/ott" },
       ],
     },
@@ -72,7 +80,7 @@ const Header = () => {
   const rightMenuItems: MenuItem[] = [
     {
       id: "actualite",
-      title: "Actualité",
+      title: "Actualités",
       href: "/actualite",
       submenu: [],
     },

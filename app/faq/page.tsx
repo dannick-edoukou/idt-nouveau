@@ -122,7 +122,7 @@ export default function FAQPage() {
           {/* Section d'aide supplémentaire */}
           <div className="mt-12 sm:mt-16 text-center">
             <div className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl sm:rounded-2xl p-6 sm:p-8 text-white">
-              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Besoin d'aide supplémentaire ?</h3>
+              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Besoin d'information supplémentaire ?</h3>
               <p className="text-sm sm:text-base md:text-lg mb-4 sm:mb-6 opacity-90 leading-relaxed">
                 Si vous ne trouvez pas la réponse à votre question, n'hésitez pas à nous contacter.
               </p>

@@ -13,7 +13,7 @@ export default function MotDuDG() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
               {/* Section Image du DG */}
               <div
-                className="relative flex items-center justify-center min-h-[350px] sm:min-h-[450px] md:min-h-[500px] lg:min-h-[600px] p-4 sm:p-8"
+                className="relative flex  justify-center min-h-[350px] sm:min-h-[450px] md:min-h-[500px] lg:min-h-[600px] p-4 sm:p-8"
                 style={{
                   background: 'linear-gradient(135deg, #f97316 0%, #059669 100%)',
                 }}
@@ -78,44 +78,45 @@ export default function MotDuDG() {
                     </h2>
                   </div>
 
-                  <div className="space-y-5 sm:space-y-6 text-gray-700 leading-relaxed">
-                    <div className="border-l-4 border-orange-500 pl-4 sm:pl-6">
-                      <p className="text-base sm:text-lg italic text-orange-700 mb-2 sm:mb-4">
-                        "L'excellence dans la diffusion audiovisuelle au service de la nation ivoirienne"
-                      </p>
-                    </div>
+                  <div className="space-y-4 sm:space-y-5 text-gray-700 leading-relaxed text-sm sm:text-base">
+                    <p>
+                      Avant tout propos, qu'il me soit permis d'exprimer mon infinie gratitude à <strong className="text-orange-600">S.E.M Alassane OUATTARA</strong>, Président de la République de Côte d'Ivoire qui a bien voulu me confier la lourde et exaltante charge de diriger la société Ivoirienne De Télédiffusion (IDT), créée principalement pour réaliser le déploiement de la Télévision Numérique Terrestre (TNT).
+                    </p>
 
-                    <p className="text-base sm:text-lg">
-                      L{' '}
-                      <strong className="text-orange-600">
-                        Ivoirienne De Télédiffusion (IDT)
-                      </strong>{' '}
-                      est une société d'État, créée par adoption en Conseil des Ministres du 20 Décembre 2017, d'un décret n°2017-844 portant création, organisation et fonctionnement de la société Ivoirienne De Télédiffusion dénommée Ivoirienne De Télédiffusion, en abrégé IDT.
+                    <p>
+                      Faire de la couverture TNT une réalité, sur tout le territoire national, était un véritable défi pour moi en tant que premier Directeur Général de la société. Car il fallait à la fois construire de toute pièce une administration de cette entreprise, la faire fonctionner, et dans le même temps lancer les travaux de construction du réseau.
                     </p>
 
                     <div className="bg-orange-50 border-l-4 border-orange-500 p-3 sm:p-4 rounded-r-lg">
-                      <p className="text-orange-800 text-sm sm:text-base">
-                        <strong>Cette structure a pour mission principale</strong> d'assurer la diffusion des programmes radiophoniques et télévisuels sur le territoire national.
+                      <p className="text-orange-800 font-semibold">
+                        Deux ans, c'est le temps que le déploiement aura mis pour atteindre le niveau de couverture actuelle (96% du territoire national) et la qualité du réseau dont le pays peut se targuer.
                       </p>
                     </div>
 
-                    <p className="text-base sm:text-lg">
-                      Son rôle de diffuseur lui confère également les prérogatives suivantes :
+                    <p>
+                      Nous y sommes parvenus grâce aux soutiens du gouvernement, notamment des différents ministres de tutelle depuis la création de IDT.
                     </p>
 
-                    <div className="space-y-3 sm:space-y-4 ml-2 sm:ml-4">
-                      {[
-                        "La gestion des centres émetteurs de radiodiffusion sonore et télévisuelle installés sur le territoire national.",
-                        "La création, l'exploitation, l'entretien et l'extension des réseaux de diffusion de télévision numérique terrestre.",
-                        "La gestion et l'entretien du réseau de diffusion de télévision analogique pendant la période de diffusion simultanée (Simulcast).",
-                        "La fourniture des services multiplexage, de transport et de diffusion des chaînes, bouquets TV, et radios publiques et privées.",
-                        "La promotion de la coopération avec les organismes techniques internationaux et ce en coordination avec les institutions concernées.",
-                      ].map((item, idx) => (
-                        <div className="flex items-start space-x-2 sm:space-x-3" key={idx}>
-                          <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
-                          <p className="text-sm sm:text-base">{item}</p>
-                        </div>
-                      ))}
+                    <p>
+                      Nous y sommes aussi parvenus grâce à l'ardeur avec laquelle le personnel de IDT a accepté de relever ce défi. Je n'oublie pas également le consortium <strong className="text-orange-600">AUCOM, GATESAIR et STA</strong>, Maitres d'œuvres du projet, et notre assistant technique <strong className="text-orange-600">TDF (Télédiffusion de France)</strong> qui ont joué leur partition pour la réalisation du projet.
+                    </p>
+
+                    <p>
+                      Aujourd'hui c'est un réseau de qualité que nous mettons à la disposition des éditeurs de chaines et des opérateurs de bouquet. J'en suis d'autant plus fier en tant que Directeur Général que le déploiement de la TNT en Côte d'Ivoire est une des plus grandes réussites en la matière dans la sous-région Ouest-Africaine.
+                    </p>
+
+                    <p>
+                      Dans la dynamique, je puis affirmer que les opérateurs de télécommunications sont aussi servis et même bien servis par la qualité de nos infrastructures pour le développement de leurs activités.
+                    </p>
+
+                    <p>
+                      Je voudrais donc rassurer tous nos partenaires et potentiels partenaires commerciaux de IDT de notre disposition à les accompagner vers de nouveaux défis, et ce, dans un partenariat gagnant-gagnant.
+                    </p>
+
+                    <div className="border-l-4 border-green-600 pl-4 sm:pl-6 bg-green-50 p-3 sm:p-4 rounded-r-lg">
+                      <p className="text-green-800">
+                        Dans le prolongement de ces acquis et fidèle à sa mission de service public, IDT engage aujourd'hui une nouvelle phase de son développement avec la mise en place de sa plateforme OTT dénommée <strong>IDTplay</strong>. Cette initiative marque une étape importante dans la diversification de nos services et traduit la volonté de l'entreprise d'accompagner l'évolution des usages numériques en matière de consommation audiovisuelle.
+                      </p>
                     </div>
                   </div>
 
@@ -124,7 +125,7 @@ export default function MotDuDG() {
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                       <div>
                         <p className="text-xs sm:text-sm text-gray-500 uppercase tracking-wide">
-                          Directeur Général
+                          Le Directeur Général
                         </p>
                         <p className="text-lg sm:text-xl font-bold text-gray-800">
                           YEO Adama Benoit
@@ -132,7 +133,7 @@ export default function MotDuDG() {
                       </div>
                       <div className="text-left sm:text-right">
                         <div className="w-16 sm:w-24 h-1 bg-gradient-to-r from-orange-500 to-green-500 mb-1 sm:mb-2"></div>
-                        <p className="text-xs sm:text-sm text-gray-500">IDT - 2017</p>
+                        <p className="text-xs sm:text-sm text-gray-500">IDT</p>
                       </div>
                     </div>
                   </div>

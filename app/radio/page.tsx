@@ -13,7 +13,7 @@ const radios = [
   },
   {
     name: "Génération 100%",
-    logo: "/radios/Génération.jpg",
+    logo: "/radios/Generation.jpg",
     description: "La radio jeune et dynamique, 100% énergie positive.",
   
   },

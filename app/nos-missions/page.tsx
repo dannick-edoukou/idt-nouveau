@@ -134,7 +134,7 @@ export default function NosMissions() {
                       </span>
                       <span className="flex items-center">
                         <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-                        TNT & Analogique
+                        TNT 
                       </span>
                       <span className="flex items-center">
                         <div className="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>

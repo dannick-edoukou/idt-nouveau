@@ -56,7 +56,7 @@ const MENU_CONFIG = {
     title: 'Les Chaînes et Bouquet TNT',
     description: 'Découvrez toutes les chaînes et bouquet de la TNT'
   },
-  'actualite': {
+  'actualités': {
     title: 'Actualités',
     description: 'Rester informé de nos dernières nouvelles'
   },
@@ -74,11 +74,11 @@ const MENU_CONFIG = {
       src: '/tnt.png',
       alt: 'Logo OTT'
     },
-    description: 'Television Numerique Terrestre'
+    description: 'Télévision Numérique Terrestre'
   },
   'radio': {
     title: 'Les Radios Nationales et Internationales',
-    description: 'Découvrez notre radio'
+    description: 'Découvrez nos radios partenaires'
   },
   'pylone': {
     title: 'Pylônes',

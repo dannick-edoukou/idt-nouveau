@@ -5,7 +5,7 @@ import DynamicHero from "../composants/DynamicHero";
 const documents = [
   {
     title: "Décret de Création du SIDT 2017-8441",
-    description: "Décret portant création de la Société Ivoirienne de Diffusion Télévisuelle (SIDT).",
+    description: "Décret portant création de la Société Ivoirienne De Télédiffusion. (SIDT).",
     url: "/documents/DECRET_CREATION_SIDT_2017-8441.pdf",
   },
   {

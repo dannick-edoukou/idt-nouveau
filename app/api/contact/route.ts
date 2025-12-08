@@ -1,5 +1,3 @@
-
-
 import { NextRequest, NextResponse } from 'next/server'
 import * as nodemailer from 'nodemailer'
 import { z } from 'zod'
@@ -15,18 +13,17 @@ const contactSchema = z.object({
   newsletter: z.boolean().optional(),
 })
 
-// Configuration du transporteur Nodemailer
+// ✅ Transporteur mis à jour 100% compatible Planethoster
 const createTransporter = () => {
-  // Vérification des variables d'environnement essentielles
   if (!process.env.EMAIL_SERVER_USER || !process.env.EMAIL_SERVER_PASSWORD || !process.env.EMAIL_TO) {
     console.error("Variables d'environnement pour l'email manquantes.");
     return null;
   }
 
   return nodemailer.createTransport({
-    host: process.env.EMAIL_SERVER_HOST || 'smtp.gmail.com',
-    port: Number(process.env.EMAIL_SERVER_PORT) || 587,
-    secure: false, // La plupart des serveurs sur le port 587 utilisent STARTTLS
+    host: process.env.EMAIL_SERVER_HOST || 'node191-eu.n0c.com',
+    port: Number(process.env.EMAIL_SERVER_PORT) || 465,
+    secure: true, // ✅ Port 465 = SSL obligatoire
     auth: {
       user: process.env.EMAIL_SERVER_USER,
       pass: process.env.EMAIL_SERVER_PASSWORD,
@@ -36,22 +33,18 @@ const createTransporter = () => {
 
 export async function POST(request: NextRequest) {
   try {
-    // Validation des données
     const body = await request.json()
     const validatedData = contactSchema.parse(body)
 
-    // Création du transporteur
     const transporter = createTransporter();
 
     if (!transporter) {
-      console.error('Échec de la création du transporteur, vérifiez la configuration des emails.');
       return NextResponse.json(
         { success: false, message: "La configuration du serveur d'email est incomplète." },
         { status: 500 }
       );
     }
 
-    // Vérification de la connexion
     await transporter.verify();
 
     const subjectLabels = {
@@ -61,7 +54,6 @@ export async function POST(request: NextRequest) {
       autre: "Autre demande"
     }
 
-    // Configuration de l'email
     const mailOptions = {
       from: `"${validatedData.firstName} ${validatedData.lastName}" <${process.env.EMAIL_SERVER_USER}>`,
       to: process.env.EMAIL_TO,
@@ -111,14 +103,11 @@ export async function POST(request: NextRequest) {
       `
     }
 
-    // Envoi de l'email
     const info = await transporter.sendMail(mailOptions)
-    
-    console.log('Email envoyé avec succès:', info.messageId)
 
-    // Email de confirmation pour l'utilisateur (optionnel)
+    // ✅ Email de confirmation pour le client
     const confirmationMailOptions = {
-      from: `"IDT - Institut de Diffusion Télévisuelle" <${process.env.EMAIL_SERVER_USER}>`,
+      from: `"IDT - Ivoirienne De Télédiffusion" <${process.env.EMAIL_SERVER_USER}>`,
       to: validatedData.email,
       subject: 'Confirmation de réception de votre message - IDT',
       html: `
@@ -138,10 +127,10 @@ export async function POST(request: NextRequest) {
           <p>Cordialement,<br>L'équipe IDT</p>
           
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px;">
-            <p>Institut de Diffusion Télévisuelle<br>
-            123 Avenue de la Télédiffusion<br>
-            75001 Paris, France<br>
-            Tél: +33 1 23 45 67 89</p>
+            <p>Ivoirienne De Télédiffusion<br>
+            28 BP 1400 Abidjan 28 CÔTE D'IVOIRE<br>
+            II Plateaux derrière l'ENA, Rue J15<br>
+            Tél: +225 25 22 01 05 00</p>
           </div>
         </div>
       `
@@ -150,34 +139,26 @@ export async function POST(request: NextRequest) {
     await transporter.sendMail(confirmationMailOptions)
 
     return NextResponse.json(
-      { 
-        success: true, 
-        message: 'Email envoyé avec succès',
-        messageId: info.messageId 
-      },
+      { success: true, message: 'Email envoyé avec succès', messageId: info.messageId },
       { status: 200 }
     )
 
   } catch (error) {
-    console.error('Erreur lors de l\'envoi de l\'email:', error)
-    
+    console.error("Erreur d'envoi:", error)
+
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { 
-          success: false, 
-          message: 'Données invalides',
-          errors: error.errors 
-        },
+        { success: false, message: 'Données invalides', errors: error.errors },
         { status: 400 }
       )
     }
 
     return NextResponse.json(
       { 
-        success: false, 
-        message: 'Erreur lors de l\'envoi de l\'email',
-        error: error instanceof Error ? error.message : 'Erreur inconnue'
-      },
+  success: false, 
+  message: "Erreur lors de l'envoi de l'email", 
+  error: error instanceof Error ? error.message : String(error) 
+},
       { status: 500 }
     )
   }

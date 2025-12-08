@@ -28,7 +28,7 @@ export default function IDTPresentation() {
                 >
                   <div className="flex items-center space-x-2 text-orange-800">
                     <Calendar className="w-4 h-4" />
-                    <span className="text-xs sm:text-sm font-semibold">Créé en 2017</span>
+                    <span className="text-xs sm:text-sm font-semibold">Créée en 2017</span>
                   </div>
                 </div>
                 <div className="text-center text-white w-full">
